@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="keywords" content="cweet, programming language" />
+  <title>Homepage for cweet</title>
+  <style>
+      p.author { font-style: italic; }
+  </style>
+  <style type="text/css">html {
+background-color: #fefefe;
+}
+code {
+font-family: monospace;
+}
+body {
+color: #111111;
+margin: 2em auto;
+padding: 1em;
+font-family: sans-serif;
+line-height: 1.7em;
+max-width: 800px;
+}
+h2 {
+font-size: 1.2em;
+}
+h1 {
+font-size: 1.6em;
+}
+a {
+color: #0074d9; 
+}
+a:visited {
+color: #85144b; 
+}
+</style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<p>The <code>cweet</code> programming language aims to be a safer, more expressive alternative to the <code>C</code> programming language. It has:</p>
+<blockquote>
+<ul>
+<li>Compound expressions to write more expressive code.</li>
+<li>Stricter typing rules to catch errors at compile time.</li>
+<li>Sum types to describe data more accurately.</li>
+<li>Pattern matching to destructure data declaratively.</li>
+<li>Concise error handling primitives.</li>
+<li>Packages to enable writing modular code.</li>
+</ul>
+</blockquote>
+<h1 id="statement-expressions">Statement Expressions</h1>
+<p>Statement expressions allow us to rewrite a sequence of statements computing a value as an expression.</p>
+<pre><code>// if-else as expressions.
+var max = if (a &gt; b) a else b;
+
+// A block of code as an expression.
+var sum: [100][100]int = do {
+    var r = undefined;
+    loop for (var i; 0 ..^ r.len[0]) {
+        loop for (var j; 0 ..^ r.len[1]) {
+            r[i][j] = i+j;
+        }
+    }
+    r; // value of the block.
+};</code></pre>
+<h1 id="lambda-syntax">Lambda Syntax</h1>
+<p>Lambda syntax allows writing short-lived functions without giving them a name. Lambda functions can access their environment if they can be inlined into the environment.</p>
+<pre><code>alias string_proc = :&amp;fn(: string): void;
+
+fn with_input_string(inline f: string_proc): void
+{
+    var s = readline();
+    (*f)(s);
+    free(s);
+}
+
+fn main(): int
+{
+    with_input_string(\s =&gt; do {
+        import io (print, println);
+        print(&quot;Hello &quot;);
+        println(s);
+    });
+    return 0;
+}</code></pre>
+<h1 id="type-inference">Type Inference</h1>
+<p>Types of function parameters and return value have to be explicit. Types of other values are inferred.</p>
+<pre><code>fn foo(): int
+{
+    var y = undefined;
+    with (
+        var primes = [2, 3, 5, 7, 11];
+        y = 0;
+    ) loop for (var p; primes[..]) {
+        y += p;
+    }
+    return y;
+}</code></pre>
+<h1 id="pattern-matching">Pattern Matching</h1>
+<p><code>choice</code> types provide tagged unions in the language ensuring that the programmer does not incorrectly access invalid fields. The <code>match</code> construct can be used to destructure objects by pattern matching.</p>
+<pre><code>// Tagged discriminative unions.
+choice Netstatus {
+    Connected{ip: [4]byte},
+    Disconnected
+};
+
+// import data constructors.
+using type Netstatus;
+
+// match expression.
+var desc = match (status) {
+    Connected{...} =&gt; &quot;connected&quot;,
+    Disconnected   =&gt; &quot;disconnected&quot;,
+};</code></pre>
+<h1 id="scope-guards">Scope Guards</h1>
+<p>Scope guards allow code that deallocates a resource to be close to code that allocates the resource and ensures proper cleanup.</p>
+<pre><code>fn copy(from, to: string): void
+{
+    var f1 = open(from, &quot;r&quot;);
+    scope (exit) { close(f1); }
+    var f2 = open(to, &quot;w&quot;);
+    scope (exit) { close(f2); }
+    with (
+        var buf: [1024]char = undefined;
+        var n = undefined;
+    ) loop while (
+        do {
+            n = read(f1, buf[..]);
+            n &gt; 0;
+        }
+    ) {
+        write(f2, buf[..^n]);
+    }
+}</code></pre>
+<h1 id="error-handling">Error Handling</h1>
+<p>An expression that has type <code>T|Error</code> (<code>T</code> or <code>Error</code>) may produce a value of type <code>T</code> or cause an error.</p>
+<pre><code>extern fn sqrt(a: double): double|Error;
+
+fn len(v: [2]double): double
+{
+    return sqrt(
+        v[0]*v[0] +
+        v[1]*v[1]
+    )!; // Ignore error.
+}
+
+fn maxsqrt(a, b: double): double|Error
+{
+    // Propagate error.
+    var aa = sqrt(a)^;
+    var bb = sqrt(b)^;
+    return if (aa &gt; bb) aa else bb;
+}
+
+fn maxsqrt1(a, b: double): double
+{
+    // Handle errors.
+    try {
+        var aa = sqrt(a)^;
+        var bb = sqrt(b)^;
+        return if (aa &gt; bb) aa else bb;
+    } else {
+        panic(&quot;sqrt of a negative number.&quot;);
+    }
+}</code></pre>
+<h1 id="packages">Packages</h1>
+<p>Packages facilitate modularity of code and separate compilation. A package interface can be optionally specified which ensures that clients can only use functionality advertised by the interface. Packages can be organized into a hierarchy using namespaces.</p>
+<pre><code>// The namespace file.
+namespace foo;
+package type BAR;
+package bar: BAR;
+
+// The package type file specifies an interface.
+package type foo.BAR;
+type t; // An opaque type.
+fn baz(): *t;
+
+// Now the implementation.
+package foo.bar;
+// t is opaque and x is inaccessible.
+alias t = :int;
+var x: int = 0;
+fn baz(): *int {
+    return &amp;x;
+}
+
+// Using the package.
+package client;
+
+import foo.bar;
+
+fn client() {
+    assert(baz() == baz());
+}</code></pre>
+<h1 id="learn-more">Learn More</h1>
+<blockquote>
+<ul>
+<li>A learn x in y minutes style <a href="learncweet.html">tutorial</a>.</li>
+<li>The full <a href="doc.html">documentation</a>.</li>
+</ul>
+</blockquote>
+<footer>
+All content on this website is licensed under
+<a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>
+</footer>
+</body>
+</html>

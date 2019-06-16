@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Balagopal Komarath" />
+  <meta name="keywords" content="C, const" />
+  <title>Fixing const</title>
+  <style>
+      p.author { font-style: italic; }
+  </style>
+  <style type="text/css">html {
+background-color: #fefefe;
+}
+code {
+font-family: monospace;
+}
+body {
+color: #111111;
+margin: 2em auto;
+padding: 1em;
+font-family: sans-serif;
+line-height: 1.7em;
+max-width: 800px;
+}
+h2 {
+font-size: 1.2em;
+}
+h1 {
+font-size: 1.6em;
+}
+a {
+color: #0074d9; 
+}
+a:visited {
+color: #85144b; 
+}
+</style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Fixing const</h1>
+<p class="author">Balagopal Komarath</p>
+</header>
+<p>The <code>const</code> type qualifier is used (in <span class="title-ref">C</span>, <span class="title-ref">C++</span>, <span class="title-ref">D</span>, <span class="title-ref">rust</span> among others) to declare that a piece of data will not be modified through the binding being declared. For pointers, the pointer and the data pointed to can be declared <code>const</code> independently.</p>
+<pre><code>int x = 42;
+int y = 21;
+const int* p = &amp;x;
+*p = 5; // error
+p = &amp;y; // Ok
+int *const q = &amp;x;
+*q = 5; // Ok
+q = &amp;y; // error
+const int * const r = &amp;x;
+*r = 5; // error
+r = &amp;y; // error</code></pre>
+<p>Pointers to <code>const</code> are commonly used as arguments to functions that promise that the data will not be modified through that pointer. This helps the caller of a function to infer what arguments will not be modified by the function. Consider the <code>strchr</code> function in <span class="title-ref">C</span> standard library that takes a null-terminated string and a character as argument and returns a pointer to the first matching character in the string. It is declared as follows:</p>
+<pre><code>char *strchr(const char *str, int c);</code></pre>
+<p>The argument is <code>const char *</code> because this function does not modify the input string. On the other hand, the return value is <code>char *</code> because the input string could actually be mutable and the caller of the function may want to mutate the string through the returned value.</p>
+<pre><code>char a[] = &quot;Hello world&quot;;
+char *p = strchr(a, &#39;w&#39;);
+*p = &#39;W&#39;;</code></pre>
+<p>This magic is achieved by casting away the <code>const</code> in the function. The problem with this approach is that the input string could actually be <code>const</code> in which case the return value should not be mutable.</p>
+<p>The <span class="title-ref">C++</span> standard library solves this problem by declaring two overloads for this function.</p>
+<pre><code>char* strchr(char* str, int c);
+const char* strchr(const char* str, int c);</code></pre>
+<p>This solution has two problems: First, overloads are a mechanism that should only be used when you want to provide different implementations based on the types of arguments. Here, the implementation of both functions are the same. Second, implementing overloading requires name mangling making the function un-callable from <span class="title-ref">C</span>.</p>
+<p>Using templates, we can combine the two equivalent function definitions into a single definition.</p>
+<pre><code>template &lt;class T&gt;
+// Hire a template guru to ensure that
+// T = char or T = const char
+T* strchr(T* str, int c) { }</code></pre>
+<p>This solution also does not solve the issue of name mangling. Templates are also too powerful for this purpose as they are usually used to map a single function definition in source code into multiple functions in the object file.</p>
+<p>This problem of distinguishing between <code>const</code> and <code>mut</code> also arises in <code>rust</code>. For example, here are two methods of <code>slice</code>.</p>
+<pre><code>pub fn split_at(&amp;self, mid: usize) -&gt; (&amp;[T], &amp;[T])
+pub fn split_at_mut(&amp;mut self, mid: usize) -&gt; (&amp;mut [T], &amp;mut [T])</code></pre>
+<p>In fact, the <code>slice</code> API is filled with <code>f</code> and <code>f_mut</code> for various values of <code>f</code>.</p>
+<p>The <span class="title-ref">D</span> programming language provides a solution to this problem by providing the <code>inout</code> keyword that allows functions to be generic over <code>const</code> qualifiers.</p>
+<pre><code>inout(char)* strchr(inout(char)* str, int c) { return str; }</code></pre>
+<p>This function can be compiled without name mangling and be called from <span class="title-ref">C</span>. The exported declaration can be the same as the original declaration for <code>strchr</code> in <span class="title-ref">C</span>.</p>
+<p>If there are multiple <code>inout</code> in the parameters, the <code>inout</code> is set to the most restrictive of all the corresponding qualifiers in arguments.</p>
+<p>The <span class="title-ref">D</span> compiler does not properly handle <code>inout</code> appearing in higher-order functions. A more fundamental problem is that the <code>inout</code> is a single variable that gets assigned to a concrete <code>const</code> or <code>mutable</code> value upon instantiation. The following valid example does not compile.</p>
+<pre><code>inout(int)* foo(
+    inout(int)* a,
+    inout(int)* function (inout(int)*) b)
+{
+    return b(a);
+}
+
+int global = 0;
+
+int* f(const(int)* x) { return &amp;global; }
+
+
+const int w = 0;
+int *x = foo(&amp;w, &amp;f); // error
+*x = 5;</code></pre>
+<p>Here, the <code>inout</code> in return type of <code>foo</code> must match the <code>inout</code> in the return type of parameter <code>b</code> and the <code>inout</code> in parameter <code>a</code> must match the <code>inout</code> in parameter of <code>b</code>.</p>
+<h1 id="const-generic-functions"><code>const</code> generic functions</h1>
+<p>Ideally, one should be able to specify multiple <code>inout</code> variables and the relations between them in the function declaration. An illuminating example is the following function used for iterating over intrusive linked lists:</p>
+<pre><code>void for_each(
+    list_head* lh,
+    void* (*entry)(list_head *),
+    void (*process)(void *)
+);</code></pre>
+<p>The <code>entry</code> function does the casting magic that is required to convert a <code>list_head*</code> into a pointer to the actual structure and the <code>process</code> function processes a single structure in the list. As written, all data is assumed to be mutable. This is too strict. The only requirements are that if the <code>process</code> function requires a pointer to mutable as input, then the <code>entry</code> function should produce one and if the <code>entry</code> function requires a pointer to mutable then <code>lh</code> should be one.</p>
+<p>For simplicity, let us assume that the only type qualifiers are <code>const</code> and <code>mut</code> and they are totally ordered by the relation <code>:</code> given by <code>const : mut</code>. The above function can be declared much more precisely using the following declaration. The syntax is a mix of <span class="title-ref">rust</span> and <span class="title-ref">D</span>.</p>
+<pre><code>fn for_each!(
+  inout!3 : inout!2
+, inout!1 : inout!0
+)
+(
+  lh : *inout!0 list_head
+, entry : *fn(*inout!1 list_head) -&gt; *inout!2 void
+, process : *fn(*inout!3 void) -&gt; void
+) -&gt; void;</code></pre>
+<p>Here, the <code>!()</code> block specifies constraints on generic parameters. The speicification <code>inout!3 : inout!2</code> means that <code>inout!2</code> is <code>const</code> implies that so is <code>inout!3</code>. Indeed, the code generated for the function remains the same irrespective of the actual values of <code>inout</code> variables. Therefore, this function can be exported to <span class="title-ref">C</span> as there is no need for name mangling. The following declaration should be used in <span class="title-ref">C</span>.</p>
+<pre><code>void for_each(
+    const list_head* lh,
+    const void *(*entry)(list_head *),
+    void (*process)(void *)
+);</code></pre>
+<p>i.e, an <code>inout!i</code> is replaced with <code>const</code> in contravariant positions and with <code>mut</code> in covariant positions.</p>
+<h1 id="const-generic-datatypes"><code>const</code> generic datatypes</h1>
+<p>One of the central concepts in <span class="title-ref">D</span> is that of ranges. A range is a generalization of the slice type <code>T[]</code> which is a pair <code>(T*, int)</code>. One can iterate over the elements of a range by making the pointer point to the next element and decrementing the length. A very common datatype in <span class="title-ref">D</span> is a slice that points to <code>const</code> elements providing a read-only view of a range of elements.</p>
+<p>A problem commonly encountered in <span class="title-ref">D</span> while working with ranges is that there is no way for the compiler to obtain a tail-const version of a user-defined range. For slices, which are the most common range types, the compiler knows that it can obtain the tail-const version of <code>const(T[])</code> by transforming it to <code>const(T)[]</code>. But, for a user-defined range, the compiler has no way to obtain this type.</p>
+<p>The problem here is that a range (like a pointer) is generic over two things: the type of the elements and their mutability. Slices allow the programmer to specify the mutability of elements separately in its datatype specification. But, the <span class="title-ref">D</span> programming language considers a range as a generic type with only the type parameter. One can solve this problem by allowing generic <code>inout</code> parameters in datatype definitions. For example, here is the definition of slice.</p>
+<pre><code>struct slice!(T)
+{
+    inout!1(T)* ptr;
+    int len;
+}
+
+struct range!(T)
+{
+    // Some declarations that use inout!1
+}</code></pre>
+<p>In the above definitions, we assume that <code>inout!0</code> refers to the qualifier on the actual <code>struct</code>. By default, all members of a <code>struct</code> can be recursively qualified <code>inout!0</code> giving us transitive <code>const</code> as the default.</p>
+<p>To make this work, the use of <code>inout!i</code> variables at places other than qualifiers (For example, it should not be possible to test its value in a <code>static if</code>) has to be disallowed. The compiler can decide whether a <code>const range!(T, const)</code> is copy-able to <code>range!(T, const)</code>. The compiler can also infer the values of <code>inout</code> variables by using rules that are similar to the inference rules for lifetime variables in <span class="title-ref">rust</span>.</p>
+<p>For full generality, we can allow the use of any number of <code>inout!i</code> variables and specification of constraints on them inside the <code>!()</code> block as was the case for functions.</p>
+<p>See the reddit <a href="https://redd.it/8m0nor">discussion</a> for this article.</p>
+<footer>
+All content on this website is licensed under
+<a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>
+</footer>
+</body>
+</html>
