@@ -24,6 +24,10 @@ font-family: sans-serif;
 line-height: 1.7em;
 max-width: 800px;
 }
+footer {
+font-size: 0.7em;
+line-height: 1.5em;
+}
 h2 {
 font-size: 1.2em;
 }
@@ -177,7 +181,7 @@ foo_bar
 foo123
 |match|</code></pre>
 <h2 id="operators">Operators</h2>
-<p>Separate operators are used for pointer arithmetic. Range operators can be used to specify ranges for iteration or pattern matching. The xor operator is <code>+^</code> and the character <code>^</code> is used for error propagation.</p>
+<p>Range operators can be used to specify ranges for iteration or pattern matching. The xor operator is <code>+^</code> and the character <code>^</code> is used for error propagation.</p>
 <pre><code>+ - * / %
 ! &amp;&amp; ||
 &amp; | +^ ~
@@ -212,6 +216,7 @@ cast</code></pre>
 <li>Slicing</li>
 <li>Access</li>
 <li>Pipe</li>
+<li>Lambda</li>
 <li>Call</li>
 <li>Construct</li>
 <li>Annotate</li>
@@ -255,9 +260,32 @@ cast</code></pre>
 </ul>
 <p>The effect of the following declarations are local to the lexical scope or the file.</p>
 <ul>
-<li>extern</li>
-<li>import</li>
-<li>using</li>
+<li><p>extern</p></li>
+<li><p>import</p></li>
+<li><p>using</p>
+<p>A <code>using</code> declaration is used to bring symbols into scope.</p>
+<pre><code>enum Color { black, white, red, blue, green }
+using type Color; // Bring all members into scope.
+var fg = red;</code></pre>
+<p>A <code>using implicit</code> declaration is used to bring objects into implicit scope.</p>
+<pre><code>fn skip(:*Lexer, :&amp;fn(:char): bool);
+fn skip_char(:*Lexer, :char);
+
+using implicit lexer;
+skip(&amp;isspace);
+if (skip_char(&#39;.&#39;)) { return Token.Dot; }
+else                { return Token.Err; }</code></pre>
+<p>When <code>_</code> is used as an expression, it takes the value of the implicit argument of the required type.</p>
+<pre><code>loop for (var i; 0..^10) {
+    using implicit i;
+    a[_+1] += a[_];
+}
+
+fn foo(i: int, f: float, d: double);
+using implicit d;
+foo(i, f, _);
+foo(.i = i, .f = f);</code></pre>
+<p>Implicit arguments to functions may be left out or can be passed by explicitly specifying the <code>_</code>. It is an error if two objects in implicit scope can be implicitly converted to an implicit argument. In particular, multiple objects with the same type are not allowed to be in implicit scope.</p></li>
 </ul>
 <h2 id="attributes">Attributes</h2>
 <p>An attribute enriches a declaration with additional information.</p>
