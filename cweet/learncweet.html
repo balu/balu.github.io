@@ -355,6 +355,48 @@ try {
     _                  =&gt; { use_impulse_power(); }
 }
 
+////////////////////////////
+// Parametric Polymorphism /
+////////////////////////////
+
+// A parametric function over two types t and u.
+fn second[t, u](x: *t, y: *u): *u { return y; }
+var x: *int = &amp;i;
+var y: *float = &amp;f;
+var z = second(x, y); // z has type *float
+
+// The C interface to `second&#39; is:
+extern void *second(void *x, void *y);
+
+
+// A parametric type.
+struct Node[t] {
+    x: *t; // x: t; is an error.
+    xs: *Node[t];
+}
+
+// C:
+struct Node {
+    void *x;
+    Node *xs;
+};
+
+// A parametric type alias.
+alias List[t] = :*Node[t];
+
+fn len[t](xs: List[t]): size
+{
+    var s = 0;
+    loop while (xs != Null) {
+        xs = xs.xs;
+    }
+    return s;
+}
+
+// C:
+typedef Node *List;
+extern size_t len(List xs);
+
 ////////////////////
 // Low-level Stuff /
 ////////////////////
@@ -381,6 +423,8 @@ var right = sub(p, n); // p - n
 var dist  = dist(right, left); // |right - left|
 inc(&amp;p); // p++
 dec(&amp;p); // p--
+front(&amp;p, n); // p += n
+back(&amp;p, n); // p -= n
 next(p); // p + 1
 prev(p); // p - 1
 
@@ -388,9 +432,9 @@ prev(p); // p - 1
 struct sse { sse_data: @alignTo(16) [4]float }
 
 // No strict type aliasing.
-// Wrap around (unsigned) or trap (signed and size).
+// Wrap around (unsigned) or trap/wrap (signed and size).
 // Indices are checked for overflow at runtime.
-// struct, union etc follow C layout.
+// Functions and types follow C layout.
 // Functions follow C calling convention.
 // Slices passed like ptr and len arguments.
 // &amp;T, *T has same ABI as T*.
