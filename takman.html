@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="keywords" content="man, tak" />
+  <title>Manual page for tak</title>
+  <style>
+      p.author { font-style: italic; }
+  </style>
+  <style type="text/css">html {
+background-color: #fefefe;
+}
+code {
+font-family: monospace;
+}
+body {
+color: #111111;
+margin: 2em auto;
+padding: 1em;
+font-family: sans-serif;
+line-height: 1.7em;
+max-width: 800px;
+}
+footer {
+font-size: 0.7em;
+line-height: 1.5em;
+}
+h2 {
+font-size: 1.2em;
+}
+h1 {
+font-size: 1.6em;
+}
+a {
+color: #0074d9; 
+}
+a:visited {
+color: #85144b; 
+}
+</style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#name">NAME</a></li>
+<li><a href="#synopsis">SYNOPSIS</a></li>
+<li><a href="#description">DESCRIPTION</a></li>
+<li><a href="#syntax">SYNTAX</a></li>
+<li><a href="#templates">TEMPLATES</a></li>
+<li><a href="#bugs">BUGS</a></li>
+<li><a href="#author">AUTHOR</a></li>
+</ul>
+</nav>
+<h1 id="name">NAME</h1>
+<p><code>tak</code> - Create presentations that use the Takahashi method.</p>
+<h1 id="synopsis">SYNOPSIS</h1>
+<pre><code>tak [OPTIONS]... [INPUT] [OUTPUT]</code></pre>
+<h1 id="description">DESCRIPTION</h1>
+<p>The <code>tak</code> command can be used to create a presentation. The INPUT is the specification for a presentation. The OUTPUT specifies the name of the output file. If INPUT is not given or &#39;-&#39;, <code>tak</code> reads from the standard input. If OUTPUT is not given or &#39;-&#39;, the output is written to the standard output.</p>
+<dl>
+<dt><strong>-t TEMPLATE, --template TEMPLATE</strong></dt>
+<dd><p>The jinja2 template to use for output (See TEMPLATES).</p>
+</dd>
+</dl>
+<p><strong>-n, --no-escape</strong></p>
+<blockquote>
+<p>Disable sanitizing content for html. By default, <code>tak</code> assumes that the output is in html format and sanitizes content using html character entities. For example the text slide:</p>
+<pre><code># &lt;html&gt;</code></pre>
+<p>is written to the output as:</p>
+<pre><code>&amp;lt;html&amp;gt;</code></pre>
+</blockquote>
+<h1 id="syntax">SYNTAX</h1>
+<p>The input to <code>tak</code> must be a UTF-8 encoded text file.</p>
+<p>The first non-blank character in a line must start a directive.</p>
+<p>An optional title page can be specified at the beginning:</p>
+<pre><code>.title  what
+.author who</code></pre>
+<p>A text slide has the following format:</p>
+<pre><code># A line of text</code></pre>
+<p>An image slide has many formats:</p>
+<pre><code>## [Caption] &quot;path/to/image.jpeg&quot;
+## (Caption) &quot;path/to/image.jpeg&quot;
+## &lt;Caption&gt; &quot;path/to/image.jpeg&quot;
+## {Caption} &quot;path/to/image.jpeg&quot;
+## |Caption| &quot;path/to/image.jpeg&quot;
+
+## &lt;&lt;Caption&gt;&gt; &quot;path/to/image.jpeg&quot;</code></pre>
+<p>Caption and path to the image file must be enclosed within delimiters. Delimiters must be one of more of one of the opening brackets ({[&lt; matched with the same number of corresponding closing bracket or one or more of one of the special characters |&quot;:&#39; matched with same number of the same character.</p>
+<p>The path to the image file is embedded verbatim into the output. Therefore, this path must be relative to the location of the output file.</p>
+<p>The file may contain comments:</p>
+<pre><code>\ This is a comment.</code></pre>
+<p>Blank lines are ignored.</p>
+<p>Everything else is a syntax error.</p>
+<h1 id="templates">TEMPLATES</h1>
+<p>If a template file is given as argument using the <strong>-t</strong> option, <code>tak</code> searches for it in the current directory and then in the list of builtin templates.</p>
+<p>The following templates are distributed with <code>tak</code>.</p>
+<dl>
+<dt><strong>dark.html</strong></dt>
+<dd><p>White text on black background (default).</p>
+</dd>
+<dt><strong>light.html</strong></dt>
+<dd><p>Black text on white background.</p>
+</dd>
+</dl>
+<h1 id="bugs">BUGS</h1>
+<p>No known bugs.</p>
+<h1 id="author">AUTHOR</h1>
+<p>Balagopal Komarath &lt;<a href="mailto:bkomarath@rbgo.in">bkomarath@rbgo.in</a>&gt;</p>
+<footer>
+All content on this website is licensed under
+<a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>
+</footer>
+</body>
+</html>
