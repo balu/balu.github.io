@@ -55,7 +55,7 @@ color: #85144b;
 var i = 42; // Infer the type.
 var lakh = 100_000; // _ as a digit separator.
 var i: int = 42; // Specify type of variable.
-var i = 42: int; // Specify type of initializer.
+var i = ann(int)(42); // Specify type of initializer.
 
 //////////
 // Types /
@@ -128,8 +128,8 @@ var ns1 = Connected{[127, 0, 0, 1]};
 
 // A match statement can be used to pattern match.
 var is_connected = match (ns) {
-    Disconnected =&gt; false,
-    _            =&gt; true, // Catch-all pattern.
+    |Disconnected =&gt; false,
+    _             =&gt; true, // Catch-all pattern.
 };
 
 // Anonymous choices.
@@ -366,7 +366,7 @@ var y: *float = &amp;f;
 var z = second(x, y); // z has type *float
 
 // The C interface to `second&#39; is:
-extern void *second(void *x, void *y);
+// extern void *second(void *x, void *y);
 
 
 // A parametric type.
@@ -376,10 +376,10 @@ struct Node[t] {
 }
 
 // C:
-struct Node {
-    void *x;
-    Node *xs;
-};
+//    struct Node {
+//        void *x;
+//        Node *xs;
+//    };
 
 // A parametric type alias.
 alias List[t] = :*Node[t];
@@ -394,8 +394,8 @@ fn len[t](xs: List[t]): size
 }
 
 // C:
-typedef Node *List;
-extern size_t len(List xs);
+//    typedef Node *List;
+//    extern size_t len(List xs);
 
 ////////////////////
 // Low-level Stuff /
@@ -406,13 +406,13 @@ var a: &amp;any = &amp;i;
 
 // *T is convertible to *repr for reinterpretation.
 var i: i32 = 1;
-var irep: []repr = {&amp;i, @sizeOf(:i32)};
+var irep: []repr = {&amp;i, @sizeOf(type(i32))};
 var f: f32 = undefined;
-var frep: []repr = {&amp;f, @sizeOf(:f32)};
+var frep: []repr = {&amp;f, @sizeOf(type(f32))};
 memcpy(frep, irep);
 
 // Can also be done using a cast.
-var f = cast(:f32)i;
+var f = cast(f32)(i);
 
 
 // The `ptr&#39; package provides many polymorphic
