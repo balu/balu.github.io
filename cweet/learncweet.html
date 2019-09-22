@@ -470,7 +470,7 @@ fn baz(): *int {
 // Using the package.
 package client;
 
-import b = foo.bar (bax = baz);
+import foo.bar as b (baz as bax);
 
 fn client() {
     assert(b.bax() == b.bax());
