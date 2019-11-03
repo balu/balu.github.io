@@ -62,7 +62,6 @@ color: #85144b;
 <li><a href="#identifiers">Identifiers</a></li>
 <li><a href="#operators">Operators</a></li>
 <li><a href="#punctutation">Punctutation</a></li>
-<li><a href="#special-tokens">Special Tokens</a></li>
 </ul></li>
 <li><a href="#grammar">Grammar</a><ul>
 <li><a href="#expressions">Expressions</a></li>
@@ -164,15 +163,16 @@ color: #85144b;
      |string  BYTE  &quot;Hello, world!&quot;,#a,0
 }</code></pre>
 <h2 id="keywords">Keywords</h2>
-<p>The following is the complete list of keywords.</p>
+<p>The following is the complete list containing all forty-five keywords.</p>
 <pre><code>var fn type struct union choice enum const exception
 when if else case match
-loop for while break continue
+loop for while break continue reverse
 try catch
 return
-package namespace include import hiding
-using cast ann alias extern scope do inline with
-undefined Null Ref true false unreachable</code></pre>
+package namespace include import hiding as
+using implicit cast ann alias extern scope do inline with
+undefined Null true false unreachable
+_</code></pre>
 <h2 id="identifiers">Identifiers</h2>
 <p>Identifiers follow the same rule as <code>C</code> identifiers. Identifiers with a double underscore are reserved.</p>
 <pre><code>foo
@@ -196,13 +196,7 @@ ann
 type</code></pre>
 <h2 id="punctutation">Punctutation</h2>
 <p>Punctuation characters are delimiters, separators, or markers.</p>
-<pre><code>( ) { } ; : , =&gt; \ ...</code></pre>
-<h2 id="special-tokens">Special Tokens</h2>
-<p>The following are special tokens.</p>
-<pre><code>_ // Underscore for unnamed identifiers etc.
-... // Ignore tail in patterns, varargs etc.
-@ // Attribute marker.
-# // Directive marker.</code></pre>
+<pre><code>( ) { } ; : , =&gt; \ ... @ #</code></pre>
 <h1 id="grammar">Grammar</h1>
 <p>This section gives an informal overview of the various major grammatical components. A formal grammar is given in the appendix.</p>
 <h2 id="expressions">Expressions</h2>
@@ -231,17 +225,16 @@ type</code></pre>
 <ul>
 <li><p>Assignment</p></li>
 <li><p>Update</p>
-<p>Only expressions classified as lvalues can appear on the lhs of an assignment or as an operand to the address of operator. An expression <code>e</code> is an lvalue if it is syntactically one of the below:</p>
+<p>Only expressions classified as lvalues can appear on the lhs of an assignment or as an operand to the address of operator. The set <code>e</code> of lvalue expressions are recursively defined based on syntax as follows:</p>
 <blockquote>
 <ul>
-<li><code>x</code> when <code>x</code> is declared as a <code>var</code> or a binding in a <code>match</code> where the expression is an lvalue.</li>
-<li><code>*f</code></li>
+<li><code>p.q.x</code> where <code>x</code> is declared as a <code>var</code> in package <code>p.q</code>.</li>
+<li><code>*f</code> where <code>f</code> is any expression.</li>
 <li><code>e[i]</code></li>
 <li><code>e.n</code></li>
 <li><code>e!</code></li>
 <li><code>e^</code></li>
 </ul>
-<p>where <code>f</code> is any expression.</p>
 </blockquote></li>
 <li><p>Loop</p></li>
 <li><p>Control Flow</p></li>
@@ -254,12 +247,14 @@ type</code></pre>
 <li>Identifier</li>
 <li>Type</li>
 <li>Field</li>
+<li>Index</li>
 <li>Expression</li>
 <li>Range</li>
 <li>Array</li>
 <li>Pointer</li>
 <li>Struct</li>
 <li>Choice</li>
+<li>Enum</li>
 </ul>
 <h2 id="declarations">Declarations</h2>
 <p>A declaration binds a name to a definition.</p>

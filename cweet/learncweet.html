@@ -197,6 +197,11 @@ loop for (var x; [2, 3, 5, 7][..]) {
     print(x);
 }
 
+// `reverse&#39; allows iteration in reverse.
+loop for (var i; reverse a.len^..0) {
+    print(a[i]);
+}
+
 // Iterating by reference.
 loop for (var &amp;x; xs) { ++*x; }
 
@@ -283,14 +288,22 @@ len = v
 // Named arguments.
 transform(.f = \x =&gt; x * x, .xs = xs);
 
+// `implicit&#39; arguments.
+using implicit ann(int)(1);
+fn sub(a, b: int): int { return a - b; }
+print(sub(1)); // prints 0.
+
+// implicit values can be accessed by _.
+print(sub(_, 2)); // prints -1.
+
 ///////////////////
 // Error Handling /
 ///////////////////
 
 // Types marked as `exception&#39; are error signalling types.
 // Error is the standard exception type.
-exception struct Error {}
-var error: Error = Error{};
+exception struct Error { a: int }
+var error: Error = Error{0};
 
 // The type of the if-else expression is int|Error.
 var q = if (y != 0) x/y else error;
@@ -420,7 +433,7 @@ var f = cast(f32)(i);
 import ptr;
 var left  = add(p, n); // p + n
 var right = sub(p, n); // p - n
-var dist  = dist(right, left); // |right - left|
+var d = dist(right, left); // |right - left|
 inc(&amp;p); // p++
 dec(&amp;p); // p--
 front(&amp;p, n); // p += n
