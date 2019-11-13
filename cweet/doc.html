@@ -305,7 +305,15 @@ fn foo(i: int, f: float, d: double);
 using implicit d;
 foo(i, f, _);
 foo(.i = i, .f = f);</code></pre>
-<p>Implicit arguments to functions may be left out or can be passed by explicitly specifying the <code>_</code>. It is an error if two objects in implicit scope can be implicitly converted to an implicit argument. In particular, multiple objects with the same type are not allowed to be in implicit scope.</p></li>
+<p>Implicit arguments to functions may be left out or can be passed by explicitly specifying the <code>_</code>. It is an error if two objects in implicit scope can be implicitly converted to an implicit argument. In particular, multiple objects with the same type are not allowed to be in implicit scope. Also, ambiguity between explicit arguments and implicit arguments results in a compiler error.</p>
+<pre><code>using implicit ann(int)(42);
+fn sum(x, y: int): int { return 0; }
+sum(1); // Error. Is 1 the first argument or the second?
+sum(_, 1); // Ok.
+fn fsum(x: int, y: float): int { return 0; }
+fsum(1.0); // Ok. fsum(42, 1.0);
+fn fsum1(x: float, y: int): int { return 0; }
+fsum1(1); // Ok. fsum1(1, 42);</code></pre></li>
 </ul>
 <h2 id="attributes">Attributes</h2>
 <p>An attribute enriches a declaration with additional information.</p>
