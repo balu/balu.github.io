@@ -9,7 +9,21 @@
   <style>
       p.author { font-style: italic; }
   </style>
-  <style type="text/css">html {
+  <style type="text/css">pre {
+background-color: #FDF6E3
+}
+.sourceCode .kw { color: #268BD2; }
+.sourceCode .dt { color: #268BD2; }
+.sourceCode .dv, .sourceCode .bn, .sourceCode .fl { color: #D33682; }
+.sourceCode .ch { color: #DC322F; }
+.sourceCode .st { color: #2AA198; }
+.sourceCode .co { color: #93A1A1; }
+.sourceCode .ot { color: #A57800; }
+.sourceCode .al { color: #CB4B16; font-weight: bold; }
+.sourceCode .fu { color: #268BD2; }
+.sourceCode .re { }
+.sourceCode .er { color: #D30102; font-weight: bold; }
+html {
 background-color: #fefefe;
 }
 code {
@@ -45,12 +59,17 @@ color: #85144b;
   <![endif]-->
 </head>
 <body>
-<p>Please use my email id on the homepage of this website to contact me. Follow the netiquette guidelines mentioned in <a href="https://tools.ietf.org/html/rfc1855">rfc 1855</a>. Use only plain text emails. If formatting is essential, then attach the formatted content as a pdf. Please wait at least one week for a reply before sending me a reminder. If you need to contact me urgently, use my phone number.</p>
+<p>Please use my email id on the homepage of this website to contact me. Follow the netiquette guidelines mentioned in <a href="https://tools.ietf.org/html/rfc1855">rfc 1855</a>. Use only plain text emails. If formatting is essential, then attach the formatted content as a pdf. Please wait at least three days for a reply before sending me a reminder. If you need to contact me urgently, use my phone number.</p>
 <p>I am not on any social networks.</p>
 <p>If you wish to send me a private email, remember that unencrypted emails are more like postcards than sealed envelopes. The only way to ensure that emails you send to me can only be read by me is to encrypt them using my <a href="data/bkomarath_public_key.txt">key</a>. You should also verify the fingerprint for my key with me through a separate, secure channel (in person or through phone) before using the key. The FSF has written an excellent <a href="https://emailselfdefense.fsf.org/en/">guide</a> on secure communication over email. The exact steps to send secure emails depend on the email client.</p>
+<p>You can send encrypted messages with minimal setup as follows:</p>
+<pre><code>$ gpg --import bkomarath_public_key.txt
+$ gpg --encrypt --armor -r bkomarath@rbgo.in message</code></pre>
+<p>This assumes that you have installed GnuPG on your system. First, import my public key given above. Assuming that you have typed in the message for me into a file called <code>message</code>, use the encrypt option to encrypt it for my eyes only. The output will be written to a file named <code>message.asc</code>. Now, you can send this <code>message.asc</code> file to me.</p>
 <footer>
 All content on this website is licensed under
-<a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>
+<a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA
+4.0</a> by Balagopal Komarath unless mentioned otherwise.
 </footer>
 </body>
 </html>

@@ -10,7 +10,21 @@
   <style>
       p.author { font-style: italic; }
   </style>
-  <style type="text/css">html {
+  <style type="text/css">pre {
+background-color: #FDF6E3
+}
+.sourceCode .kw { color: #268BD2; }
+.sourceCode .dt { color: #268BD2; }
+.sourceCode .dv, .sourceCode .bn, .sourceCode .fl { color: #D33682; }
+.sourceCode .ch { color: #DC322F; }
+.sourceCode .st { color: #2AA198; }
+.sourceCode .co { color: #93A1A1; }
+.sourceCode .ot { color: #A57800; }
+.sourceCode .al { color: #CB4B16; font-weight: bold; }
+.sourceCode .fu { color: #268BD2; }
+.sourceCode .re { }
+.sourceCode .er { color: #D30102; font-weight: bold; }
+html {
 background-color: #fefefe;
 }
 code {
@@ -52,170 +66,171 @@ color: #85144b;
 </header>
 <h1 id="the-problem">The Problem</h1>
 <p>From C++11, the <span class="title-ref">auto</span> keyword can be used for automatic type deduction while declaring variables. For example:</p>
-<pre><code>auto i = 25; // i is an int.
-std::vector&lt;int&gt; v;
-auto b = v.cbegin();
-// b is __gnu_cxx::__normal_iterator&lt;...&gt;</code></pre>
+<div class="sourceCode" id="cb1"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">auto</span> i = <span class="dv">25</span>; <span class="co">// i is an int.</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="bu">std::</span>vector&lt;<span class="dt">int</span>&gt; v;</span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="kw">auto</span> b = v.cbegin();</span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="co">// b is __gnu_cxx::__normal_iterator&lt;...&gt;</span></span></code></pre></div>
 <p>As you can see from the type of <span class="title-ref">b</span>, <span class="title-ref">auto</span> is not just for mere convenience, it is a necessary feature for writing portable programs.</p>
 <p>Another advantage of <span class="title-ref">auto</span> is that it disables implicit conversions that could happen when writing types explicitly. For example:</p>
-<pre><code>long long i = 0xFFFFFFFF; // A very large number.
-...
-int j = i; // oops. becomes -1.</code></pre>
+<div class="sourceCode" id="cb2"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1"></a><span class="dt">long</span> <span class="dt">long</span> i = <span class="bn">0xFFFFFFFF</span>; <span class="co">// A very large number.</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a>...</span>
+<span id="cb2-3"><a href="#cb2-3"></a><span class="dt">int</span> j = i; <span class="co">// oops. becomes -1.</span></span></code></pre></div>
 <p>One of the alleged problems that arise with the pervasive use of <span class="title-ref">auto</span> (called the Almost Always Auto style) in large codebases is that the documentation provided by writing out types explicitly is no longer present, which makes reading and understanding code difficult. Ideally, we would like a feature that preserves types like the <span class="title-ref">auto</span> keyword <em>and</em> allow us to specify the type that we expect the variable to be like.</p>
 <h1 id="a-solution">A Solution</h1>
 <p>It should be possible to specify types when declaring variables without forcing conversions. For example, a programmer should be able to write:</p>
-<pre><code>long long i = 0xFFFFFFFF;
-...
-expect&lt;int&gt;::e j = i;
-// long long is convertible to int. 
-// Make j&#39;s type long long.</code></pre>
+<div class="sourceCode" id="cb3"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1"></a><span class="dt">long</span> <span class="dt">long</span> i = <span class="bn">0xFFFFFFFF</span>;</span>
+<span id="cb3-2"><a href="#cb3-2"></a>...</span>
+<span id="cb3-3"><a href="#cb3-3"></a>expect&lt;<span class="dt">int</span>&gt;::e j = i;</span>
+<span id="cb3-4"><a href="#cb3-4"></a><span class="co">// long long is convertible to int. </span></span>
+<span id="cb3-5"><a href="#cb3-5"></a><span class="co">// Make j&#39;s type long long.</span></span></code></pre></div>
 <p>A definition for <span class="title-ref">expect</span> could be as follows:</p>
-<pre><code>template&lt;class T&gt; struct expect {
-  template&lt;class U&gt; struct e {
-      static_assert(std::is_convertible&lt;U, T&gt;::value);
-      U data;
-      template&lt;int = 0&gt; e(U d) : data(d) {}
-      operator U() { return data; }
-  ...</code></pre>
+<div class="sourceCode" id="cb4"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">template</span>&lt;<span class="kw">class</span> T&gt; <span class="kw">struct</span> expect {</span>
+<span id="cb4-2"><a href="#cb4-2"></a>  <span class="kw">template</span>&lt;<span class="kw">class</span> U&gt; <span class="kw">struct</span> e {</span>
+<span id="cb4-3"><a href="#cb4-3"></a>      <span class="kw">static_assert</span>(<span class="bu">std::</span>is_convertible&lt;U, T&gt;::value);</span>
+<span id="cb4-4"><a href="#cb4-4"></a>      U data;</span>
+<span id="cb4-5"><a href="#cb4-5"></a>      <span class="kw">template</span>&lt;<span class="dt">int</span> = <span class="dv">0</span>&gt; e(U d) : data(d) {}</span>
+<span id="cb4-6"><a href="#cb4-6"></a>      <span class="kw">operator</span> U() { <span class="cf">return</span> data; }</span>
+<span id="cb4-7"><a href="#cb4-7"></a>  ...</span></code></pre></div>
 <p>If a variable is declared and initialized as <span class="title-ref">expect&lt;T&gt;::e y = expr;</span>, then it will compile only if the type of <span class="title-ref">expr</span> is convertible to <span class="title-ref">T</span>. But, no actual conversion to <span class="title-ref">T</span> is performed. The type of <span class="title-ref">y</span> is almost the same as type of <span class="title-ref">expr</span> (close to what <span class="title-ref">auto</span> does). We overload operators for <span class="title-ref">expect&lt;T&gt;::e&lt;U&gt;</span> depending on the operators implemented by <span class="title-ref">U</span> as follows:</p>
-<pre><code>e&amp; operator++()
-{
-    return pre_increment&lt;U&gt;();
-}
-private:
-    template&lt;class V&gt;
-    std::enable_if_t&lt;has_pre_increment_v&lt;V&gt;, e&gt;&amp;
-    pre_increment()
-    {
-        ++data_;
-        return *this;
-    }</code></pre>
+<div class="sourceCode" id="cb5"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb5-1"><a href="#cb5-1"></a>e&amp; <span class="kw">operator</span>++()</span>
+<span id="cb5-2"><a href="#cb5-2"></a>{</span>
+<span id="cb5-3"><a href="#cb5-3"></a>    <span class="cf">return</span> pre_increment&lt;U&gt;();</span>
+<span id="cb5-4"><a href="#cb5-4"></a>}</span>
+<span id="cb5-5"><a href="#cb5-5"></a><span class="kw">private</span>:</span>
+<span id="cb5-6"><a href="#cb5-6"></a>    <span class="kw">template</span>&lt;<span class="kw">class</span> V&gt;</span>
+<span id="cb5-7"><a href="#cb5-7"></a>    <span class="bu">std::</span>enable_if_t&lt;has_pre_increment_v&lt;V&gt;, e&gt;&amp;</span>
+<span id="cb5-8"><a href="#cb5-8"></a>    pre_increment()</span>
+<span id="cb5-9"><a href="#cb5-9"></a>    {</span>
+<span id="cb5-10"><a href="#cb5-10"></a>        ++<span class="va">data_</span>;</span>
+<span id="cb5-11"><a href="#cb5-11"></a>        <span class="cf">return</span> *<span class="kw">this</span>;</span>
+<span id="cb5-12"><a href="#cb5-12"></a>    }</span></code></pre></div>
 <p>Full source code is given in the appendix.</p>
 <h1 id="a-case-for-deduction-in-alias-templates">A case for deduction in alias templates?</h1>
 <p>In this section, we describe a hypothetical feature that would make the above solution cleaner. The feature is template parameter deduction for alias templates. With such a feature, we could have simply wrote something like the following for defining <span class="title-ref">expect&lt;T&gt;::e</span>. This should behave exactly like <span class="title-ref">auto</span> except for the additional compatibility check with <span class="title-ref">T</span>.</p>
-<pre><code>template&lt;class T&gt; struct expect {
-    template&lt;class U&gt;
-    using e = std::enable_if_t&lt;
-        std::is_convertible&lt;U, T&gt;,
-        U
-    &gt;;
-};</code></pre>
+<div class="sourceCode" id="cb6"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw">template</span>&lt;<span class="kw">class</span> T&gt; <span class="kw">struct</span> expect {</span>
+<span id="cb6-2"><a href="#cb6-2"></a>    <span class="kw">template</span>&lt;<span class="kw">class</span> U&gt;</span>
+<span id="cb6-3"><a href="#cb6-3"></a>    <span class="kw">using</span> e = <span class="bu">std::</span>enable_if_t&lt;</span>
+<span id="cb6-4"><a href="#cb6-4"></a>        <span class="bu">std::</span>is_convertible&lt;U, T&gt;,</span>
+<span id="cb6-5"><a href="#cb6-5"></a>        U</span>
+<span id="cb6-6"><a href="#cb6-6"></a>    &gt;;</span>
+<span id="cb6-7"><a href="#cb6-7"></a>};</span></code></pre></div>
 <p>Infact, using template parameter deduction for alias templates, we can implement the <span class="title-ref">auto</span> feature as follows:</p>
-<pre><code>template&lt;class T&gt; using auto = T;
-auto x = 5; // T = int
-auto msg = &quot;Hello&quot;; // T = const char*</code></pre>
+<div class="sourceCode" id="cb7"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw">template</span>&lt;<span class="kw">class</span> T&gt; <span class="kw">using</span> <span class="kw">auto</span> = T;</span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="kw">auto</span> x = <span class="dv">5</span>; <span class="co">// T = int</span></span>
+<span id="cb7-3"><a href="#cb7-3"></a><span class="kw">auto</span> msg = <span class="st">&quot;Hello&quot;</span>; <span class="co">// T = const char*</span></span></code></pre></div>
 <p>This can be used to check conformance of types to interfaces as follows:</p>
-<pre><code>template&lt;class T&gt; using iterator = std::enable_if_t&lt;
-    is_iterator_v&lt;T&gt;,
-    T
-&gt;;
-std::vector&lt;int&gt; v;
-iterator p = v.cbegin(); // Ok. is_iterator_v&lt;T&gt; is true.</code></pre>
+<div class="sourceCode" id="cb8"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb8-1"><a href="#cb8-1"></a><span class="kw">template</span>&lt;<span class="kw">class</span> T&gt; <span class="kw">using</span> iterator = <span class="bu">std::</span>enable_if_t&lt;</span>
+<span id="cb8-2"><a href="#cb8-2"></a>    is_iterator_v&lt;T&gt;,</span>
+<span id="cb8-3"><a href="#cb8-3"></a>    T</span>
+<span id="cb8-4"><a href="#cb8-4"></a>&gt;;</span>
+<span id="cb8-5"><a href="#cb8-5"></a><span class="bu">std::</span>vector&lt;<span class="dt">int</span>&gt; v;</span>
+<span id="cb8-6"><a href="#cb8-6"></a>iterator p = v.cbegin(); <span class="co">// Ok. is_iterator_v&lt;T&gt; is true.</span></span></code></pre></div>
 <p>We could also supply deduction guides as follows:</p>
-<pre><code>template&lt;class I&gt; using range = std::pair&lt;I, I&gt;;
-// explicit deduction guide. (1)
-template&lt;class I&gt; range(I, I) -&gt; range&lt;
-    std::enable_if_t&lt;is_iterator_v&lt;I&gt;, I&gt;
-&gt;;
-// The following deduction guide (2) disables
-// template&lt;class T&gt; range(T) -&gt; range&lt;T&gt;;
-// which is obviously wrong.
-// is_range_v checks whether 
-// R is a std::pair of iterators (i.e., a range).
-template&lt;class R&gt; range(R) -&gt; range&lt;
-    std::enable_if_t&lt;
-        is_range_v&lt;R&gt;,
-        R::first_type
-    &gt;
-&gt;;
-std::vector&lt;int&gt; v;
-range r{v.cbegin(), v.cend()}; // Use (1)
-range s{r}; // Use (2)</code></pre>
+<div class="sourceCode" id="cb9"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb9-1"><a href="#cb9-1"></a><span class="kw">template</span>&lt;<span class="kw">class</span> I&gt; <span class="kw">using</span> range = <span class="bu">std::</span>pair&lt;I, I&gt;;</span>
+<span id="cb9-2"><a href="#cb9-2"></a><span class="co">// explicit deduction guide. (1)</span></span>
+<span id="cb9-3"><a href="#cb9-3"></a><span class="kw">template</span>&lt;<span class="kw">class</span> I&gt; range(I, I) -&gt; range&lt;</span>
+<span id="cb9-4"><a href="#cb9-4"></a>    <span class="bu">std::</span>enable_if_t&lt;is_iterator_v&lt;I&gt;, I&gt;</span>
+<span id="cb9-5"><a href="#cb9-5"></a>&gt;;</span>
+<span id="cb9-6"><a href="#cb9-6"></a><span class="co">// The following deduction guide (2) disables</span></span>
+<span id="cb9-7"><a href="#cb9-7"></a><span class="co">// template&lt;class T&gt; range(T) -&gt; range&lt;T&gt;;</span></span>
+<span id="cb9-8"><a href="#cb9-8"></a><span class="co">// which is obviously wrong.</span></span>
+<span id="cb9-9"><a href="#cb9-9"></a><span class="co">// is_range_v checks whether </span></span>
+<span id="cb9-10"><a href="#cb9-10"></a><span class="co">// R is a std::pair of iterators (i.e., a range).</span></span>
+<span id="cb9-11"><a href="#cb9-11"></a><span class="kw">template</span>&lt;<span class="kw">class</span> R&gt; range(R) -&gt; range&lt;</span>
+<span id="cb9-12"><a href="#cb9-12"></a>    <span class="bu">std::</span>enable_if_t&lt;</span>
+<span id="cb9-13"><a href="#cb9-13"></a>        is_range_v&lt;R&gt;,</span>
+<span id="cb9-14"><a href="#cb9-14"></a>        R::<span class="dt">first_type</span></span>
+<span id="cb9-15"><a href="#cb9-15"></a>    &gt;</span>
+<span id="cb9-16"><a href="#cb9-16"></a>&gt;;</span>
+<span id="cb9-17"><a href="#cb9-17"></a><span class="bu">std::</span>vector&lt;<span class="dt">int</span>&gt; v;</span>
+<span id="cb9-18"><a href="#cb9-18"></a>range r{v.cbegin(), v.cend()}; <span class="co">// Use (1)</span></span>
+<span id="cb9-19"><a href="#cb9-19"></a>range s{r}; <span class="co">// Use (2)</span></span></code></pre></div>
 <p>See the reddit <a href="https://redd.it/6vdxx0">discussion</a> for this article.</p>
 <h1 id="appendix-full-source-code">Appendix: Full source code</h1>
 <p>This is just a proof of concept implementation. The check <span class="title-ref">is_convertible</span> is not right in this context. We should really check whether all operations supported by the expected type <span class="title-ref">T</span> is supported by the actual type <span class="title-ref">U</span>.</p>
-<pre><code>#include &lt;iostream&gt;
-#include &lt;type_traits&gt;
-#include &lt;string&gt;
-
-template&lt; class, class T = std::void_t&lt;&gt; &gt;
-struct has_pre_increment : std::false_type { };
-
-template&lt; class T &gt;
-struct has_pre_increment&lt;
-    T,
-    std::void_t&lt;
-        decltype( ++std::declval&lt;T&amp;&gt;() )
-    &gt;
-&gt; : std::true_type { };
-
-template&lt;class T&gt;
-constexpr bool has_pre_increment_v =
-    has_pre_increment&lt;T&gt;::value;
-
-template&lt;class T&gt; struct expect {
-    template&lt;class U&gt; struct e {
-        static_assert(std::is_convertible&lt;U, T&gt;::value);
-        U data_;
-        template&lt;int = 0&gt; e(U d) : data_(d) {}
-        operator U() { return data_; }
-
-        e&amp; operator++()
-        {
-            return pre_increment&lt;U&gt;();
-        }
-    private:
-        template&lt;class V&gt;
-        std::enable_if_t&lt;has_pre_increment_v&lt;V&gt;, e&gt;&amp;
-        pre_increment()
-        {
-            ++data_;
-            return *this;
-        }
-    };
-};
-
-void foo(int x)
-{
-    std::cout &lt;&lt; &quot;foo(int)&quot; &lt;&lt; x &lt;&lt; &quot;\n&quot;;
-}
-
-void foo(long long x)
-{
-    std::cout &lt;&lt; &quot;foo(long) &quot; &lt;&lt; x &lt;&lt; &quot;\n&quot;;
-}
-
-void bar(const std::string&amp; x)
-{
-    std::cout &lt;&lt; &quot;bar(string) &quot; &lt;&lt; x &lt;&lt; &quot;\n&quot;;
-}
-
-void bar(const char* x)
-{
-    std::cout &lt;&lt; &quot;bar(const char*) &quot; &lt;&lt; x &lt;&lt; &quot;\n&quot;;
-}
-
-int main()
-{
-    long long x = 0xFFFFFFFF;
-    expect&lt;int&gt;::e y = x;
-    ++y;
-    foo(y);
-    y = 42;
-    foo(y);
-
-    std::string msg = &quot;Hello&quot;;
-    expect&lt;const char*&gt;::e m = msg.data();
-    bar(msg);
-    ++m;
-    bar(m);
-
-    expect&lt;std::string&gt;::e m1 = msg;
-    // ++m1; // compilation error. no pre-increment.
-}</code></pre>
+<div class="sourceCode" id="cb10"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb10-1"><a href="#cb10-1"></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a><span class="pp">#include </span><span class="im">&lt;type_traits&gt;</span></span>
+<span id="cb10-3"><a href="#cb10-3"></a><span class="pp">#include </span><span class="im">&lt;string&gt;</span></span>
+<span id="cb10-4"><a href="#cb10-4"></a></span>
+<span id="cb10-5"><a href="#cb10-5"></a><span class="kw">template</span>&lt; <span class="kw">class</span>, <span class="kw">class</span> T = <span class="bu">std::</span>void_t&lt;&gt; &gt;</span>
+<span id="cb10-6"><a href="#cb10-6"></a><span class="kw">struct</span> has_pre_increment : <span class="bu">std::</span>false_type { };</span>
+<span id="cb10-7"><a href="#cb10-7"></a></span>
+<span id="cb10-8"><a href="#cb10-8"></a><span class="kw">template</span>&lt; <span class="kw">class</span> T &gt;</span>
+<span id="cb10-9"><a href="#cb10-9"></a><span class="kw">struct</span> has_pre_increment&lt;</span>
+<span id="cb10-10"><a href="#cb10-10"></a>    T,</span>
+<span id="cb10-11"><a href="#cb10-11"></a>    <span class="bu">std::</span>void_t&lt;</span>
+<span id="cb10-12"><a href="#cb10-12"></a>        <span class="kw">decltype</span>( ++<span class="bu">std::</span>declval&lt;T&amp;&gt;() )</span>
+<span id="cb10-13"><a href="#cb10-13"></a>    &gt;</span>
+<span id="cb10-14"><a href="#cb10-14"></a>&gt; : <span class="bu">std::</span>true_type { };</span>
+<span id="cb10-15"><a href="#cb10-15"></a></span>
+<span id="cb10-16"><a href="#cb10-16"></a><span class="kw">template</span>&lt;<span class="kw">class</span> T&gt;</span>
+<span id="cb10-17"><a href="#cb10-17"></a><span class="kw">constexpr</span> <span class="dt">bool</span> has_pre_increment_v =</span>
+<span id="cb10-18"><a href="#cb10-18"></a>    has_pre_increment&lt;T&gt;::value;</span>
+<span id="cb10-19"><a href="#cb10-19"></a></span>
+<span id="cb10-20"><a href="#cb10-20"></a><span class="kw">template</span>&lt;<span class="kw">class</span> T&gt; <span class="kw">struct</span> expect {</span>
+<span id="cb10-21"><a href="#cb10-21"></a>    <span class="kw">template</span>&lt;<span class="kw">class</span> U&gt; <span class="kw">struct</span> e {</span>
+<span id="cb10-22"><a href="#cb10-22"></a>        <span class="kw">static_assert</span>(<span class="bu">std::</span>is_convertible&lt;U, T&gt;::value);</span>
+<span id="cb10-23"><a href="#cb10-23"></a>        U <span class="va">data_</span>;</span>
+<span id="cb10-24"><a href="#cb10-24"></a>        <span class="kw">template</span>&lt;<span class="dt">int</span> = <span class="dv">0</span>&gt; e(U d) : <span class="va">data_</span>(d) {}</span>
+<span id="cb10-25"><a href="#cb10-25"></a>        <span class="kw">operator</span> U() { <span class="cf">return</span> <span class="va">data_</span>; }</span>
+<span id="cb10-26"><a href="#cb10-26"></a></span>
+<span id="cb10-27"><a href="#cb10-27"></a>        e&amp; <span class="kw">operator</span>++()</span>
+<span id="cb10-28"><a href="#cb10-28"></a>        {</span>
+<span id="cb10-29"><a href="#cb10-29"></a>            <span class="cf">return</span> pre_increment&lt;U&gt;();</span>
+<span id="cb10-30"><a href="#cb10-30"></a>        }</span>
+<span id="cb10-31"><a href="#cb10-31"></a>    <span class="kw">private</span>:</span>
+<span id="cb10-32"><a href="#cb10-32"></a>        <span class="kw">template</span>&lt;<span class="kw">class</span> V&gt;</span>
+<span id="cb10-33"><a href="#cb10-33"></a>        <span class="bu">std::</span>enable_if_t&lt;has_pre_increment_v&lt;V&gt;, e&gt;&amp;</span>
+<span id="cb10-34"><a href="#cb10-34"></a>        pre_increment()</span>
+<span id="cb10-35"><a href="#cb10-35"></a>        {</span>
+<span id="cb10-36"><a href="#cb10-36"></a>            ++<span class="va">data_</span>;</span>
+<span id="cb10-37"><a href="#cb10-37"></a>            <span class="cf">return</span> *<span class="kw">this</span>;</span>
+<span id="cb10-38"><a href="#cb10-38"></a>        }</span>
+<span id="cb10-39"><a href="#cb10-39"></a>    };</span>
+<span id="cb10-40"><a href="#cb10-40"></a>};</span>
+<span id="cb10-41"><a href="#cb10-41"></a></span>
+<span id="cb10-42"><a href="#cb10-42"></a><span class="dt">void</span> foo(<span class="dt">int</span> x)</span>
+<span id="cb10-43"><a href="#cb10-43"></a>{</span>
+<span id="cb10-44"><a href="#cb10-44"></a>    <span class="bu">std::</span>cout &lt;&lt; <span class="st">&quot;foo(int)&quot;</span> &lt;&lt; x &lt;&lt; <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>;</span>
+<span id="cb10-45"><a href="#cb10-45"></a>}</span>
+<span id="cb10-46"><a href="#cb10-46"></a></span>
+<span id="cb10-47"><a href="#cb10-47"></a><span class="dt">void</span> foo(<span class="dt">long</span> <span class="dt">long</span> x)</span>
+<span id="cb10-48"><a href="#cb10-48"></a>{</span>
+<span id="cb10-49"><a href="#cb10-49"></a>    <span class="bu">std::</span>cout &lt;&lt; <span class="st">&quot;foo(long) &quot;</span> &lt;&lt; x &lt;&lt; <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>;</span>
+<span id="cb10-50"><a href="#cb10-50"></a>}</span>
+<span id="cb10-51"><a href="#cb10-51"></a></span>
+<span id="cb10-52"><a href="#cb10-52"></a><span class="dt">void</span> bar(<span class="at">const</span> <span class="bu">std::</span>string&amp; x)</span>
+<span id="cb10-53"><a href="#cb10-53"></a>{</span>
+<span id="cb10-54"><a href="#cb10-54"></a>    <span class="bu">std::</span>cout &lt;&lt; <span class="st">&quot;bar(string) &quot;</span> &lt;&lt; x &lt;&lt; <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>;</span>
+<span id="cb10-55"><a href="#cb10-55"></a>}</span>
+<span id="cb10-56"><a href="#cb10-56"></a></span>
+<span id="cb10-57"><a href="#cb10-57"></a><span class="dt">void</span> bar(<span class="at">const</span> <span class="dt">char</span>* x)</span>
+<span id="cb10-58"><a href="#cb10-58"></a>{</span>
+<span id="cb10-59"><a href="#cb10-59"></a>    <span class="bu">std::</span>cout &lt;&lt; <span class="st">&quot;bar(const char*) &quot;</span> &lt;&lt; x &lt;&lt; <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>;</span>
+<span id="cb10-60"><a href="#cb10-60"></a>}</span>
+<span id="cb10-61"><a href="#cb10-61"></a></span>
+<span id="cb10-62"><a href="#cb10-62"></a><span class="dt">int</span> main()</span>
+<span id="cb10-63"><a href="#cb10-63"></a>{</span>
+<span id="cb10-64"><a href="#cb10-64"></a>    <span class="dt">long</span> <span class="dt">long</span> x = <span class="bn">0xFFFFFFFF</span>;</span>
+<span id="cb10-65"><a href="#cb10-65"></a>    expect&lt;<span class="dt">int</span>&gt;::e y = x;</span>
+<span id="cb10-66"><a href="#cb10-66"></a>    ++y;</span>
+<span id="cb10-67"><a href="#cb10-67"></a>    foo(y);</span>
+<span id="cb10-68"><a href="#cb10-68"></a>    y = <span class="dv">42</span>;</span>
+<span id="cb10-69"><a href="#cb10-69"></a>    foo(y);</span>
+<span id="cb10-70"><a href="#cb10-70"></a></span>
+<span id="cb10-71"><a href="#cb10-71"></a>    <span class="bu">std::</span>string msg = <span class="st">&quot;Hello&quot;</span>;</span>
+<span id="cb10-72"><a href="#cb10-72"></a>    expect&lt;<span class="at">const</span> <span class="dt">char</span>*&gt;::e m = msg.data();</span>
+<span id="cb10-73"><a href="#cb10-73"></a>    bar(msg);</span>
+<span id="cb10-74"><a href="#cb10-74"></a>    ++m;</span>
+<span id="cb10-75"><a href="#cb10-75"></a>    bar(m);</span>
+<span id="cb10-76"><a href="#cb10-76"></a></span>
+<span id="cb10-77"><a href="#cb10-77"></a>    expect&lt;<span class="bu">std::</span>string&gt;::e m1 = msg;</span>
+<span id="cb10-78"><a href="#cb10-78"></a>    <span class="co">// ++m1; // compilation error. no pre-increment.</span></span>
+<span id="cb10-79"><a href="#cb10-79"></a>}</span></code></pre></div>
 <footer>
 All content on this website is licensed under
-<a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>
+<a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA
+4.0</a> by Balagopal Komarath unless mentioned otherwise.
 </footer>
 </body>
 </html>
