@@ -77,220 +77,220 @@ color: #85144b;
 <p>There are different ways to guarantee memory safety for all programs. One is to restrict the programming language and disallow pointers. But, this forces most programs to make unnecessary copies of data. Another strategy, called garbage collection, embeds a garbage collector with every program. The garbage collector periodically looks for objects in memory that cannot be accessed from the program and reclaims this memory. The drawbacks of this are the overhead of garbage collection and that deallocation of memory is no longer under the control of the programmer.</p>
 <h1 id="lifetimes">Lifetimes</h1>
 <p>The lifetime of an object in an execution of the program is the span of time from when memory for the object is initialized to when the memory for the object is deallocated.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1"></a><span class="dt">void</span> foo(<span class="dt">bool</span> b)</span>
-<span id="cb1-2"><a href="#cb1-2"></a>{</span>
-<span id="cb1-3"><a href="#cb1-3"></a>    <span class="dt">int</span> *ip = <span class="kw">new</span> <span class="dt">int</span>;</span>
-<span id="cb1-4"><a href="#cb1-4"></a>    <span class="cf">if</span> (b) {</span>
-<span id="cb1-5"><a href="#cb1-5"></a>        <span class="kw">delete</span> ip;</span>
-<span id="cb1-6"><a href="#cb1-6"></a>        <span class="co">// (1)</span></span>
-<span id="cb1-7"><a href="#cb1-7"></a>    } <span class="cf">else</span> {</span>
-<span id="cb1-8"><a href="#cb1-8"></a>        *ip = <span class="dv">0</span>;</span>
-<span id="cb1-9"><a href="#cb1-9"></a>    }</span>
-<span id="cb1-10"><a href="#cb1-10"></a>    <span class="kw">delete</span> ip;</span>
-<span id="cb1-11"><a href="#cb1-11"></a>    <span class="co">// (2)</span></span>
-<span id="cb1-12"><a href="#cb1-12"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="dt">void</span> foo(<span class="dt">bool</span> b)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a>{</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true"></a>    <span class="dt">int</span> *ip = <span class="kw">new</span> <span class="dt">int</span>;</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true"></a>    <span class="cf">if</span> (b) {</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true"></a>        <span class="kw">delete</span> ip;</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true"></a>        <span class="co">// (1)</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true"></a>    } <span class="cf">else</span> {</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true"></a>        *ip = <span class="dv">0</span>;</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true"></a>    }</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true"></a>    <span class="kw">delete</span> ip;</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true"></a>    <span class="co">// (2)</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true"></a>}</span></code></pre></div>
 <p>In any execution of a program calling <span class="title-ref">foo</span>, the lifetime of the <span class="title-ref">int</span> allocated on the heap starts immediately after <span class="title-ref">foo</span> is called and ends at the point marked (1) if <span class="title-ref">b</span> is true and at the point marked (2) otherwise. This example shows that the lifetime of an object is a dynamic property.</p>
 <p>If a garbage collection strategy is being used, then the programmer cannot explicitly call <span class="title-ref">delete</span> to release memory. Instead, a garbage collector stops the program during execution and checks whether the lifetime of all objects currently in memory have expired or not. The garbage collector considers the lifetime of an object to be expired if there are no more active references to it. This is a conservative estimate because if there are no references to the object, then it cannot be accessed anymore.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1"></a><span class="dt">void</span> foo()</span>
-<span id="cb2-2"><a href="#cb2-2"></a>{</span>
-<span id="cb2-3"><a href="#cb2-3"></a>    <span class="dt">int</span>* i = <span class="kw">new</span> <span class="dt">int</span>;</span>
-<span id="cb2-4"><a href="#cb2-4"></a>    <span class="dt">int</span>* j = <span class="kw">new</span> <span class="dt">int</span>;</span>
-<span id="cb2-5"><a href="#cb2-5"></a>    *i = <span class="dv">0</span>;</span>
-<span id="cb2-6"><a href="#cb2-6"></a>    *j = <span class="dv">0</span>;</span>
-<span id="cb2-7"><a href="#cb2-7"></a>    bar(i, j);</span>
-<span id="cb2-8"><a href="#cb2-8"></a>    <span class="co">// (1)</span></span>
-<span id="cb2-9"><a href="#cb2-9"></a>    baz(i);</span>
-<span id="cb2-10"><a href="#cb2-10"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="dt">void</span> foo()</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a>{</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true"></a>    <span class="dt">int</span>* i = <span class="kw">new</span> <span class="dt">int</span>;</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true"></a>    <span class="dt">int</span>* j = <span class="kw">new</span> <span class="dt">int</span>;</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true"></a>    *i = <span class="dv">0</span>;</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true"></a>    *j = <span class="dv">0</span>;</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true"></a>    bar(i, j);</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true"></a>    <span class="co">// (1)</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true"></a>    baz(i);</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true"></a>}</span></code></pre></div>
 <p>In the above program, the lifetime of the <span class="title-ref">int</span> pointed to by the variable <span class="title-ref">j</span> can be considered over at (1). But, if the garbage collector stops the program just before the call to <span class="title-ref">baz</span>, then it has to consider that object to be alive because the reference <span class="title-ref">j</span> is still active. On the other hand, if garbage collection is not being used, then the programmer can call <span class="title-ref">delete</span> at (1) to relase memory before calling <span class="title-ref">baz</span>.</p>
 <h1 id="lexical-lifetimes-in-rust">Lexical Lifetimes in Rust</h1>
 <p>In the rust programming language, lifetimes are compile-time values that are used to ensure memory safety. To make use of lifetimes, rust provides an enhanced pointer type called a reference. A reference is a non-nullable pointer type that is parameterized by two things -- a lifetime and the type of the referrent. On the contrary, a raw pointer is parameterized only by the type of the referrent as in other languages.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">template</span> &lt;lifetime a, <span class="kw">typename</span> T&gt; <span class="kw">class</span> Ref { ... };</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a><span class="kw">template</span> &lt;lifetime a, <span class="kw">typename</span> T&gt; <span class="kw">class</span> Ref { ... };</span></code></pre></div>
 <p>In rust, the reference type gets special syntax. <span class="title-ref">Ref&lt;&#39;a, T&gt;</span> is written as <span class="title-ref">&amp;&#39;a T</span>.</p>
 <h1 id="lifetime-inference">Lifetime Inference</h1>
 <p>Rust lifetimes are associated with lexical scopes in the source code of the program. A programmer cannot explicitly pass the lifetime argument while instantiating references. Instead, the compiler automatically infers the lifetime parameter in a conservative fashion. We will use <span class="title-ref">&#39;r1, &#39;r2</span> etc. to denote lifetimes in a program and use scopes delimited using curly braces to specify their extent. Note that rust does not allow the programmer to directly specify lifetimes in this fashion.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode rust"><code class="sourceCode rust"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">struct</span> Foo <span class="op">{}</span></span>
-<span id="cb4-2"><a href="#cb4-2"></a><span class="kw">fn</span> foo() <span class="op">{</span></span>
-<span id="cb4-3"><a href="#cb4-3"></a>    <span class="ot">&#39;r1</span> <span class="op">{</span></span>
-<span id="cb4-4"><a href="#cb4-4"></a>        <span class="kw">let</span> x <span class="op">=</span> Foo<span class="op">{};</span></span>
-<span id="cb4-5"><a href="#cb4-5"></a>        <span class="ot">&#39;r2</span> <span class="op">{</span></span>
-<span id="cb4-6"><a href="#cb4-6"></a>            <span class="kw">let</span> y <span class="op">=</span> <span class="op">&amp;</span>x<span class="op">;</span> <span class="co">// (1)</span></span>
-<span id="cb4-7"><a href="#cb4-7"></a>        <span class="op">}</span></span>
-<span id="cb4-8"><a href="#cb4-8"></a>        <span class="kw">let</span> z <span class="op">=</span> x<span class="op">;</span> <span class="co">// (2)</span></span>
-<span id="cb4-9"><a href="#cb4-9"></a>    <span class="op">}</span></span>
-<span id="cb4-10"><a href="#cb4-10"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode rust"><code class="sourceCode rust"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true"></a><span class="kw">struct</span> Foo <span class="op">{}</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true"></a><span class="kw">fn</span> foo() <span class="op">{</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true"></a>    <span class="ot">&#39;r1</span> <span class="op">{</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true"></a>        <span class="kw">let</span> x <span class="op">=</span> Foo<span class="op">{};</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true"></a>        <span class="ot">&#39;r2</span> <span class="op">{</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true"></a>            <span class="kw">let</span> y <span class="op">=</span> <span class="op">&amp;</span>x<span class="op">;</span> <span class="co">// (1)</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true"></a>        <span class="op">}</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true"></a>        <span class="kw">let</span> z <span class="op">=</span> x<span class="op">;</span> <span class="co">// (2)</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true"></a>    <span class="op">}</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true"></a><span class="op">}</span></span></code></pre></div>
 <p>An assignment from <span class="title-ref">&amp;&#39;a T</span> to <span class="title-ref">&amp;&#39;b T</span> is valid if and only if the lifetime <span class="title-ref">&#39;a</span> is at least as large as the lifetime <span class="title-ref">&#39;b</span>. In (1), the expression <span class="title-ref">&amp;x</span> has type <span class="title-ref">&amp;&#39;r1 Foo</span> and <span class="title-ref">y</span> is automatically inferred to have type <span class="title-ref">&amp;&#39;r2 Foo</span>. Since <span class="title-ref">&#39;r1 &gt;= &#39;r2</span>, this assigment is valid. In (2), the object is moved out of <span class="title-ref">x</span>. This is valid because <span class="title-ref">x</span> is the only variable referring to that object.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode rust"><code class="sourceCode rust"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw">struct</span> Foo <span class="op">{}</span></span>
-<span id="cb5-2"><a href="#cb5-2"></a><span class="kw">fn</span> foo() <span class="op">{</span></span>
-<span id="cb5-3"><a href="#cb5-3"></a>    <span class="kw">let</span> x <span class="op">=</span> Foo<span class="op">{};</span></span>
-<span id="cb5-4"><a href="#cb5-4"></a>    <span class="kw">let</span> y <span class="op">=</span> <span class="op">&amp;</span>x<span class="op">;</span></span>
-<span id="cb5-5"><a href="#cb5-5"></a>    <span class="kw">let</span> z <span class="op">=</span> x<span class="op">;</span></span>
-<span id="cb5-6"><a href="#cb5-6"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode rust"><code class="sourceCode rust"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true"></a><span class="kw">struct</span> Foo <span class="op">{}</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true"></a><span class="kw">fn</span> foo() <span class="op">{</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true"></a>    <span class="kw">let</span> x <span class="op">=</span> Foo<span class="op">{};</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true"></a>    <span class="kw">let</span> y <span class="op">=</span> <span class="op">&amp;</span>x<span class="op">;</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true"></a>    <span class="kw">let</span> z <span class="op">=</span> x<span class="op">;</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true"></a><span class="op">}</span></span></code></pre></div>
 <p>The above code will not compile because the reference <span class="title-ref">y</span> is still active when the object is moved out of <span class="title-ref">x</span>.</p>
 <p>Let us look an example of lifetimes in action when passing references in and out of functions.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode rust"><code class="sourceCode rust"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw">struct</span> Foo <span class="op">{}</span></span>
-<span id="cb6-2"><a href="#cb6-2"></a></span>
-<span id="cb6-3"><a href="#cb6-3"></a><span class="kw">fn</span> foo<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span>(x<span class="op">:</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> Foo) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> Foo <span class="op">{</span></span>
-<span id="cb6-4"><a href="#cb6-4"></a>    <span class="kw">return</span> x<span class="op">;</span></span>
-<span id="cb6-5"><a href="#cb6-5"></a><span class="op">}</span></span>
-<span id="cb6-6"><a href="#cb6-6"></a></span>
-<span id="cb6-7"><a href="#cb6-7"></a><span class="kw">fn</span> main() <span class="op">{</span></span>
-<span id="cb6-8"><a href="#cb6-8"></a>    <span class="ot">&#39;r1</span> <span class="op">{</span></span>
-<span id="cb6-9"><a href="#cb6-9"></a>        <span class="kw">let</span> x <span class="op">=</span> Foo<span class="op">{};</span></span>
-<span id="cb6-10"><a href="#cb6-10"></a>        <span class="ot">&#39;r2</span> <span class="op">{</span></span>
-<span id="cb6-11"><a href="#cb6-11"></a>            <span class="kw">let</span> y <span class="op">=</span> foo(<span class="op">&amp;</span>x)<span class="op">;</span> <span class="co">// (1)</span></span>
-<span id="cb6-12"><a href="#cb6-12"></a>            <span class="kw">let</span> z <span class="op">=</span> x<span class="op">;</span> <span class="co">// (2)</span></span>
-<span id="cb6-13"><a href="#cb6-13"></a>        <span class="op">}</span></span>
-<span id="cb6-14"><a href="#cb6-14"></a>    <span class="op">}</span></span>
-<span id="cb6-15"><a href="#cb6-15"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode rust"><code class="sourceCode rust"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true"></a><span class="kw">struct</span> Foo <span class="op">{}</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true"></a><span class="kw">fn</span> foo<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span>(x<span class="op">:</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> Foo) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> Foo <span class="op">{</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true"></a>    <span class="kw">return</span> x<span class="op">;</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true"></a><span class="op">}</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true"></a><span class="kw">fn</span> main() <span class="op">{</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true"></a>    <span class="ot">&#39;r1</span> <span class="op">{</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true"></a>        <span class="kw">let</span> x <span class="op">=</span> Foo<span class="op">{};</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true"></a>        <span class="ot">&#39;r2</span> <span class="op">{</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true"></a>            <span class="kw">let</span> y <span class="op">=</span> foo(<span class="op">&amp;</span>x)<span class="op">;</span> <span class="co">// (1)</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true"></a>            <span class="kw">let</span> z <span class="op">=</span> x<span class="op">;</span> <span class="co">// (2)</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true"></a>        <span class="op">}</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true"></a>    <span class="op">}</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true"></a><span class="op">}</span></span></code></pre></div>
 <p>Here the rust compiler will disallow the move in (2). We can see that <span class="title-ref">y</span> is referring to the same object as <span class="title-ref">x</span> by looking at the body of <span class="title-ref">foo</span>. Let us look at how rust proves this. The signature tells that <span class="title-ref">foo</span> is a templated function that accepts a lifetime value as a template parameter. The variable <span class="title-ref">&#39;a</span> is a compile-time variable of type <span class="title-ref">lifetime</span>. When <span class="title-ref">foo</span> is called, the compiler automatically infers the value for <span class="title-ref">&#39;a</span> to be the smallest lifetime possible. The expression <span class="title-ref">&amp;x</span> has type <span class="title-ref">&amp;&#39;r1 Foo</span> implying <span class="title-ref">&#39;r1 &gt;= &#39;a</span> because the function call is assigning a <span class="title-ref">&amp;&#39;r1 Foo</span> to <span class="title-ref">&amp;&#39;a Foo</span>. In (1), the assignment is from a value of type <span class="title-ref">&amp;&#39;a Foo</span> to a variable of type <span class="title-ref">&amp;&#39;r2 Foo</span> which is valid only when <span class="title-ref">&#39;a &gt;= &#39;r2</span>. Therefore, <span class="title-ref">&#39;r2 &lt;= &#39;a &lt;= &#39;r1</span> and the smallest lifetime that can be assigned to <span class="title-ref">&#39;a</span> is <span class="title-ref">&#39;r2</span>. The expression <span class="title-ref">&amp;x</span> has type <span class="title-ref">&amp;&#39;r2 Foo</span> indicating that <span class="title-ref">x</span> is borrowed for the scope <span class="title-ref">&#39;r2</span>. This prevents the move in (2).</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode rust"><code class="sourceCode rust"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw">struct</span> Foo <span class="op">{}</span></span>
-<span id="cb7-2"><a href="#cb7-2"></a></span>
-<span id="cb7-3"><a href="#cb7-3"></a><span class="kw">static</span> z <span class="op">:</span> Foo <span class="op">=</span> Foo<span class="op">{};</span></span>
-<span id="cb7-4"><a href="#cb7-4"></a></span>
-<span id="cb7-5"><a href="#cb7-5"></a><span class="kw">fn</span> foo<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span>(x<span class="op">:</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> Foo) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> Foo <span class="op">{</span></span>
-<span id="cb7-6"><a href="#cb7-6"></a>    <span class="kw">return</span> <span class="op">&amp;</span>z<span class="op">;</span></span>
-<span id="cb7-7"><a href="#cb7-7"></a><span class="op">}</span></span>
-<span id="cb7-8"><a href="#cb7-8"></a></span>
-<span id="cb7-9"><a href="#cb7-9"></a><span class="kw">fn</span> main() <span class="op">{</span></span>
-<span id="cb7-10"><a href="#cb7-10"></a>    <span class="ot">&#39;r1</span> <span class="op">{</span></span>
-<span id="cb7-11"><a href="#cb7-11"></a>        <span class="kw">let</span> y<span class="op">;</span></span>
-<span id="cb7-12"><a href="#cb7-12"></a>        <span class="ot">&#39;r2</span> <span class="op">{</span></span>
-<span id="cb7-13"><a href="#cb7-13"></a>            <span class="kw">let</span> x <span class="op">=</span> Foo<span class="op">{};</span></span>
-<span id="cb7-14"><a href="#cb7-14"></a>            y <span class="op">=</span> foo(<span class="op">&amp;</span>x)<span class="op">;</span></span>
-<span id="cb7-15"><a href="#cb7-15"></a>        <span class="op">}</span></span>
-<span id="cb7-16"><a href="#cb7-16"></a>    <span class="op">}</span></span>
-<span id="cb7-17"><a href="#cb7-17"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode rust"><code class="sourceCode rust"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true"></a><span class="kw">struct</span> Foo <span class="op">{}</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true"></a><span class="kw">static</span> z <span class="op">:</span> Foo <span class="op">=</span> Foo<span class="op">{};</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true"></a></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true"></a><span class="kw">fn</span> foo<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span>(x<span class="op">:</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> Foo) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> Foo <span class="op">{</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true"></a>    <span class="kw">return</span> <span class="op">&amp;</span>z<span class="op">;</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true"></a><span class="op">}</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true"></a></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true"></a><span class="kw">fn</span> main() <span class="op">{</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true"></a>    <span class="ot">&#39;r1</span> <span class="op">{</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true"></a>        <span class="kw">let</span> y<span class="op">;</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true"></a>        <span class="ot">&#39;r2</span> <span class="op">{</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true"></a>            <span class="kw">let</span> x <span class="op">=</span> Foo<span class="op">{};</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true"></a>            y <span class="op">=</span> foo(<span class="op">&amp;</span>x)<span class="op">;</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true"></a>        <span class="op">}</span></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true"></a>    <span class="op">}</span></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true"></a><span class="op">}</span></span></code></pre></div>
 <p>The above code will fail to compile even though it is memory safe because rust cannot assign a valid value to <span class="title-ref">&#39;a</span>. The expression <span class="title-ref">&amp;x</span> has type <span class="title-ref">&amp;&#39;r2 Foo</span> implying <span class="title-ref">&#39;r2 &gt;= &#39;a</span>. But, the variable <span class="title-ref">y</span> has type <span class="title-ref">&amp;&#39;r1 Foo</span> implying <span class="title-ref">&#39;a &gt;= &#39;r1</span>. These two constraints cannot be satisfied simultaneosly and the program fails to compile.</p>
 <p>We can make the program compile by changing the return type of <span class="title-ref">foo</span> to <span class="title-ref">&amp;&#39;static Foo</span>.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode rust"><code class="sourceCode rust"><span id="cb8-1"><a href="#cb8-1"></a><span class="kw">struct</span> Foo <span class="op">{}</span></span>
-<span id="cb8-2"><a href="#cb8-2"></a></span>
-<span id="cb8-3"><a href="#cb8-3"></a><span class="kw">static</span> z <span class="op">:</span> Foo <span class="op">=</span> Foo<span class="op">{};</span></span>
-<span id="cb8-4"><a href="#cb8-4"></a></span>
-<span id="cb8-5"><a href="#cb8-5"></a><span class="kw">fn</span> foo<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span>(x<span class="op">:</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> Foo) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;static</span> Foo <span class="op">{</span></span>
-<span id="cb8-6"><a href="#cb8-6"></a>    <span class="kw">return</span> <span class="op">&amp;</span>z<span class="op">;</span></span>
-<span id="cb8-7"><a href="#cb8-7"></a><span class="op">}</span></span>
-<span id="cb8-8"><a href="#cb8-8"></a></span>
-<span id="cb8-9"><a href="#cb8-9"></a><span class="kw">fn</span> main() <span class="op">{</span></span>
-<span id="cb8-10"><a href="#cb8-10"></a>    <span class="kw">let</span> y<span class="op">;</span></span>
-<span id="cb8-11"><a href="#cb8-11"></a>    <span class="op">{</span></span>
-<span id="cb8-12"><a href="#cb8-12"></a>        <span class="kw">let</span> x <span class="op">=</span> Foo<span class="op">{};</span></span>
-<span id="cb8-13"><a href="#cb8-13"></a>        y <span class="op">=</span> foo(<span class="op">&amp;</span>x)<span class="op">;</span></span>
-<span id="cb8-14"><a href="#cb8-14"></a>        <span class="kw">let</span> w <span class="op">=</span> x<span class="op">;</span> <span class="co">// (1)</span></span>
-<span id="cb8-15"><a href="#cb8-15"></a>    <span class="op">}</span></span>
-<span id="cb8-16"><a href="#cb8-16"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode rust"><code class="sourceCode rust"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true"></a><span class="kw">struct</span> Foo <span class="op">{}</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true"></a><span class="kw">static</span> z <span class="op">:</span> Foo <span class="op">=</span> Foo<span class="op">{};</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true"></a><span class="kw">fn</span> foo<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span>(x<span class="op">:</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> Foo) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;static</span> Foo <span class="op">{</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true"></a>    <span class="kw">return</span> <span class="op">&amp;</span>z<span class="op">;</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true"></a><span class="op">}</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true"></a></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true"></a><span class="kw">fn</span> main() <span class="op">{</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true"></a>    <span class="kw">let</span> y<span class="op">;</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true"></a>    <span class="op">{</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true"></a>        <span class="kw">let</span> x <span class="op">=</span> Foo<span class="op">{};</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true"></a>        y <span class="op">=</span> foo(<span class="op">&amp;</span>x)<span class="op">;</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true"></a>        <span class="kw">let</span> w <span class="op">=</span> x<span class="op">;</span> <span class="co">// (1)</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true"></a>    <span class="op">}</span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true"></a><span class="op">}</span></span></code></pre></div>
 <p>The lifetime <span class="title-ref">&#39;static</span> is a special lifetime that stands for the entirety of program execution and <span class="title-ref">&#39;static &gt;= &#39;a</span> for any lifetime <span class="title-ref">&#39;a</span>. Once this change is made there is only one constraint, which is <span class="title-ref">&#39;a &lt;= &#39;r2</span>. Therefore, the compiler is free to choose a lifetime that is as small as possible. Here, the compiler will choose <span class="title-ref">&#39;a = &#39;r3</span> where <span class="title-ref">&#39;r3</span> is a lifetime that spans only the function call expression. Therefore, the move in (1) remains valid.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode rust"><code class="sourceCode rust"><span id="cb9-1"><a href="#cb9-1"></a><span class="kw">struct</span> Foo <span class="op">{}</span></span>
-<span id="cb9-2"><a href="#cb9-2"></a></span>
-<span id="cb9-3"><a href="#cb9-3"></a><span class="kw">static</span> z <span class="op">:</span> Foo <span class="op">=</span> Foo<span class="op">{};</span></span>
-<span id="cb9-4"><a href="#cb9-4"></a></span>
-<span id="cb9-5"><a href="#cb9-5"></a><span class="kw">fn</span> foo<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span>(x<span class="op">:</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> Foo) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;static</span> Foo <span class="op">{</span></span>
-<span id="cb9-6"><a href="#cb9-6"></a>    <span class="kw">return</span> <span class="op">&amp;</span>x<span class="op">;</span> <span class="co">// (1)</span></span>
-<span id="cb9-7"><a href="#cb9-7"></a><span class="op">}</span></span>
-<span id="cb9-8"><a href="#cb9-8"></a></span>
-<span id="cb9-9"><a href="#cb9-9"></a><span class="kw">fn</span> main() <span class="op">{</span></span>
-<span id="cb9-10"><a href="#cb9-10"></a>    <span class="ot">&#39;r1</span> <span class="op">{</span></span>
-<span id="cb9-11"><a href="#cb9-11"></a>        <span class="kw">let</span> y<span class="op">;</span></span>
-<span id="cb9-12"><a href="#cb9-12"></a>        <span class="ot">&#39;r2</span> <span class="op">{</span></span>
-<span id="cb9-13"><a href="#cb9-13"></a>            <span class="kw">let</span> x <span class="op">=</span> Foo<span class="op">{};</span></span>
-<span id="cb9-14"><a href="#cb9-14"></a>            y <span class="op">=</span> foo(<span class="op">&amp;</span>x)<span class="op">;</span></span>
-<span id="cb9-15"><a href="#cb9-15"></a>        <span class="op">}</span></span>
-<span id="cb9-16"><a href="#cb9-16"></a>    <span class="op">}</span></span>
-<span id="cb9-17"><a href="#cb9-17"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode rust"><code class="sourceCode rust"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true"></a><span class="kw">struct</span> Foo <span class="op">{}</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true"></a><span class="kw">static</span> z <span class="op">:</span> Foo <span class="op">=</span> Foo<span class="op">{};</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true"></a></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true"></a><span class="kw">fn</span> foo<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span>(x<span class="op">:</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> Foo) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;static</span> Foo <span class="op">{</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true"></a>    <span class="kw">return</span> <span class="op">&amp;</span>x<span class="op">;</span> <span class="co">// (1)</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true"></a><span class="op">}</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true"></a></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true"></a><span class="kw">fn</span> main() <span class="op">{</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true"></a>    <span class="ot">&#39;r1</span> <span class="op">{</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true"></a>        <span class="kw">let</span> y<span class="op">;</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true"></a>        <span class="ot">&#39;r2</span> <span class="op">{</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true"></a>            <span class="kw">let</span> x <span class="op">=</span> Foo<span class="op">{};</span></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true"></a>            y <span class="op">=</span> foo(<span class="op">&amp;</span>x)<span class="op">;</span></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true"></a>        <span class="op">}</span></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true"></a>    <span class="op">}</span></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true"></a><span class="op">}</span></span></code></pre></div>
 <p>The above program will fail to compile because the return statement in (1) is trying to convert a <span class="title-ref">&amp;&#39;a Foo</span> to <span class="title-ref">&amp;&#39;static Foo</span> which is only possible when <span class="title-ref">&#39;a = &#39;static</span>.</p>
 <p>The rules remain the same when your function takes multiple references as input. As an exercise, try and figure out the values of lifetimes <span class="title-ref">&#39;a</span> and <span class="title-ref">&#39;b</span> in both calls to <span class="title-ref">foo</span> and explain why the second call fails to compile.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode rust"><code class="sourceCode rust"><span id="cb10-1"><a href="#cb10-1"></a><span class="kw">struct</span> Foo <span class="op">{}</span></span>
-<span id="cb10-2"><a href="#cb10-2"></a></span>
-<span id="cb10-3"><a href="#cb10-3"></a><span class="kw">fn</span> foo<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">,</span> <span class="ot">&#39;b</span><span class="op">&gt;</span>(x <span class="op">:</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> Foo<span class="op">,</span> y <span class="op">:</span> <span class="op">&amp;</span><span class="ot">&#39;b</span> Foo) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> Foo <span class="op">{</span></span>
-<span id="cb10-4"><a href="#cb10-4"></a>    <span class="kw">return</span> x<span class="op">;</span></span>
-<span id="cb10-5"><a href="#cb10-5"></a><span class="op">}</span></span>
-<span id="cb10-6"><a href="#cb10-6"></a></span>
-<span id="cb10-7"><a href="#cb10-7"></a><span class="kw">fn</span> main() <span class="op">{</span></span>
-<span id="cb10-8"><a href="#cb10-8"></a>    <span class="op">{</span></span>
-<span id="cb10-9"><a href="#cb10-9"></a>        <span class="kw">let</span> x <span class="op">=</span> Foo<span class="op">{};</span></span>
-<span id="cb10-10"><a href="#cb10-10"></a>        <span class="kw">let</span> <span class="kw">mut</span> z<span class="op">;</span></span>
-<span id="cb10-11"><a href="#cb10-11"></a>        <span class="op">{</span></span>
-<span id="cb10-12"><a href="#cb10-12"></a>            <span class="kw">let</span> y <span class="op">=</span> Foo<span class="op">{};</span></span>
-<span id="cb10-13"><a href="#cb10-13"></a>            z <span class="op">=</span> foo(<span class="op">&amp;</span>x<span class="op">,</span> <span class="op">&amp;</span>y)<span class="op">;</span></span>
-<span id="cb10-14"><a href="#cb10-14"></a>        <span class="op">}</span></span>
-<span id="cb10-15"><a href="#cb10-15"></a>        <span class="op">{</span></span>
-<span id="cb10-16"><a href="#cb10-16"></a>            <span class="kw">let</span> y <span class="op">=</span> Foo<span class="op">{};</span></span>
-<span id="cb10-17"><a href="#cb10-17"></a>            z <span class="op">=</span> foo(<span class="op">&amp;</span>y<span class="op">,</span> <span class="op">&amp;</span>x)<span class="op">;</span></span>
-<span id="cb10-18"><a href="#cb10-18"></a>        <span class="op">}</span></span>
-<span id="cb10-19"><a href="#cb10-19"></a>    <span class="op">}</span></span>
-<span id="cb10-20"><a href="#cb10-20"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode rust"><code class="sourceCode rust"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true"></a><span class="kw">struct</span> Foo <span class="op">{}</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true"></a><span class="kw">fn</span> foo<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">,</span> <span class="ot">&#39;b</span><span class="op">&gt;</span>(x <span class="op">:</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> Foo<span class="op">,</span> y <span class="op">:</span> <span class="op">&amp;</span><span class="ot">&#39;b</span> Foo) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> Foo <span class="op">{</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true"></a>    <span class="kw">return</span> x<span class="op">;</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true"></a><span class="op">}</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true"></a></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true"></a><span class="kw">fn</span> main() <span class="op">{</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true"></a>    <span class="op">{</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true"></a>        <span class="kw">let</span> x <span class="op">=</span> Foo<span class="op">{};</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true"></a>        <span class="kw">let</span> <span class="kw">mut</span> z<span class="op">;</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true"></a>        <span class="op">{</span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true"></a>            <span class="kw">let</span> y <span class="op">=</span> Foo<span class="op">{};</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true"></a>            z <span class="op">=</span> foo(<span class="op">&amp;</span>x<span class="op">,</span> <span class="op">&amp;</span>y)<span class="op">;</span></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true"></a>        <span class="op">}</span></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true"></a>        <span class="op">{</span></span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true"></a>            <span class="kw">let</span> y <span class="op">=</span> Foo<span class="op">{};</span></span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true"></a>            z <span class="op">=</span> foo(<span class="op">&amp;</span>y<span class="op">,</span> <span class="op">&amp;</span>x)<span class="op">;</span></span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true"></a>        <span class="op">}</span></span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true"></a>    <span class="op">}</span></span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true"></a><span class="op">}</span></span></code></pre></div>
 <h1 id="datatypes-parameterized-by-lifetimes">Datatypes Parameterized by Lifetimes</h1>
 <p>Let us look at a rust datatype that contains a reference. Here, rust enforces the rule that an object with lifetime <span class="title-ref">&#39;r1</span> can contain a reference of lifetime <span class="title-ref">&#39;r2</span> if and only if <span class="title-ref">&#39;r2 &gt;= &#39;r1</span>. This ensures that all references contained within the object are valid until the object is deallocated.</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode rust"><code class="sourceCode rust"><span id="cb11-1"><a href="#cb11-1"></a><span class="kw">struct</span> Foo<span class="op">&lt;</span><span class="ot">&#39;c</span><span class="op">&gt;</span> <span class="op">{</span> x <span class="op">:</span> <span class="op">&amp;</span><span class="ot">&#39;c</span> <span class="dt">u64</span> <span class="op">}</span></span>
-<span id="cb11-2"><a href="#cb11-2"></a></span>
-<span id="cb11-3"><a href="#cb11-3"></a><span class="kw">fn</span> foo<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">,</span> <span class="ot">&#39;b</span><span class="op">&gt;</span>(x <span class="op">:</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> Foo<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;,</span> y <span class="op">:</span> <span class="op">&amp;</span><span class="ot">&#39;b</span> Foo<span class="op">&lt;</span><span class="ot">&#39;b</span><span class="op">&gt;</span>)</span>
-<span id="cb11-4"><a href="#cb11-4"></a>    <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> Foo<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span></span>
-<span id="cb11-5"><a href="#cb11-5"></a><span class="op">{</span></span>
-<span id="cb11-6"><a href="#cb11-6"></a>    <span class="kw">return</span> x<span class="op">;</span></span>
-<span id="cb11-7"><a href="#cb11-7"></a><span class="op">}</span></span>
-<span id="cb11-8"><a href="#cb11-8"></a></span>
-<span id="cb11-9"><a href="#cb11-9"></a><span class="kw">fn</span> main() <span class="op">{</span></span>
-<span id="cb11-10"><a href="#cb11-10"></a>    <span class="kw">let</span> i <span class="op">:</span> <span class="dt">u64</span> <span class="op">=</span> <span class="dv">3</span><span class="op">;</span></span>
-<span id="cb11-11"><a href="#cb11-11"></a>    <span class="kw">let</span> x<span class="op">;</span></span>
-<span id="cb11-12"><a href="#cb11-12"></a>    <span class="kw">let</span> z<span class="op">;</span></span>
-<span id="cb11-13"><a href="#cb11-13"></a>    <span class="kw">let</span> w<span class="op">;</span></span>
-<span id="cb11-14"><a href="#cb11-14"></a>    <span class="ot">&#39;r2</span> <span class="op">{</span></span>
-<span id="cb11-15"><a href="#cb11-15"></a>        <span class="kw">let</span> j <span class="op">:</span> <span class="dt">u64</span> <span class="op">=</span> <span class="dv">4</span><span class="op">;</span></span>
-<span id="cb11-16"><a href="#cb11-16"></a>        x <span class="op">=</span> Foo <span class="op">{</span>x <span class="op">:</span> <span class="op">&amp;</span>i<span class="op">};</span> <span class="co">// (1)</span></span>
-<span id="cb11-17"><a href="#cb11-17"></a>        <span class="kw">let</span> y <span class="op">=</span> Foo <span class="op">{</span>x <span class="op">:</span> <span class="op">&amp;</span>j<span class="op">};</span> <span class="co">// (2)</span></span>
-<span id="cb11-18"><a href="#cb11-18"></a>        z <span class="op">=</span> foo(<span class="op">&amp;</span>x<span class="op">,</span> <span class="op">&amp;</span>y)<span class="op">;</span> <span class="co">// (3)</span></span>
-<span id="cb11-19"><a href="#cb11-19"></a>        w <span class="op">=</span> Foo <span class="op">{</span>x <span class="op">:</span> <span class="op">&amp;</span>j<span class="op">};</span> <span class="co">// (4)</span></span>
-<span id="cb11-20"><a href="#cb11-20"></a>    <span class="op">}</span></span>
-<span id="cb11-21"><a href="#cb11-21"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode rust"><code class="sourceCode rust"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true"></a><span class="kw">struct</span> Foo<span class="op">&lt;</span><span class="ot">&#39;c</span><span class="op">&gt;</span> <span class="op">{</span> x <span class="op">:</span> <span class="op">&amp;</span><span class="ot">&#39;c</span> <span class="dt">u64</span> <span class="op">}</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true"></a><span class="kw">fn</span> foo<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">,</span> <span class="ot">&#39;b</span><span class="op">&gt;</span>(x <span class="op">:</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> Foo<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;,</span> y <span class="op">:</span> <span class="op">&amp;</span><span class="ot">&#39;b</span> Foo<span class="op">&lt;</span><span class="ot">&#39;b</span><span class="op">&gt;</span>)</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true"></a>    <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> Foo<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true"></a><span class="op">{</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true"></a>    <span class="kw">return</span> x<span class="op">;</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true"></a><span class="op">}</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true"></a></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true"></a><span class="kw">fn</span> main() <span class="op">{</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true"></a>    <span class="kw">let</span> i <span class="op">:</span> <span class="dt">u64</span> <span class="op">=</span> <span class="dv">3</span><span class="op">;</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true"></a>    <span class="kw">let</span> x<span class="op">;</span></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true"></a>    <span class="kw">let</span> z<span class="op">;</span></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true"></a>    <span class="kw">let</span> w<span class="op">;</span></span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true"></a>    <span class="ot">&#39;r2</span> <span class="op">{</span></span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true"></a>        <span class="kw">let</span> j <span class="op">:</span> <span class="dt">u64</span> <span class="op">=</span> <span class="dv">4</span><span class="op">;</span></span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true"></a>        x <span class="op">=</span> Foo <span class="op">{</span>x <span class="op">:</span> <span class="op">&amp;</span>i<span class="op">};</span> <span class="co">// (1)</span></span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true"></a>        <span class="kw">let</span> y <span class="op">=</span> Foo <span class="op">{</span>x <span class="op">:</span> <span class="op">&amp;</span>j<span class="op">};</span> <span class="co">// (2)</span></span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true"></a>        z <span class="op">=</span> foo(<span class="op">&amp;</span>x<span class="op">,</span> <span class="op">&amp;</span>y)<span class="op">;</span> <span class="co">// (3)</span></span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true"></a>        w <span class="op">=</span> Foo <span class="op">{</span>x <span class="op">:</span> <span class="op">&amp;</span>j<span class="op">};</span> <span class="co">// (4)</span></span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true"></a>    <span class="op">}</span></span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true"></a><span class="op">}</span></span></code></pre></div>
 <p>Line (4) will fail to compile because rust infers that <span class="title-ref">&#39;c &lt;= &#39;r2</span> and the lifetime of <span class="title-ref">w</span> is larger than <span class="title-ref">&#39;r2</span>. Lines (1) and (2) are fine since <span class="title-ref">i</span> and <span class="title-ref">j</span> live longer than <span class="title-ref">x</span> and <span class="title-ref">y</span> respectively. In line (3), rust infers <span class="title-ref">&#39;a &lt;= lt(x)</span> from the argument and <span class="title-ref">lt(z) &lt;= &#39;a</span> from the assignment of the return value implying <span class="title-ref">&#39;a = lt(z)</span> and <span class="title-ref">&#39;b</span> is set to the lifetime limited to the function call expression according to rules previously discussed. The rules for references apply recursively to <span class="title-ref">Foo</span> too. i.e., a <span class="title-ref">Foo&lt;&#39;a&gt;</span> can be assigned to <span class="title-ref">Foo&lt;&#39;b&gt;</span> only when <span class="title-ref">&#39;a &gt;= &#39;b</span>.</p>
 <h1 id="mutable-references">Mutable References</h1>
 <p>Rust has a second non-nullable reference type that tracks lifetimes. An <span class="title-ref">&amp;&#39;a mut T</span>, called a mutable reference to an object of type <span class="title-ref">T</span> with lifetime <span class="title-ref">&#39;a</span>. An object can only have atmost one mutable reference referring to it at any point of time.</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode rust"><code class="sourceCode rust"><span id="cb12-1"><a href="#cb12-1"></a><span class="kw">struct</span> Foo <span class="op">{</span> a <span class="op">:</span> <span class="dt">u32</span> <span class="op">}</span></span>
-<span id="cb12-2"><a href="#cb12-2"></a></span>
-<span id="cb12-3"><a href="#cb12-3"></a><span class="kw">fn</span> main() <span class="op">{</span></span>
-<span id="cb12-4"><a href="#cb12-4"></a>    <span class="kw">let</span> <span class="kw">mut</span> x <span class="op">=</span> Foo<span class="op">{</span> a <span class="op">:</span> <span class="dv">0</span> <span class="op">};</span></span>
-<span id="cb12-5"><a href="#cb12-5"></a>    <span class="op">{</span></span>
-<span id="cb12-6"><a href="#cb12-6"></a>        <span class="kw">let</span> y <span class="op">=</span> <span class="op">&amp;</span><span class="kw">mut</span> x<span class="op">;</span></span>
-<span id="cb12-7"><a href="#cb12-7"></a>        <span class="kw">let</span> w <span class="op">=</span> <span class="op">&amp;</span>x<span class="op">;</span> <span class="co">// (1)</span></span>
-<span id="cb12-8"><a href="#cb12-8"></a>    <span class="op">}</span></span>
-<span id="cb12-9"><a href="#cb12-9"></a>    <span class="kw">let</span> z <span class="op">=</span> <span class="op">&amp;</span>x<span class="op">;</span> <span class="co">// (2)</span></span>
-<span id="cb12-10"><a href="#cb12-10"></a>    <span class="pp">assert!</span>(x<span class="op">.</span>a <span class="op">==</span> <span class="dv">0</span> <span class="op">&amp;&amp;</span> z<span class="op">.</span>a <span class="op">==</span> <span class="dv">0</span>)<span class="op">;</span></span>
-<span id="cb12-11"><a href="#cb12-11"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode rust"><code class="sourceCode rust"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true"></a><span class="kw">struct</span> Foo <span class="op">{</span> a <span class="op">:</span> <span class="dt">u32</span> <span class="op">}</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true"></a><span class="kw">fn</span> main() <span class="op">{</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true"></a>    <span class="kw">let</span> <span class="kw">mut</span> x <span class="op">=</span> Foo<span class="op">{</span> a <span class="op">:</span> <span class="dv">0</span> <span class="op">};</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true"></a>    <span class="op">{</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true"></a>        <span class="kw">let</span> y <span class="op">=</span> <span class="op">&amp;</span><span class="kw">mut</span> x<span class="op">;</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true"></a>        <span class="kw">let</span> w <span class="op">=</span> <span class="op">&amp;</span>x<span class="op">;</span> <span class="co">// (1)</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true"></a>    <span class="op">}</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true"></a>    <span class="kw">let</span> z <span class="op">=</span> <span class="op">&amp;</span>x<span class="op">;</span> <span class="co">// (2)</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true"></a>    <span class="pp">assert!</span>(x<span class="op">.</span>a <span class="op">==</span> <span class="dv">0</span> <span class="op">&amp;&amp;</span> z<span class="op">.</span>a <span class="op">==</span> <span class="dv">0</span>)<span class="op">;</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true"></a><span class="op">}</span></span></code></pre></div>
 <p>Note that <span class="title-ref">x</span> is a mutable object. Mutable references can only point to mutable objects. Line (1) fails to compile because <span class="title-ref">y</span> is a mutable reference to <span class="title-ref">x</span> and this prevents using any other reference (including <span class="title-ref">x</span>) to the object while <span class="title-ref">y</span> is active. In line (2), the mutable reference <span class="title-ref">y</span> to <span class="title-ref">x</span> has gone away making the code valid. Note that after (2), the <span class="title-ref">Foo</span> object cannot be modified through <span class="title-ref">x</span> because it is borrowed by <span class="title-ref">z</span>. However, one can read the object using <span class="title-ref">x</span> or through <span class="title-ref">z</span>. i.e., the mutable object is downgraded to an immutable one while <span class="title-ref">z</span> is active.</p>
 <p>The lifetime constraints are the same as that for immutable references. An object with type <span class="title-ref">&amp;&#39;a mut T</span> can be assigned to <span class="title-ref">&amp;&#39;b mut T</span> if and only if <span class="title-ref">&#39;a &gt;= &#39;b</span>.</p>
 <h1 id="references-to-internal-objects">References to Internal Objects</h1>
 <p>Things get complicated when referring to parts of aggregate objects. Rust can figure out that references are disjoint when they refer to distinct struct members (1). But disallows mutable references to distinct array elements (2) because it is not verifiable in general.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode rust"><code class="sourceCode rust"><span id="cb13-1"><a href="#cb13-1"></a><span class="kw">struct</span> Foo <span class="op">{</span> x <span class="op">:</span> <span class="dt">u64</span><span class="op">,</span> y <span class="op">:</span> <span class="dt">u64</span> <span class="op">}</span></span>
-<span id="cb13-2"><a href="#cb13-2"></a></span>
-<span id="cb13-3"><a href="#cb13-3"></a><span class="kw">fn</span> main() <span class="op">{</span></span>
-<span id="cb13-4"><a href="#cb13-4"></a>    <span class="kw">let</span> <span class="kw">mut</span> x <span class="op">=</span> Foo<span class="op">{</span>x<span class="op">:</span><span class="dv">0</span><span class="op">,</span> y<span class="op">:</span><span class="dv">1</span><span class="op">};</span></span>
-<span id="cb13-5"><a href="#cb13-5"></a>    <span class="kw">let</span> y <span class="op">=</span> <span class="op">&amp;</span><span class="kw">mut</span> x<span class="op">.</span>x<span class="op">;</span></span>
-<span id="cb13-6"><a href="#cb13-6"></a>    <span class="kw">let</span> z <span class="op">=</span> <span class="op">&amp;</span><span class="kw">mut</span> x<span class="op">.</span>y<span class="op">;</span> <span class="co">// (1)</span></span>
-<span id="cb13-7"><a href="#cb13-7"></a></span>
-<span id="cb13-8"><a href="#cb13-8"></a>    <span class="kw">let</span> <span class="kw">mut</span> v <span class="op">=</span> <span class="pp">vec!</span>[<span class="dv">0</span><span class="op">,</span> <span class="dv">1</span><span class="op">,</span> <span class="dv">2</span>]<span class="op">;</span></span>
-<span id="cb13-9"><a href="#cb13-9"></a>    <span class="kw">let</span> u <span class="op">=</span> <span class="op">&amp;</span><span class="kw">mut</span> v[<span class="dv">1</span>]<span class="op">;</span></span>
-<span id="cb13-10"><a href="#cb13-10"></a>    <span class="kw">let</span> w <span class="op">=</span> <span class="op">&amp;</span><span class="kw">mut</span> v[<span class="dv">2</span>]<span class="op">;</span> <span class="co">// (2)</span></span>
-<span id="cb13-11"><a href="#cb13-11"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode rust"><code class="sourceCode rust"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true"></a><span class="kw">struct</span> Foo <span class="op">{</span> x <span class="op">:</span> <span class="dt">u64</span><span class="op">,</span> y <span class="op">:</span> <span class="dt">u64</span> <span class="op">}</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true"></a><span class="kw">fn</span> main() <span class="op">{</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true"></a>    <span class="kw">let</span> <span class="kw">mut</span> x <span class="op">=</span> Foo<span class="op">{</span>x<span class="op">:</span><span class="dv">0</span><span class="op">,</span> y<span class="op">:</span><span class="dv">1</span><span class="op">};</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true"></a>    <span class="kw">let</span> y <span class="op">=</span> <span class="op">&amp;</span><span class="kw">mut</span> x<span class="op">.</span>x<span class="op">;</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true"></a>    <span class="kw">let</span> z <span class="op">=</span> <span class="op">&amp;</span><span class="kw">mut</span> x<span class="op">.</span>y<span class="op">;</span> <span class="co">// (1)</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true"></a></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true"></a>    <span class="kw">let</span> <span class="kw">mut</span> v <span class="op">=</span> <span class="pp">vec!</span>[<span class="dv">0</span><span class="op">,</span> <span class="dv">1</span><span class="op">,</span> <span class="dv">2</span>]<span class="op">;</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true"></a>    <span class="kw">let</span> u <span class="op">=</span> <span class="op">&amp;</span><span class="kw">mut</span> v[<span class="dv">1</span>]<span class="op">;</span></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true"></a>    <span class="kw">let</span> w <span class="op">=</span> <span class="op">&amp;</span><span class="kw">mut</span> v[<span class="dv">2</span>]<span class="op">;</span> <span class="co">// (2)</span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true"></a><span class="op">}</span></span></code></pre></div>
 <p>These restrictions impose some constraints when designing interfaces.</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode rust"><code class="sourceCode rust"><span id="cb14-1"><a href="#cb14-1"></a><span class="kw">struct</span> Foo <span class="op">{</span> x <span class="op">:</span> <span class="dt">u64</span><span class="op">,</span> y <span class="op">:</span> <span class="dt">u64</span> <span class="op">}</span></span>
-<span id="cb14-2"><a href="#cb14-2"></a></span>
-<span id="cb14-3"><a href="#cb14-3"></a><span class="kw">fn</span> foo<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span>(s <span class="op">:</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> Foo) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="dt">u64</span> <span class="op">{</span></span>
-<span id="cb14-4"><a href="#cb14-4"></a>    <span class="kw">return</span> <span class="op">&amp;</span>s<span class="op">.</span>x<span class="op">;</span></span>
-<span id="cb14-5"><a href="#cb14-5"></a><span class="op">}</span></span>
-<span id="cb14-6"><a href="#cb14-6"></a></span>
-<span id="cb14-7"><a href="#cb14-7"></a><span class="kw">fn</span> main() <span class="op">{</span></span>
-<span id="cb14-8"><a href="#cb14-8"></a>    <span class="kw">let</span> <span class="kw">mut</span> x <span class="op">=</span> Foo<span class="op">{</span>x<span class="op">:</span><span class="dv">0</span><span class="op">,</span> y<span class="op">:</span><span class="dv">1</span><span class="op">};</span></span>
-<span id="cb14-9"><a href="#cb14-9"></a>    <span class="kw">let</span> y <span class="op">=</span> foo(<span class="op">&amp;</span>x)<span class="op">;</span></span>
-<span id="cb14-10"><a href="#cb14-10"></a>    <span class="kw">let</span> z <span class="op">=</span> <span class="op">&amp;</span><span class="kw">mut</span> x<span class="op">.</span>y<span class="op">;</span> <span class="co">// (1)</span></span>
-<span id="cb14-11"><a href="#cb14-11"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode rust"><code class="sourceCode rust"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true"></a><span class="kw">struct</span> Foo <span class="op">{</span> x <span class="op">:</span> <span class="dt">u64</span><span class="op">,</span> y <span class="op">:</span> <span class="dt">u64</span> <span class="op">}</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true"></a><span class="kw">fn</span> foo<span class="op">&lt;</span><span class="ot">&#39;a</span><span class="op">&gt;</span>(s <span class="op">:</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> Foo) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">&#39;a</span> <span class="dt">u64</span> <span class="op">{</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true"></a>    <span class="kw">return</span> <span class="op">&amp;</span>s<span class="op">.</span>x<span class="op">;</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true"></a><span class="op">}</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true"></a></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true"></a><span class="kw">fn</span> main() <span class="op">{</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true"></a>    <span class="kw">let</span> <span class="kw">mut</span> x <span class="op">=</span> Foo<span class="op">{</span>x<span class="op">:</span><span class="dv">0</span><span class="op">,</span> y<span class="op">:</span><span class="dv">1</span><span class="op">};</span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true"></a>    <span class="kw">let</span> y <span class="op">=</span> foo(<span class="op">&amp;</span>x)<span class="op">;</span></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true"></a>    <span class="kw">let</span> z <span class="op">=</span> <span class="op">&amp;</span><span class="kw">mut</span> x<span class="op">.</span>y<span class="op">;</span> <span class="co">// (1)</span></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true"></a><span class="op">}</span></span></code></pre></div>
 <p>Line (1) fails to compile even though the code is safe. To work around this, functions that accept references to object should only take references to subobjects that are necessary.</p>
 <p>For taking references to disjoint parts of a vector, rust provides <span class="title-ref">split</span> and <span class="title-ref">split_at_mut</span> functions as part of the interface to a vector.</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode rust"><code class="sourceCode rust"><span id="cb15-1"><a href="#cb15-1"></a><span class="kw">fn</span> main() <span class="op">{</span></span>
-<span id="cb15-2"><a href="#cb15-2"></a>    <span class="kw">let</span> <span class="kw">mut</span> x <span class="op">=</span> <span class="pp">vec!</span>[<span class="dv">0</span><span class="op">,</span> <span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span><span class="op">,</span> <span class="dv">4</span>]<span class="op">;</span></span>
-<span id="cb15-3"><a href="#cb15-3"></a>    <span class="kw">let</span> (y<span class="op">,</span> z) <span class="op">=</span> x<span class="op">.</span>split_at_mut(<span class="dv">2</span>)<span class="op">;</span></span>
-<span id="cb15-4"><a href="#cb15-4"></a>    y[<span class="dv">0</span>] <span class="op">=</span> <span class="dv">1</span><span class="op">;</span></span>
-<span id="cb15-5"><a href="#cb15-5"></a>    z[<span class="dv">0</span>] <span class="op">=</span> <span class="dv">3</span><span class="op">;</span></span>
-<span id="cb15-6"><a href="#cb15-6"></a>    <span class="pp">print!</span>(<span class="st">&quot;{:?} {:?}&quot;</span><span class="op">,</span> y<span class="op">,</span> z)<span class="op">;</span> <span class="co">// [1, 1] [3, 3, 4]</span></span>
-<span id="cb15-7"><a href="#cb15-7"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode rust"><code class="sourceCode rust"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true"></a><span class="kw">fn</span> main() <span class="op">{</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true"></a>    <span class="kw">let</span> <span class="kw">mut</span> x <span class="op">=</span> <span class="pp">vec!</span>[<span class="dv">0</span><span class="op">,</span> <span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span><span class="op">,</span> <span class="dv">4</span>]<span class="op">;</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true"></a>    <span class="kw">let</span> (y<span class="op">,</span> z) <span class="op">=</span> x<span class="op">.</span>split_at_mut(<span class="dv">2</span>)<span class="op">;</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true"></a>    y[<span class="dv">0</span>] <span class="op">=</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true"></a>    z[<span class="dv">0</span>] <span class="op">=</span> <span class="dv">3</span><span class="op">;</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true"></a>    <span class="pp">print!</span>(<span class="st">&quot;{:?} {:?}&quot;</span><span class="op">,</span> y<span class="op">,</span> z)<span class="op">;</span> <span class="co">// [1, 1] [3, 3, 4]</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true"></a><span class="op">}</span></span></code></pre></div>
 <div class="topic">
 <p><strong>Summary</strong></p>
 <ul>

@@ -65,98 +65,98 @@ color: #85144b;
 <p class="author">Balagopal Komarath</p>
 </header>
 <p>The <code>const</code> type qualifier is used (in <span class="title-ref">C</span>, <span class="title-ref">C++</span>, <span class="title-ref">D</span>, <span class="title-ref">rust</span> among others) to declare that a piece of data will not be modified through the binding being declared. For pointers, the pointer and the data pointed to can be declared <code>const</code> independently.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1"></a><span class="dt">int</span> x = <span class="dv">42</span>;</span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="dt">int</span> y = <span class="dv">21</span>;</span>
-<span id="cb1-3"><a href="#cb1-3"></a><span class="at">const</span> <span class="dt">int</span>* p = &amp;x;</span>
-<span id="cb1-4"><a href="#cb1-4"></a>*p = <span class="dv">5</span>; <span class="co">// error</span></span>
-<span id="cb1-5"><a href="#cb1-5"></a>p = &amp;y; <span class="co">// Ok</span></span>
-<span id="cb1-6"><a href="#cb1-6"></a><span class="dt">int</span> *<span class="at">const</span> q = &amp;x;</span>
-<span id="cb1-7"><a href="#cb1-7"></a>*q = <span class="dv">5</span>; <span class="co">// Ok</span></span>
-<span id="cb1-8"><a href="#cb1-8"></a>q = &amp;y; <span class="co">// error</span></span>
-<span id="cb1-9"><a href="#cb1-9"></a><span class="at">const</span> <span class="dt">int</span> * <span class="at">const</span> r = &amp;x;</span>
-<span id="cb1-10"><a href="#cb1-10"></a>*r = <span class="dv">5</span>; <span class="co">// error</span></span>
-<span id="cb1-11"><a href="#cb1-11"></a>r = &amp;y; <span class="co">// error</span></span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="dt">int</span> x = <span class="dv">42</span>;</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a><span class="dt">int</span> y = <span class="dv">21</span>;</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true"></a><span class="at">const</span> <span class="dt">int</span>* p = &amp;x;</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true"></a>*p = <span class="dv">5</span>; <span class="co">// error</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true"></a>p = &amp;y; <span class="co">// Ok</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true"></a><span class="dt">int</span> *<span class="at">const</span> q = &amp;x;</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true"></a>*q = <span class="dv">5</span>; <span class="co">// Ok</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true"></a>q = &amp;y; <span class="co">// error</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true"></a><span class="at">const</span> <span class="dt">int</span> * <span class="at">const</span> r = &amp;x;</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true"></a>*r = <span class="dv">5</span>; <span class="co">// error</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true"></a>r = &amp;y; <span class="co">// error</span></span></code></pre></div>
 <p>Pointers to <code>const</code> are commonly used as arguments to functions that promise that the data will not be modified through that pointer. This helps the caller of a function to infer what arguments will not be modified by the function. Consider the <code>strchr</code> function in <span class="title-ref">C</span> standard library that takes a null-terminated string and a character as argument and returns a pointer to the first matching character in the string. It is declared as follows:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1"></a><span class="dt">char</span> *strchr(<span class="at">const</span> <span class="dt">char</span> *str, <span class="dt">int</span> c);</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="dt">char</span> *strchr(<span class="at">const</span> <span class="dt">char</span> *str, <span class="dt">int</span> c);</span></code></pre></div>
 <p>The argument is <code>const char *</code> because this function does not modify the input string. On the other hand, the return value is <code>char *</code> because the input string could actually be mutable and the caller of the function may want to mutate the string through the returned value.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1"></a><span class="dt">char</span> a[] = <span class="st">&quot;Hello world&quot;</span>;</span>
-<span id="cb3-2"><a href="#cb3-2"></a><span class="dt">char</span> *p = strchr(a, <span class="ch">&#39;w&#39;</span>);</span>
-<span id="cb3-3"><a href="#cb3-3"></a>*p = <span class="ch">&#39;W&#39;</span>;</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a><span class="dt">char</span> a[] = <span class="st">&quot;Hello world&quot;</span>;</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true"></a><span class="dt">char</span> *p = strchr(a, <span class="ch">&#39;w&#39;</span>);</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true"></a>*p = <span class="ch">&#39;W&#39;</span>;</span></code></pre></div>
 <p>This magic is achieved by casting away the <code>const</code> in the function. The problem with this approach is that the input string could actually be <code>const</code> in which case the return value should not be mutable.</p>
 <p>The <span class="title-ref">C++</span> standard library solves this problem by declaring two overloads for this function.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb4-1"><a href="#cb4-1"></a><span class="dt">char</span>* strchr(<span class="dt">char</span>* str, <span class="dt">int</span> c);</span>
-<span id="cb4-2"><a href="#cb4-2"></a><span class="at">const</span> <span class="dt">char</span>* strchr(<span class="at">const</span> <span class="dt">char</span>* str, <span class="dt">int</span> c);</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true"></a><span class="dt">char</span>* strchr(<span class="dt">char</span>* str, <span class="dt">int</span> c);</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true"></a><span class="at">const</span> <span class="dt">char</span>* strchr(<span class="at">const</span> <span class="dt">char</span>* str, <span class="dt">int</span> c);</span></code></pre></div>
 <p>This solution has two problems: First, overloads are a mechanism that should only be used when you want to provide different implementations based on the types of arguments. Here, the implementation of both functions are the same. Second, implementing overloading requires name mangling making the function un-callable from <span class="title-ref">C</span>.</p>
 <p>Using templates, we can combine the two equivalent function definitions into a single definition.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw">template</span> &lt;<span class="kw">class</span> T&gt;</span>
-<span id="cb5-2"><a href="#cb5-2"></a><span class="co">// Hire a template guru to ensure that</span></span>
-<span id="cb5-3"><a href="#cb5-3"></a><span class="co">// T = char or T = const char</span></span>
-<span id="cb5-4"><a href="#cb5-4"></a>T* strchr(T* str, <span class="dt">int</span> c) { }</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true"></a><span class="kw">template</span> &lt;<span class="kw">class</span> T&gt;</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true"></a><span class="co">// Hire a template guru to ensure that</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true"></a><span class="co">// T = char or T = const char</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true"></a>T* strchr(T* str, <span class="dt">int</span> c) { }</span></code></pre></div>
 <p>This solution also does not solve the issue of name mangling. Templates are also too powerful for this purpose as they are usually used to map a single function definition in source code into multiple functions in the object file.</p>
 <p>This problem of distinguishing between <code>const</code> and <code>mut</code> also arises in <code>rust</code>. For example, here are two methods of <code>slice</code>.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode rust"><code class="sourceCode rust"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw">pub</span> <span class="kw">fn</span> split_at(<span class="op">&amp;</span><span class="kw">self</span><span class="op">,</span> mid<span class="op">:</span> <span class="dt">usize</span>) <span class="op">-&gt;</span> (<span class="op">&amp;</span>[T]<span class="op">,</span> <span class="op">&amp;</span>[T])</span>
-<span id="cb6-2"><a href="#cb6-2"></a><span class="kw">pub</span> <span class="kw">fn</span> split_at_mut(<span class="op">&amp;</span><span class="kw">mut</span> <span class="kw">self</span><span class="op">,</span> mid<span class="op">:</span> <span class="dt">usize</span>) <span class="op">-&gt;</span> (<span class="op">&amp;</span><span class="kw">mut</span> [T]<span class="op">,</span> <span class="op">&amp;</span><span class="kw">mut</span> [T])</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode rust"><code class="sourceCode rust"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> split_at(<span class="op">&amp;</span><span class="kw">self</span><span class="op">,</span> mid<span class="op">:</span> <span class="dt">usize</span>) <span class="op">-&gt;</span> (<span class="op">&amp;</span>[T]<span class="op">,</span> <span class="op">&amp;</span>[T])</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> split_at_mut(<span class="op">&amp;</span><span class="kw">mut</span> <span class="kw">self</span><span class="op">,</span> mid<span class="op">:</span> <span class="dt">usize</span>) <span class="op">-&gt;</span> (<span class="op">&amp;</span><span class="kw">mut</span> [T]<span class="op">,</span> <span class="op">&amp;</span><span class="kw">mut</span> [T])</span></code></pre></div>
 <p>In fact, the <code>slice</code> API is filled with <code>f</code> and <code>f_mut</code> for various values of <code>f</code>.</p>
 <p>The <span class="title-ref">D</span> programming language provides a solution to this problem by providing the <code>inout</code> keyword that allows functions to be generic over <code>const</code> qualifiers.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode d"><code class="sourceCode d"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw">inout</span>(<span class="dt">char</span>)* strchr(<span class="kw">inout</span>(<span class="dt">char</span>)* str, <span class="dt">int</span> c) { <span class="kw">return</span> str; }</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode d"><code class="sourceCode d"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true"></a><span class="kw">inout</span>(<span class="dt">char</span>)* strchr(<span class="kw">inout</span>(<span class="dt">char</span>)* str, <span class="dt">int</span> c) { <span class="kw">return</span> str; }</span></code></pre></div>
 <p>This function can be compiled without name mangling and be called from <span class="title-ref">C</span>. The exported declaration can be the same as the original declaration for <code>strchr</code> in <span class="title-ref">C</span>.</p>
 <p>If there are multiple <code>inout</code> in the parameters, the <code>inout</code> is set to the most restrictive of all the corresponding qualifiers in arguments.</p>
 <p>The <span class="title-ref">D</span> compiler does not properly handle <code>inout</code> appearing in higher-order functions. A more fundamental problem is that the <code>inout</code> is a single variable that gets assigned to a concrete <code>const</code> or <code>mutable</code> value upon instantiation. The following valid example does not compile.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode d"><code class="sourceCode d"><span id="cb8-1"><a href="#cb8-1"></a><span class="kw">inout</span>(<span class="dt">int</span>)* foo(</span>
-<span id="cb8-2"><a href="#cb8-2"></a>    <span class="kw">inout</span>(<span class="dt">int</span>)* a,</span>
-<span id="cb8-3"><a href="#cb8-3"></a>    <span class="kw">inout</span>(<span class="dt">int</span>)* <span class="kw">function </span>(<span class="kw">inout</span>(<span class="dt">int</span>)*) b)</span>
-<span id="cb8-4"><a href="#cb8-4"></a>{</span>
-<span id="cb8-5"><a href="#cb8-5"></a>    <span class="kw">return</span> b(a);</span>
-<span id="cb8-6"><a href="#cb8-6"></a>}</span>
-<span id="cb8-7"><a href="#cb8-7"></a></span>
-<span id="cb8-8"><a href="#cb8-8"></a><span class="dt">int</span> global = <span class="dv">0</span>;</span>
-<span id="cb8-9"><a href="#cb8-9"></a></span>
-<span id="cb8-10"><a href="#cb8-10"></a><span class="dt">int</span>* f(<span class="kw">const</span>(<span class="dt">int</span>)* x) { <span class="kw">return</span> &amp;global; }</span>
-<span id="cb8-11"><a href="#cb8-11"></a></span>
-<span id="cb8-12"><a href="#cb8-12"></a></span>
-<span id="cb8-13"><a href="#cb8-13"></a><span class="kw">const</span> <span class="dt">int</span> w = <span class="dv">0</span>;</span>
-<span id="cb8-14"><a href="#cb8-14"></a><span class="dt">int</span> *x = foo(&amp;w, &amp;f); <span class="co">// error</span></span>
-<span id="cb8-15"><a href="#cb8-15"></a>*x = <span class="dv">5</span>;</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode d"><code class="sourceCode d"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true"></a><span class="kw">inout</span>(<span class="dt">int</span>)* foo(</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true"></a>    <span class="kw">inout</span>(<span class="dt">int</span>)* a,</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true"></a>    <span class="kw">inout</span>(<span class="dt">int</span>)* <span class="kw">function </span>(<span class="kw">inout</span>(<span class="dt">int</span>)*) b)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true"></a>{</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true"></a>    <span class="kw">return</span> b(a);</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true"></a>}</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true"></a></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true"></a><span class="dt">int</span> global = <span class="dv">0</span>;</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true"></a></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true"></a><span class="dt">int</span>* f(<span class="kw">const</span>(<span class="dt">int</span>)* x) { <span class="kw">return</span> &amp;global; }</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true"></a></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true"></a></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true"></a><span class="kw">const</span> <span class="dt">int</span> w = <span class="dv">0</span>;</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true"></a><span class="dt">int</span> *x = foo(&amp;w, &amp;f); <span class="co">// error</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true"></a>*x = <span class="dv">5</span>;</span></code></pre></div>
 <p>Here, the <code>inout</code> in return type of <code>foo</code> must match the <code>inout</code> in the return type of parameter <code>b</code> and the <code>inout</code> in parameter <code>a</code> must match the <code>inout</code> in parameter of <code>b</code>.</p>
 <h1 id="const-generic-functions"><code>const</code> generic functions</h1>
 <p>Ideally, one should be able to specify multiple <code>inout</code> variables and the relations between them in the function declaration. An illuminating example is the following function used for iterating over intrusive linked lists:</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode d"><code class="sourceCode d"><span id="cb9-1"><a href="#cb9-1"></a><span class="dt">void</span> for_each(</span>
-<span id="cb9-2"><a href="#cb9-2"></a>    list_head* lh,</span>
-<span id="cb9-3"><a href="#cb9-3"></a>    <span class="dt">void</span>* (*entry)(list_head *),</span>
-<span id="cb9-4"><a href="#cb9-4"></a>    <span class="dt">void</span> (*process)(<span class="dt">void</span> *)</span>
-<span id="cb9-5"><a href="#cb9-5"></a>);</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode d"><code class="sourceCode d"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true"></a><span class="dt">void</span> for_each(</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true"></a>    list_head* lh,</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true"></a>    <span class="dt">void</span>* (*entry)(list_head *),</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true"></a>    <span class="dt">void</span> (*process)(<span class="dt">void</span> *)</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true"></a>);</span></code></pre></div>
 <p>The <code>entry</code> function does the casting magic that is required to convert a <code>list_head*</code> into a pointer to the actual structure and the <code>process</code> function processes a single structure in the list. As written, all data is assumed to be mutable. This is too strict. The only requirements are that if the <code>process</code> function requires a pointer to mutable as input, then the <code>entry</code> function should produce one and if the <code>entry</code> function requires a pointer to mutable then <code>lh</code> should be one.</p>
 <p>For simplicity, let us assume that the only type qualifiers are <code>const</code> and <code>mut</code> and they are totally ordered by the relation <code>:</code> given by <code>const : mut</code>. The above function can be declared much more precisely using the following declaration. The syntax is a mix of <span class="title-ref">rust</span> and <span class="title-ref">D</span>.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode rust"><code class="sourceCode rust"><span id="cb10-1"><a href="#cb10-1"></a><span class="kw">fn</span> for_each!(</span>
-<span id="cb10-2"><a href="#cb10-2"></a>  <span class="pp">inout!</span><span class="dv">3</span> <span class="op">:</span> <span class="pp">inout!</span><span class="dv">2</span></span>
-<span id="cb10-3"><a href="#cb10-3"></a><span class="op">,</span> <span class="pp">inout!</span><span class="dv">1</span> <span class="op">:</span> <span class="pp">inout!</span><span class="dv">0</span></span>
-<span id="cb10-4"><a href="#cb10-4"></a>)</span>
-<span id="cb10-5"><a href="#cb10-5"></a>(</span>
-<span id="cb10-6"><a href="#cb10-6"></a>  lh <span class="op">:</span> <span class="op">*</span><span class="pp">inout!</span><span class="dv">0</span> list_head</span>
-<span id="cb10-7"><a href="#cb10-7"></a><span class="op">,</span> entry <span class="op">:</span> <span class="op">*</span><span class="kw">fn</span>(<span class="op">*</span><span class="pp">inout!</span><span class="dv">1</span> list_head) <span class="op">-&gt;</span> <span class="op">*</span><span class="pp">inout!</span><span class="dv">2</span> void</span>
-<span id="cb10-8"><a href="#cb10-8"></a><span class="op">,</span> process <span class="op">:</span> <span class="op">*</span><span class="kw">fn</span>(<span class="op">*</span><span class="pp">inout!</span><span class="dv">3</span> void) <span class="op">-&gt;</span> void</span>
-<span id="cb10-9"><a href="#cb10-9"></a>) <span class="op">-&gt;</span> void<span class="op">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode rust"><code class="sourceCode rust"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true"></a><span class="kw">fn</span> for_each!(</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true"></a>  <span class="pp">inout!</span><span class="dv">3</span> <span class="op">:</span> <span class="pp">inout!</span><span class="dv">2</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true"></a><span class="op">,</span> <span class="pp">inout!</span><span class="dv">1</span> <span class="op">:</span> <span class="pp">inout!</span><span class="dv">0</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true"></a>)</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true"></a>(</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true"></a>  lh <span class="op">:</span> <span class="op">*</span><span class="pp">inout!</span><span class="dv">0</span> list_head</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true"></a><span class="op">,</span> entry <span class="op">:</span> <span class="op">*</span><span class="kw">fn</span>(<span class="op">*</span><span class="pp">inout!</span><span class="dv">1</span> list_head) <span class="op">-&gt;</span> <span class="op">*</span><span class="pp">inout!</span><span class="dv">2</span> void</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true"></a><span class="op">,</span> process <span class="op">:</span> <span class="op">*</span><span class="kw">fn</span>(<span class="op">*</span><span class="pp">inout!</span><span class="dv">3</span> void) <span class="op">-&gt;</span> void</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true"></a>) <span class="op">-&gt;</span> void<span class="op">;</span></span></code></pre></div>
 <p>Here, the <code>!()</code> block specifies constraints on generic parameters. The speicification <code>inout!3 : inout!2</code> means that <code>inout!2</code> is <code>const</code> implies that so is <code>inout!3</code>. Indeed, the code generated for the function remains the same irrespective of the actual values of <code>inout</code> variables. Therefore, this function can be exported to <span class="title-ref">C</span> as there is no need for name mangling. The following declaration should be used in <span class="title-ref">C</span>.</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb11-1"><a href="#cb11-1"></a><span class="dt">void</span> for_each(</span>
-<span id="cb11-2"><a href="#cb11-2"></a>    <span class="dt">const</span> list_head* lh,</span>
-<span id="cb11-3"><a href="#cb11-3"></a>    <span class="dt">const</span> <span class="dt">void</span> *(*entry)(list_head *),</span>
-<span id="cb11-4"><a href="#cb11-4"></a>    <span class="dt">void</span> (*process)(<span class="dt">void</span> *)</span>
-<span id="cb11-5"><a href="#cb11-5"></a>);</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true"></a><span class="dt">void</span> for_each(</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true"></a>    <span class="dt">const</span> list_head* lh,</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true"></a>    <span class="dt">const</span> <span class="dt">void</span> *(*entry)(list_head *),</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true"></a>    <span class="dt">void</span> (*process)(<span class="dt">void</span> *)</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true"></a>);</span></code></pre></div>
 <p>i.e, an <code>inout!i</code> is replaced with <code>const</code> in contravariant positions and with <code>mut</code> in covariant positions.</p>
 <h1 id="const-generic-datatypes"><code>const</code> generic datatypes</h1>
 <p>One of the central concepts in <span class="title-ref">D</span> is that of ranges. A range is a generalization of the slice type <code>T[]</code> which is a pair <code>(T*, int)</code>. One can iterate over the elements of a range by making the pointer point to the next element and decrementing the length. A very common datatype in <span class="title-ref">D</span> is a slice that points to <code>const</code> elements providing a read-only view of a range of elements.</p>
 <p>A problem commonly encountered in <span class="title-ref">D</span> while working with ranges is that there is no way for the compiler to obtain a tail-const version of a user-defined range. For slices, which are the most common range types, the compiler knows that it can obtain the tail-const version of <code>const(T[])</code> by transforming it to <code>const(T)[]</code>. But, for a user-defined range, the compiler has no way to obtain this type.</p>
 <p>The problem here is that a range (like a pointer) is generic over two things: the type of the elements and their mutability. Slices allow the programmer to specify the mutability of elements separately in its datatype specification. But, the <span class="title-ref">D</span> programming language considers a range as a generic type with only the type parameter. One can solve this problem by allowing generic <code>inout</code> parameters in datatype definitions. For example, here is the definition of slice.</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode d"><code class="sourceCode d"><span id="cb12-1"><a href="#cb12-1"></a><span class="kw">struct</span> slice!(T)</span>
-<span id="cb12-2"><a href="#cb12-2"></a>{</span>
-<span id="cb12-3"><a href="#cb12-3"></a>    <span class="kw">inout</span>!<span class="dv">1</span>(T)* ptr;</span>
-<span id="cb12-4"><a href="#cb12-4"></a>    <span class="dt">int</span> len;</span>
-<span id="cb12-5"><a href="#cb12-5"></a>}</span>
-<span id="cb12-6"><a href="#cb12-6"></a></span>
-<span id="cb12-7"><a href="#cb12-7"></a><span class="kw">struct</span> range!(T)</span>
-<span id="cb12-8"><a href="#cb12-8"></a>{</span>
-<span id="cb12-9"><a href="#cb12-9"></a>    <span class="co">// Some declarations that use inout!1</span></span>
-<span id="cb12-10"><a href="#cb12-10"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode d"><code class="sourceCode d"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true"></a><span class="kw">struct</span> slice!(T)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true"></a>{</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true"></a>    <span class="kw">inout</span>!<span class="dv">1</span>(T)* ptr;</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true"></a>    <span class="dt">int</span> len;</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true"></a>}</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true"></a></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true"></a><span class="kw">struct</span> range!(T)</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true"></a>{</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true"></a>    <span class="co">// Some declarations that use inout!1</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true"></a>}</span></code></pre></div>
 <p>In the above definitions, we assume that <code>inout!0</code> refers to the qualifier on the actual <code>struct</code>. By default, all members of a <code>struct</code> can be recursively qualified <code>inout!0</code> giving us transitive <code>const</code> as the default.</p>
 <p>To make this work, the use of <code>inout!i</code> variables at places other than qualifiers (For example, it should not be possible to test its value in a <code>static if</code>) has to be disallowed. The compiler can decide whether a <code>const range!(T, const)</code> is copy-able to <code>range!(T, const)</code>. The compiler can also infer the values of <code>inout</code> variables by using rules that are similar to the inference rules for lifetime variables in <span class="title-ref">rust</span>.</p>
 <p>For full generality, we can allow the use of any number of <code>inout!i</code> variables and specification of constraints on them inside the <code>!()</code> block as was the case for functions.</p>
