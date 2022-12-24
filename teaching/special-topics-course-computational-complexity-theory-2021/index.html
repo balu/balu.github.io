@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="author" content="Balagopal Komarath" />
+  <title> </title>
+  <link rel="stylesheet" type="text/css" href="/css/bk.css" />
+</head>
+<body>
+  <header>
+  <a class="skip-link" aria-label="Skip to main content" href="#main">Skip to main content</a>
+  <a class="logo" href="/index.html">bkomarath</a>
+  <nav aria-label="Primary navigation">
+    <ul>
+      <li>
+        <a
+          role="button"
+          href=""
+          tabindex="0"
+        >
+          Main
+        </a>
+        <ul>
+          <li><a href="/research">Research</a></li>
+          <li><a href="/teaching">Teaching</a></li>
+          <li><a href="/posts">Writing</a></li>
+          <li><a href="/cv">CV</a></li>
+        </ul>
+      </li>
+    </ul>
+  </nav>
+</header>
+
+  
+<main>
+  <h1>Special Topics Course: Computational Complexity Theory (2021)</h1>
+  <h2 id="welcome">Welcome</h2>
+<p>Welcome to computational complexity theory. In this course, we will look at various computational models (TM, circuits) and the power enabled by various resources (time, space, size, depth). We will see that using this framework, we can formulate many natural real-world questions in concrete terms. Questions such as:</p>
+<ol>
+<li>Is verifying solutions harder than finding them?</li>
+<li>Does interacting with the prover help someone verifying the proof?</li>
+<li>Can we verify a proof by reading only a part of it?</li>
+<li>Does randomness help in computation?</li>
+</ol>
+<p>You are expected to be familiar with all topics covered in an undergraduate theory of computation course and algorithms course. In particular, a good understanding of Turing machines, analyzing time and space complexity of algorithms, reductions, and NP-completeness is assumed.</p>
+<h2 id="contact">Contact</h2>
+<p>Please write to Balagopal Komarath &lt;<a href="mailto:bkomarath@iitgn.ac.in">bkomarath@iitgn.ac.in</a>&gt; or Bireswar Das &lt;<a href="mailto:bireswar@iitgn.ac.in">bireswar@iitgn.ac.in</a>&gt; for any course related queries. Prefix the subject line with &ldquo;CS691:&rdquo; (without double quotes).</p>
+<h2 id="lectures">Lectures</h2>
+<p>The meetings happen in P1 and P2.</p>
+<ol>
+<li>(Jan 13) <a href="https://drive.google.com/file/d/1j_I6rJUqYiiUpBgdpVn8DjewporZ5LO0/view?usp=sharing">Overview</a></li>
+<li>(Jan 18) <a href="https://drive.google.com/file/d/1ZGoKDANJulkrlmlQwnwEtVIMS2p_573V/view?usp=sharing">Time and Space: Hierarchy</a></li>
+<li>(Jan 20) <a href="https://drive.google.com/file/d/1NNOk7Gg7mA_vMP3UyWvRZrp5C0U0Mx_L/view?usp=sharing">Constructibility and Time Hierarchy Theorem</a></li>
+<li>(Jan 25) <a href="https://drive.google.com/file/d/1oCcUuhUZBKI-4rWsDH3Z0yxhk-w159zt/view?usp=sharing">Speedup Theorem</a></li>
+<li>(Jan 27) <a href="https://drive.google.com/file/d/1DqurWzhGbEZydhkXPhG9tAcmYoWuLt0O/view?usp=sharing">P and poly-time reductions</a></li>
+<li>(Feb 01) <a href="https://drive.google.com/file/d/12ogn19CcKhr6kID6R2_PkHA76fT4zA-n/view?usp=sharing">NP and coNP</a></li>
+<li>(Feb 03) <a href="https://drive.google.com/file/d/1WjZoYQGSHcQu-OUC2EXlHSiq_N4JkfsX/view?usp=sharing">Polynomial Hierarchy</a></li>
+<li>(Feb 08) <a href="https://drive.google.com/file/d/1LQQ-JyO4y-TXjpUwizsqMIjn_PXIKZ0j/view?usp=sharing">PSPACE and QBF</a></li>
+<li>(Feb 10) <a href="https://drive.google.com/file/d/1T5YCgllkwjIYr5nn863b501c7TLunehF/view?usp=sharing">REACH Algorithms and PSPACE</a></li>
+<li>(Feb 15) <a href="https://drive.google.com/file/d/1Ad-HaZ7ZeeXMig6JlPM8iFPRQWeLmGWP/view?usp=sharing">L and NL</a></li>
+<li>(Feb 17) <a href="https://drive.google.com/file/d/1bplWMPjcy8w1vSOfJJknUvxdP8A0AOuR/view?usp=sharing">NL = coNL</a></li>
+</ol>
+<h2 id="evaluation">Evaluation</h2>
+<p>Evaluation includes take-home assignments (10x4), a mid-sem quiz (20), a paper presentation (20), and end-sem viva (20).</p>
+<h2 id="references">References</h2>
+<p>The lecture notes are <a href="https://drive.google.com/file/d/1lcg8BGWhfZYLS83cyuOVtLibUu0G7Egp/view?usp=sharing">here</a>. A cleaned-up version of lecture <a href="https://drive.google.com/file/d/1euqaRKVSko-DoVg4NKHDkaM-ffn2ZJUZ/view?usp=sharing">notes</a></p>
+<p>Now, a list of text books.</p>
+<ol>
+<li>Computational Complexity: A Modern Approach, Arora and Barak</li>
+<li>Computational Complexity: A Conceptual Perspective, Goldreich</li>
+</ol>
+
+</main>
+
+  <footer>
+  <p>
+    All content on this website is licensed under
+    <a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA
+      4.0</a> by Balagopal Komarath unless mentioned otherwise.
+</footer>
+
+<script>
+ 'use strict';
+
+ class DisclosureNav {
+   constructor(navNode) {
+     this.navNode = navNode;
+     var menus = navNode.querySelectorAll('a[role="button"]');
+     this.menus = [];
+     for (var i = 0; i < menus.length; ++i) {
+       this.menus.push(new DisclosureMenu(menus[i]));
+     }
+     this.navNode.addEventListener(
+       'focusout',
+       this.onFocusOut.bind(this)
+     );
+   }
+
+   onFocusOut(event) {
+     var containsFocus = this.navNode.contains(event.relatedTarget);
+     if (!containsFocus) {
+       this.menus.forEach((menu) => {
+         menu.close();
+       });
+     }
+   }
+ }
+
+ var nextID = 0;
+
+ function generateID() {
+   return ++nextID;
+ }
+
+ class DisclosureMenu {
+   constructor(menuNode) {
+     this.id = '_nav_menu_' + generateID();
+     this.menuNode = menuNode;
+     this.controlledMenu = menuNode.parentNode.querySelector('ul');
+     this.controlledMenuItems = this.controlledMenu.querySelectorAll('li');
+
+     console.log(this.id);
+
+      
+     this.menuNode.classList.add("disclosure-menu-closed");
+     this.menuNode.setAttribute("aria-expanded", "false");
+     this.menuNode.setAttribute("aria-haspopup", "true");
+     this.menuNode.setAttribute("aria-controls", this.id);
+
+      
+     this.controlledMenu.classList.add("disclosure-toggled-list-closed");
+     this.controlledMenu.setAttribute("id", this.id);
+
+     menuNode.addEventListener(
+       'click',
+       this.onClick.bind(this)
+     );
+     menuNode.addEventListener(
+       'keydown',
+       this.onMenuKeyDown.bind(this)
+     );
+     for (var i = 0; i < this.controlledMenuItems.length; ++i) {
+       var menuItem = this.controlledMenuItems[i];
+       menuItem.addEventListener(
+         'keydown',
+         this.onMenuItemKeyDown.bind(this)
+       );
+     }
+   }
+
+   isClosed() {
+     return this.menuNode.classList.contains("disclosure-menu-closed");
+   }
+
+   onClick(event) {
+     event.preventDefault();
+     this.toggleMenu(this.isClosed());
+   }
+
+   close() { this.toggleMenu(false); }
+
+   toggleMenu(should_open) {
+     var closed = this.isClosed();
+
+     if (should_open && !closed) return;
+     if (!should_open && closed) return;
+
+     if (should_open) {
+       this.menuNode.classList.replace(
+         "disclosure-menu-closed",
+         "disclosure-menu-opened"
+       );
+       this.menuNode.setAttribute("aria-expanded", "true");
+       this.controlledMenu.classList.replace("disclosure-toggled-list-closed", "disclosure-toggled-list-opened");
+     } else {
+       this.menuNode.classList.replace("disclosure-menu-opened", "disclosure-menu-closed");
+       this.menuNode.setAttribute("aria-expanded", "false");
+       this.controlledMenu.classList.replace("disclosure-toggled-list-opened", "disclosure-toggled-list-closed");
+     }
+   }
+
+   onMenuKeyDown(event) {
+     if (event.key === " ") {
+       event.preventDefault();
+       this.toggleMenu(this.isClosed());
+     } else if (event.key === 'Escape') {
+       this.close();
+     }
+   }
+
+   onMenuItemKeyDown(event) {
+     if (event.key === 'Escape') {
+       this.toggleMenu(false);
+       this.menuNode.focus();
+     }
+   }
+ }
+
+ function initNavigation(navs) {
+   for (let nav of navs) {
+     new DisclosureNav(nav);
+   }
+ }
+
+ window.addEventListener(
+   'load',
+   function () {
+     var navMenus = document.querySelectorAll('nav a[role="button"]');
+     var navs = [];
+     for (var i = 0; i < navMenus.length; ++i) {
+       var nav = navMenus[i].parentNode.parentNode;
+       if (!navs.find((otherNav) => otherNav === nav)) {
+         navs.push(nav);
+       }
+     }
+     initNavigation(navs);
+   },
+   false
+ );
+
+</script>
+
+</body>
+</html>

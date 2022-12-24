@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on Balagopal Komarath&#39;s Homepage</title>
+    <link>https://bkomarath.rbgo.in/posts/</link>
+    <description>Recent content in Posts on Balagopal Komarath&#39;s Homepage</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 28 Nov 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://bkomarath.rbgo.in/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Python is Not an Acceptable ML</title>
+      <link>https://bkomarath.rbgo.in/posts/python-is-not-an-acceptable-ml/</link>
+      <pubDate>Mon, 28 Nov 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://bkomarath.rbgo.in/posts/python-is-not-an-acceptable-ml/</guid>
+      <description>The programming language Python is a popular fixture in introductory programming courses. The adoption of Python as a programming language for introductory courses is mainly driven by two reasons:
+Popularity in scientific computing and software industry. Readability. While the first point is irrefutable, the readability enabled by Python&amp;rsquo;s surface-level syntax does not compensate for its many violations of certain fundamental principles related to programming language and user interface design. In this article, we look at certain common problems with Python faced by beginning programmers and will see how a programming language with a better design, OCaml, prevents or even completely avoids these issues.</description>
+    </item>
+    
+  </channel>
+</rss>

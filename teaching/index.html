@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="author" content="Balagopal Komarath" />
+  <title> </title>
+  <link rel="stylesheet" type="text/css" href="/css/bk.css" />
+</head>
+<body>
+  <header>
+  <a class="skip-link" aria-label="Skip to main content" href="#main">Skip to main content</a>
+  <a class="logo" href="/index.html">bkomarath</a>
+  <nav aria-label="Primary navigation">
+    <ul>
+      <li>
+        <a
+          role="button"
+          href=""
+          tabindex="0"
+        >
+          Main
+        </a>
+        <ul>
+          <li><a href="/research">Research</a></li>
+          <li><a href="/teaching">Teaching</a></li>
+          <li><a href="/posts">Writing</a></li>
+          <li><a href="/cv">CV</a></li>
+        </ul>
+      </li>
+    </ul>
+  </nav>
+</header>
+
+  
+<main>
+  <h1 class="sr-only">Balagopal Komarath's Courses</h1>
+  <ul>
+    
+    <li><a href="https://bkomarath.rbgo.in/teaching/compilers-2023/">Compilers (2023)</a></li>
+    
+    <li><a href="https://bkomarath.rbgo.in/teaching/computing-2022/">Computing (2022)</a></li>
+    
+    <li><a href="https://bkomarath.rbgo.in/teaching/computational-complexity-theory-2022/">Computational Complexity Theory (2022)</a></li>
+    
+    <li><a href="https://bkomarath.rbgo.in/teaching/data-structures-and-algorithms-ii-2022/">Data Structures and Algorithms II (2022)</a></li>
+    
+    <li><a href="https://bkomarath.rbgo.in/teaching/introduction-to-computing-dec-2021/">Introduction to Computing (Dec 2021)</a></li>
+    
+    <li><a href="https://bkomarath.rbgo.in/teaching/special-topics-course-algebraic-complexity-theory-2021/">Special Topics Course: Algebraic Complexity Theory (2021)</a></li>
+    
+    <li><a href="https://bkomarath.rbgo.in/teaching/assembly-and-c-programming-mini-course-2021/">Assembly and C Programming Mini-Course (2021)</a></li>
+    
+    <li><a href="https://bkomarath.rbgo.in/teaching/special-topics-course-computational-complexity-theory-2021/">Special Topics Course: Computational Complexity Theory (2021)</a></li>
+    
+    <li><a href="https://bkomarath.rbgo.in/teaching/introduction-to-computing-2021/">Introduction to Computing (2021)</a></li>
+    
+    <li><a href="https://bkomarath.rbgo.in/teaching/theory-of-computation-2020/">Theory of Computation (2020)</a></li>
+    
+    <li><a href="https://bkomarath.rbgo.in/teaching/complexity-theory-2019-20/">Complexity Theory (2019-20)</a></li>
+    
+    <li><a href="https://bkomarath.rbgo.in/teaching/complexity-theory-2018/">Complexity Theory (2018)</a></li>
+    
+  </ul>
+</main>
+
+  <footer>
+  <p>
+    All content on this website is licensed under
+    <a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA
+      4.0</a> by Balagopal Komarath unless mentioned otherwise.
+</footer>
+
+<script>
+ 'use strict';
+
+ class DisclosureNav {
+   constructor(navNode) {
+     this.navNode = navNode;
+     var menus = navNode.querySelectorAll('a[role="button"]');
+     this.menus = [];
+     for (var i = 0; i < menus.length; ++i) {
+       this.menus.push(new DisclosureMenu(menus[i]));
+     }
+     this.navNode.addEventListener(
+       'focusout',
+       this.onFocusOut.bind(this)
+     );
+   }
+
+   onFocusOut(event) {
+     var containsFocus = this.navNode.contains(event.relatedTarget);
+     if (!containsFocus) {
+       this.menus.forEach((menu) => {
+         menu.close();
+       });
+     }
+   }
+ }
+
+ var nextID = 0;
+
+ function generateID() {
+   return ++nextID;
+ }
+
+ class DisclosureMenu {
+   constructor(menuNode) {
+     this.id = '_nav_menu_' + generateID();
+     this.menuNode = menuNode;
+     this.controlledMenu = menuNode.parentNode.querySelector('ul');
+     this.controlledMenuItems = this.controlledMenu.querySelectorAll('li');
+
+     console.log(this.id);
+
+      
+     this.menuNode.classList.add("disclosure-menu-closed");
+     this.menuNode.setAttribute("aria-expanded", "false");
+     this.menuNode.setAttribute("aria-haspopup", "true");
+     this.menuNode.setAttribute("aria-controls", this.id);
+
+      
+     this.controlledMenu.classList.add("disclosure-toggled-list-closed");
+     this.controlledMenu.setAttribute("id", this.id);
+
+     menuNode.addEventListener(
+       'click',
+       this.onClick.bind(this)
+     );
+     menuNode.addEventListener(
+       'keydown',
+       this.onMenuKeyDown.bind(this)
+     );
+     for (var i = 0; i < this.controlledMenuItems.length; ++i) {
+       var menuItem = this.controlledMenuItems[i];
+       menuItem.addEventListener(
+         'keydown',
+         this.onMenuItemKeyDown.bind(this)
+       );
+     }
+   }
+
+   isClosed() {
+     return this.menuNode.classList.contains("disclosure-menu-closed");
+   }
+
+   onClick(event) {
+     event.preventDefault();
+     this.toggleMenu(this.isClosed());
+   }
+
+   close() { this.toggleMenu(false); }
+
+   toggleMenu(should_open) {
+     var closed = this.isClosed();
+
+     if (should_open && !closed) return;
+     if (!should_open && closed) return;
+
+     if (should_open) {
+       this.menuNode.classList.replace(
+         "disclosure-menu-closed",
+         "disclosure-menu-opened"
+       );
+       this.menuNode.setAttribute("aria-expanded", "true");
+       this.controlledMenu.classList.replace("disclosure-toggled-list-closed", "disclosure-toggled-list-opened");
+     } else {
+       this.menuNode.classList.replace("disclosure-menu-opened", "disclosure-menu-closed");
+       this.menuNode.setAttribute("aria-expanded", "false");
+       this.controlledMenu.classList.replace("disclosure-toggled-list-opened", "disclosure-toggled-list-closed");
+     }
+   }
+
+   onMenuKeyDown(event) {
+     if (event.key === " ") {
+       event.preventDefault();
+       this.toggleMenu(this.isClosed());
+     } else if (event.key === 'Escape') {
+       this.close();
+     }
+   }
+
+   onMenuItemKeyDown(event) {
+     if (event.key === 'Escape') {
+       this.toggleMenu(false);
+       this.menuNode.focus();
+     }
+   }
+ }
+
+ function initNavigation(navs) {
+   for (let nav of navs) {
+     new DisclosureNav(nav);
+   }
+ }
+
+ window.addEventListener(
+   'load',
+   function () {
+     var navMenus = document.querySelectorAll('nav a[role="button"]');
+     var navs = [];
+     for (var i = 0; i < navMenus.length; ++i) {
+       var nav = navMenus[i].parentNode.parentNode;
+       if (!navs.find((otherNav) => otherNav === nav)) {
+         navs.push(nav);
+       }
+     }
+     initNavigation(navs);
+   },
+   false
+ );
+
+</script>
+
+</body>
+</html>

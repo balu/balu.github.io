@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="author" content="Balagopal Komarath" />
+  <title> </title>
+  <link rel="stylesheet" type="text/css" href="/css/bk.css" />
+</head>
+<body>
+  <header>
+  <a class="skip-link" aria-label="Skip to main content" href="#main">Skip to main content</a>
+  <a class="logo" href="/index.html">bkomarath</a>
+  <nav aria-label="Primary navigation">
+    <ul>
+      <li>
+        <a
+          role="button"
+          href=""
+          tabindex="0"
+        >
+          Main
+        </a>
+        <ul>
+          <li><a href="/research">Research</a></li>
+          <li><a href="/teaching">Teaching</a></li>
+          <li><a href="/posts">Writing</a></li>
+          <li><a href="/cv">CV</a></li>
+        </ul>
+      </li>
+    </ul>
+  </nav>
+</header>
+
+  
+<main>
+  <h1>Special Topics Course: Algebraic Complexity Theory (2021)</h1>
+  <h2 id="welcome">Welcome</h2>
+<p>Algebraic complexity theory deals with the computation of polynomials using the basic operations addition and multiplication. For example, we can compute the polynomial \(xy + xz\) using two multiplications and one addition. By using distributivity, we can perform the same computation as \(x(y + z)\) which costs one addition and only one multiplication. The primary goal of algebraic complexity theory is to understand the minimum number of operations for computing interesting polynomials such as determinants and matrix multiplication polynomials (also called the complexity of these polynomials). For example, can we prove that multiplying two n x n matrices can be done using \(n^2\) operations? (The trivial method uses \(n^3\) operations. We can improve it as much as \(n^2.{37}\))</p>
+<p>In this course, we will first learn about polynomial families such as matrix multiplication polynomials, determinants, and permanents. What makes them interesting is the fact that they seem to characterize the complexity of large classes of interesting polynomials? For example, any polynomial that can be written as a small formula can also be written as a small determinant. We will then look at very clever ways to compute polynomials efficiently such as computing all first-order partial derivatives of an n-variate polynomial using almost the same number of operations as for the polynomial (If you compute them individually, you&rsquo;ll need about n times more, which is too much)! and the theory underlying Strassen&rsquo;s fast matrix multiplication algorithm.</p>
+<p>Even though we have many clever algorithms to efficiently compute certain important polynomials, there seems to be a lack of techniques that will allow us to prove that certain polynomials are hard to compute, despite our strong suspicion that they actually are hard to compute. Nevertheless, we can impose natural restrictions such as monotonicity (disallow subtraction), constant-depth (limit nesting of operations), multilinearity (disallow squaring variables) and show that under these restrictions, certain polynomials are hard to compute.</p>
+<h2 id="contact">Contact</h2>
+<p>Please write to Balagopal Komarath &lt;<a href="mailto:bkomarath@iitgn.ac.in">bkomarath@iitgn.ac.in</a>&gt; for any course related queries.</p>
+<h2 id="lectures">Lectures</h2>
+<p>The lectures will be conducted on slots M1+N1, N3. Please use this <a href="https://meet.google.com/ivt-hgvz-dqa">link</a> to join.</p>
+<h2 id="evaluation">Evaluation</h2>
+<ul>
+<li>Presentations (30%)</li>
+<li>Take-home assignments (30%)</li>
+<li>End-sem viva (40%)</li>
+</ul>
+<h2 id="references">References</h2>
+<ol>
+<li>Completeness and Reduction in Algebraic Complexity Theory, Peter Bürgisser.</li>
+<li><a href="https://cims.nyu.edu/~regev/toc/articles/gs005/index.html">Fast Matrix Multiplication</a>, Markus Bläser.</li>
+<li><a href="https://github.com/dasarpmar/lowerbounds-survey">Arithmetic circuits lower-bounds survey</a>, Ramprasad Saptarishi.</li>
+</ol>
+
+</main>
+
+  <footer>
+  <p>
+    All content on this website is licensed under
+    <a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA
+      4.0</a> by Balagopal Komarath unless mentioned otherwise.
+</footer>
+
+<script>
+ 'use strict';
+
+ class DisclosureNav {
+   constructor(navNode) {
+     this.navNode = navNode;
+     var menus = navNode.querySelectorAll('a[role="button"]');
+     this.menus = [];
+     for (var i = 0; i < menus.length; ++i) {
+       this.menus.push(new DisclosureMenu(menus[i]));
+     }
+     this.navNode.addEventListener(
+       'focusout',
+       this.onFocusOut.bind(this)
+     );
+   }
+
+   onFocusOut(event) {
+     var containsFocus = this.navNode.contains(event.relatedTarget);
+     if (!containsFocus) {
+       this.menus.forEach((menu) => {
+         menu.close();
+       });
+     }
+   }
+ }
+
+ var nextID = 0;
+
+ function generateID() {
+   return ++nextID;
+ }
+
+ class DisclosureMenu {
+   constructor(menuNode) {
+     this.id = '_nav_menu_' + generateID();
+     this.menuNode = menuNode;
+     this.controlledMenu = menuNode.parentNode.querySelector('ul');
+     this.controlledMenuItems = this.controlledMenu.querySelectorAll('li');
+
+     console.log(this.id);
+
+      
+     this.menuNode.classList.add("disclosure-menu-closed");
+     this.menuNode.setAttribute("aria-expanded", "false");
+     this.menuNode.setAttribute("aria-haspopup", "true");
+     this.menuNode.setAttribute("aria-controls", this.id);
+
+      
+     this.controlledMenu.classList.add("disclosure-toggled-list-closed");
+     this.controlledMenu.setAttribute("id", this.id);
+
+     menuNode.addEventListener(
+       'click',
+       this.onClick.bind(this)
+     );
+     menuNode.addEventListener(
+       'keydown',
+       this.onMenuKeyDown.bind(this)
+     );
+     for (var i = 0; i < this.controlledMenuItems.length; ++i) {
+       var menuItem = this.controlledMenuItems[i];
+       menuItem.addEventListener(
+         'keydown',
+         this.onMenuItemKeyDown.bind(this)
+       );
+     }
+   }
+
+   isClosed() {
+     return this.menuNode.classList.contains("disclosure-menu-closed");
+   }
+
+   onClick(event) {
+     event.preventDefault();
+     this.toggleMenu(this.isClosed());
+   }
+
+   close() { this.toggleMenu(false); }
+
+   toggleMenu(should_open) {
+     var closed = this.isClosed();
+
+     if (should_open && !closed) return;
+     if (!should_open && closed) return;
+
+     if (should_open) {
+       this.menuNode.classList.replace(
+         "disclosure-menu-closed",
+         "disclosure-menu-opened"
+       );
+       this.menuNode.setAttribute("aria-expanded", "true");
+       this.controlledMenu.classList.replace("disclosure-toggled-list-closed", "disclosure-toggled-list-opened");
+     } else {
+       this.menuNode.classList.replace("disclosure-menu-opened", "disclosure-menu-closed");
+       this.menuNode.setAttribute("aria-expanded", "false");
+       this.controlledMenu.classList.replace("disclosure-toggled-list-opened", "disclosure-toggled-list-closed");
+     }
+   }
+
+   onMenuKeyDown(event) {
+     if (event.key === " ") {
+       event.preventDefault();
+       this.toggleMenu(this.isClosed());
+     } else if (event.key === 'Escape') {
+       this.close();
+     }
+   }
+
+   onMenuItemKeyDown(event) {
+     if (event.key === 'Escape') {
+       this.toggleMenu(false);
+       this.menuNode.focus();
+     }
+   }
+ }
+
+ function initNavigation(navs) {
+   for (let nav of navs) {
+     new DisclosureNav(nav);
+   }
+ }
+
+ window.addEventListener(
+   'load',
+   function () {
+     var navMenus = document.querySelectorAll('nav a[role="button"]');
+     var navs = [];
+     for (var i = 0; i < navMenus.length; ++i) {
+       var nav = navMenus[i].parentNode.parentNode;
+       if (!navs.find((otherNav) => otherNav === nav)) {
+         navs.push(nav);
+       }
+     }
+     initNavigation(navs);
+   },
+   false
+ );
+
+</script>
+
+</body>
+</html>

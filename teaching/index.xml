@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Teachings on Balagopal Komarath&#39;s Homepage</title>
+    <link>https://bkomarath.rbgo.in/teaching/</link>
+    <description>Recent content in Teachings on Balagopal Komarath&#39;s Homepage</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 02 Jan 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://bkomarath.rbgo.in/teaching/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Compilers (2023)</title>
+      <link>https://bkomarath.rbgo.in/teaching/compilers-2023/</link>
+      <pubDate>Mon, 02 Jan 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://bkomarath.rbgo.in/teaching/compilers-2023/</guid>
+      <description>Welcome to CS327: Compilers. In this course, we will design and implement a compiler for a simple imperative language. We will aim for the following language features.
+Basic Types: numbers, booleans, strings. Compound Types: products, sums, arrays. Conditionals. Loops. Functions. Closures. Mutable variables. Exceptions. We will aim to implement a tree-walking interpreter followed by designing a bytecode along with a source to bytecode compiler that implements some optimizations such as function inlining, loop unrolling, constant folding, and dead code elimination.</description>
+    </item>
+    
+    <item>
+      <title>Computing (2022)</title>
+      <link>https://bkomarath.rbgo.in/teaching/computing-2022/</link>
+      <pubDate>Thu, 24 Nov 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://bkomarath.rbgo.in/teaching/computing-2022/</guid>
+      <description>Course website for computing in the winter of 2022.</description>
+    </item>
+    
+    <item>
+      <title>Computational Complexity Theory (2022)</title>
+      <link>https://bkomarath.rbgo.in/teaching/computational-complexity-theory-2022/</link>
+      <pubDate>Sun, 07 Aug 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://bkomarath.rbgo.in/teaching/computational-complexity-theory-2022/</guid>
+      <description>First time computational complexity theory was offered as a regular course at IIT Gandhinagar since the CS discipline was formed. The course had code CS 617. I co-taught this course with Bireswar Das. See the Canvas page for computational complexity theory in 2022 (requires invitation).</description>
+    </item>
+    
+    <item>
+      <title>Data Structures and Algorithms II (2022)</title>
+      <link>https://bkomarath.rbgo.in/teaching/data-structures-and-algorithms-ii-2022/</link>
+      <pubDate>Sat, 01 Jan 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://bkomarath.rbgo.in/teaching/data-structures-and-algorithms-ii-2022/</guid>
+      <description>This course covered algorithmic design paradigms such as divide and conquer, greedy, dynamic programming, and network flows. All course-related communication was managed on a locally hosted Zulip instance.</description>
+    </item>
+    
+    <item>
+      <title>Introduction to Computing (Dec 2021)</title>
+      <link>https://bkomarath.rbgo.in/teaching/introduction-to-computing-dec-2021/</link>
+      <pubDate>Wed, 01 Dec 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://bkomarath.rbgo.in/teaching/introduction-to-computing-dec-2021/</guid>
+      <description>I was a tutor for this course. See course website for introduction to computing in the winter of 2021.</description>
+    </item>
+    
+    <item>
+      <title>Special Topics Course: Algebraic Complexity Theory (2021)</title>
+      <link>https://bkomarath.rbgo.in/teaching/special-topics-course-algebraic-complexity-theory-2021/</link>
+      <pubDate>Sun, 01 Aug 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://bkomarath.rbgo.in/teaching/special-topics-course-algebraic-complexity-theory-2021/</guid>
+      <description>Welcome Algebraic complexity theory deals with the computation of polynomials using the basic operations addition and multiplication. For example, we can compute the polynomial \(xy + xz\) using two multiplications and one addition. By using distributivity, we can perform the same computation as \(x(y + z)\) which costs one addition and only one multiplication. The primary goal of algebraic complexity theory is to understand the minimum number of operations for computing interesting polynomials such as determinants and matrix multiplication polynomials (also called the complexity of these polynomials).</description>
+    </item>
+    
+    <item>
+      <title>Assembly and C Programming Mini-Course (2021)</title>
+      <link>https://bkomarath.rbgo.in/teaching/assembly-and-c-programming-mini-course-2021/</link>
+      <pubDate>Thu, 01 Jul 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://bkomarath.rbgo.in/teaching/assembly-and-c-programming-mini-course-2021/</guid>
+      <description>Welcome &amp;ldquo;High&amp;rdquo;-level programming languages such as python provides many abstract types like lists and dictionaries and support complex operations such as taking a slice of the list as a basic operation. The underlying computer, of course, doesn&amp;rsquo;t directly support such complex operations in hardware. The typical &amp;ldquo;Data structures and algorithms&amp;rdquo; course describes how one can structure data (Data structures) in memory so that complex operations can be implemented efficiently in terms of more primitive ones (Algorithms).</description>
+    </item>
+    
+    <item>
+      <title>Special Topics Course: Computational Complexity Theory (2021)</title>
+      <link>https://bkomarath.rbgo.in/teaching/special-topics-course-computational-complexity-theory-2021/</link>
+      <pubDate>Wed, 13 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://bkomarath.rbgo.in/teaching/special-topics-course-computational-complexity-theory-2021/</guid>
+      <description>Welcome Welcome to computational complexity theory. In this course, we will look at various computational models (TM, circuits) and the power enabled by various resources (time, space, size, depth). We will see that using this framework, we can formulate many natural real-world questions in concrete terms. Questions such as:
+Is verifying solutions harder than finding them? Does interacting with the prover help someone verifying the proof? Can we verify a proof by reading only a part of it?</description>
+    </item>
+    
+    <item>
+      <title>Introduction to Computing (2021)</title>
+      <link>https://bkomarath.rbgo.in/teaching/introduction-to-computing-2021/</link>
+      <pubDate>Wed, 06 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://bkomarath.rbgo.in/teaching/introduction-to-computing-2021/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Theory of Computation (2020)</title>
+      <link>https://bkomarath.rbgo.in/teaching/theory-of-computation-2020/</link>
+      <pubDate>Wed, 05 Aug 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://bkomarath.rbgo.in/teaching/theory-of-computation-2020/</guid>
+      <description>Welcome Welcome to &amp;ldquo;Theory of Computation&amp;rdquo;. In this course, we are going to try and answer fundamental questions about the nature of computation such as:
+Are all problems computable? Does backtracking help? Is there a best algorithm for all problems? Does more time help? Does more memory help? Is verifying solutions easier than finding them? Use this to add lectures to your Google calendar. The Google meet link for lectures is here.</description>
+    </item>
+    
+    <item>
+      <title>Complexity Theory (2019-20)</title>
+      <link>https://bkomarath.rbgo.in/teaching/complexity-theory-2019-20/</link>
+      <pubDate>Tue, 15 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://bkomarath.rbgo.in/teaching/complexity-theory-2019-20/</guid>
+      <description>This course was co-taught with Markus Bläser. See the webpage for complexity theory course in 2019 at Saarland for details.</description>
+    </item>
+    
+    <item>
+      <title>Complexity Theory (2018)</title>
+      <link>https://bkomarath.rbgo.in/teaching/complexity-theory-2018/</link>
+      <pubDate>Wed, 11 Apr 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://bkomarath.rbgo.in/teaching/complexity-theory-2018/</guid>
+      <description>This course was co-taught with Markus Bläser. See the webpage for complexity theory course in 2018 at Saarland for details.</description>
+    </item>
+    
+  </channel>
+</rss>

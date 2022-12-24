@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="author" content="Balagopal Komarath" />
+  <title> </title>
+  <link rel="stylesheet" type="text/css" href="/css/bk.css" />
+</head>
+<body>
+  <header>
+  <a class="skip-link" aria-label="Skip to main content" href="#main">Skip to main content</a>
+  <a class="logo" href="/index.html">bkomarath</a>
+  <nav aria-label="Primary navigation">
+    <ul>
+      <li>
+        <a
+          role="button"
+          href=""
+          tabindex="0"
+        >
+          Main
+        </a>
+        <ul>
+          <li><a href="/research">Research</a></li>
+          <li><a href="/teaching">Teaching</a></li>
+          <li><a href="/posts">Writing</a></li>
+          <li><a href="/cv">CV</a></li>
+        </ul>
+      </li>
+    </ul>
+  </nav>
+</header>
+
+  
+<main>
+  <h1 class="sr-only" >Balagopal Komarath's research publications</h1>
+  <p>The research articles that I have co-authored are given below in reverse chronological order.</p>
+
+  <article>
+    <h1>
+      Finding and counting patterns in sparse graphs
+    </h1>
+    <p>with Anant Kumar, Suchismita Mishra, and Aditi Sethia</p>
+    <p>A pattern is a small graph that we want to find in a larger graph called the host graph. The state of the art algorithms for finding and counting patterns in graphs are oblivious to the number of edges in the host graph. We introduce two natural parameters on the pattern and show that we can obtain asymptotic improvements on sparse host graphs for many patterns. For certain simple classes of patterns, we also characterize patterns that can be detected or counted easily using forbidden induced minors.</p>
+  </article>
+
+  <article>
+    <h1>
+      Rabbits approximate, cows compute exactly!
+    </h1>
+    <p>with Anurag Pandey and Nitin Saurabh</p>
+    <p>Determinants of symbolic matrices are a very important sequence of polynomials in engineering.  From a theoretical perspective, any polynomial with a small algebraic formula can be expressed as a projection of the determinant of a small matrix that contains only variables and constants. However, determinants of symbolic matrices are believed to be uncomputable by small formulas. In this paper, we look at determinants of symbolic matrices with low <em>bandwidth</em>. We show that such determinants can still powerful enough to express all formulas <em>and</em> can be computed by small formulas.  We also exhibit very simple polynomials, namely Narayana's cows polynomials and Padovan polynomials that have this property.</p>
+  </article>
+
+  <article>
+    <h1>
+      <a href="https://arxiv.org/abs/2107.05128">KW games for hazard-free computation</a>
+    </h1>
+    <p>with Christian Ikenmeyer and Nitin Saurabh</p>
+    <p>Karchmer-Wigderson games are two-player, collaborative, communication games where two people with a part of the input try to compute a function at the whole input while minimizing communication. Variants of this game characterize Boolean and monotone formula complexity. Using this relationship, we can obtain good lower bounds for monotone formulas. However, we do not know how to obtain good lower bounds for Boolean formulas. In this work, we introduce a variant of this game that is related to hazard-free formulas and show that it acts as a bridge between the monotone and the Boolean game. Therefore, using this game, we can prove lower bounds that was not possible using the monotone game. As an application, we examine hazard-free formula complexity of the multiplexer function.
+    </p>
+  </article>
+
+  <article>
+    <h1>
+      <a href="https://drops.dagstuhl.de/opus/volltexte/2022/16424/">Monotone arithmetic complexity of graph homomorphism polynomials</a>
+    </h1>
+    <p>With Anurag Pandey and Rahul C S</p>
+    <p>Graph homomorphism polynomials are polynomials that enumerate graph homomorphisms from a small, fixed pattern graph to large cliques. These polynomials have wide-ranging applications in graph pattern detection and counting. Monotone arithmetic circuits (circuits that do not use cancellation) are usually used to efficiently compute these polynomials. We completely characterize the complexity of all homomorphism polynomials in all three major monotone models (circuits, branching programs, and formulas) in terms of well-known structural graph parameters.</p>
+  </article>
+
+  <article>
+    <h1>
+      <a href="https://arxiv.org/abs/2006.10592">On the complexity of detecting hazards</a>
+    </h1>
+    <p>With Nitin Saurabh</p>
+    <p>Detecting whether a given circuit has a logic hazard is a fundamental problem in logic circuit design. The best algorithm for this problem is due to Eichelberger (1965) and runs in exponential time. In this paper, we show that if a widely believed complexity theoretic hypothesis called the strong exponential time hypothesis is true, Eichelberger's algorithm is asymptotically optimal. We also show that there is a polynomial time algorithm that solves this problem in practice if the circuit is in CNF or DNF.</p>
+  </article>
+
+  <article>
+    <h1>
+      <a href="https://arxiv.org/abs/1809.08858">Graph pattern polynomials</a>
+    </h1>
+    <p>with Markus Bläser and Karteek Sreenivasaiah</p>
+    <p>We show that efficient constructions of circuits for computing homomorphism polynomials for small pattern graphs can be used to solve the induced subgraph isomorphism problem for small pattern graphs. Our main result is that there exists a k-vertex pattern graph that has a faster detection algorithm than the one for k-clique. This answers an open problem from 1985.</p>
+  </article>
+
+  <article>
+    <h1>
+      <a href="https://arxiv.org/abs/1711.01904">On the complexity of hazard-free circuits</a>
+    </h1>
+    <p>with Christian Ikenmeyer, Christoph Lenzen, Vladimir Lysikov, Andrey Mokhov, and Karteek Sreenivasaiah</p>
+    <p>A circuit is said to have a hazard if given an input where some of the bits are unstable, it outputs an unstable value even if the value of the function is determined by the stable inputs. In 1957, Huffman asked whether given a circuit that has hazards, is it possible to obtain a hazard-free circuit that computes the same function without adding too many gates? In this paper, we show that this is impossible. The result is obtained using a newly discovered connection between hazard-free computation and monotone computation.</p>
+  </article>
+
+  <article>
+    <h1>
+      <a href="https://arxiv.org/abs/1503.00275">Comparator circuits over finite bounded posets</a>
+    </h1>
+    <p>with Jayalal Sarma and K.S. Sunil</p>
+    <p>The comparator circuit model characterizes the complexity of many interesting problems such as the stable matching problem. Intuitively, this circuit model appears to be slightly less powerful than arbitrary polynomial time computation. In this paper, we study generalizations of the comparator circuit model that characterizes polynomial time computation. We also show that certain natural restrictions on the comparator circuit model enables us to characterize space bounded computation.</p>
+  </article>
+
+  <article>
+    <h1>
+      <a href="https://arxiv.org/abs/1604.05510">Pebbling meets coloring: Reversible pebble game on trees</a>
+    </h1>
+    <p>with Jayalal Sarma and Saurabh Sawlani</p>
+    <p>The reversible pebbling game, played on directed acyclic graphs, was invented to determine storage requirements of reversible computation that follows a specific algorithm. It was known that this pebbling game is equivalent to many other pebbling games invented to study other computational models. In this paper, we relate reversible pebbling to a purely structural property of graphs called edge-rank coloring. Many interesting structural and algorithmic results follow from this discovery.</p>
+  </article>
+
+  <article>
+    <h1>
+      <a href="https://arxiv.org/abs/1701.03255">On the complexity of L-reachability</a>
+    </h1>
+    <p>with Jayalal Sarma and K.S. Sunil</p>
+    <p>We look at a generalization of the graph reachability problem where all edges are labelled from an alphabet and paths are valid only if the string yielded by the path belongs to a language.</p>
+  </article>
+
+  <article>
+    <h1>
+      <a href="https://doi.org/10.1007/978-3-662-44465-8_29">Circuit complexity of properties of graphs with constant planar cutwidth</a>
+    </h1>
+    <p>With Kristoffer Arnsfelt Hansen, Jayalal Sarma, Sven Skyum, and Navid Talebanfard</p>
+    <p>We show that constant depth circuits can decide the perfect matching, 3-coloring, and disjoint paths problem on graphs where the vertices can be arranged on a constant width grid and edges exist only between consecutive layers in the grid.</p>
+  </article>
+
+  <article>
+    <h1>
+      <a href="https://arxiv.org/abs/1301.1425">Pebbling, entropy and branching program size lower bounds</a>
+    </h1>
+    <p>with Jayalal Sarma</p>
+    <p>We look at computational models that solve a problem where the dependence between data values can be described using a complete binary tree and the root of the tree is the final output. We show that even with the help of non-determinism, such models require large storage to solve the problem.</p>
+  </article>
+
+  <p>I did my PhD at IIT Madras, India. <a href="https://www.cse.iitm.ac.in/~jayalal/">Jayalal Sarma</a> was my PhD advisor. You can download <a href="">my PhD thesis from here</a>.</p>
+</main>
+
+  <footer>
+  <p>
+    All content on this website is licensed under
+    <a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA
+      4.0</a> by Balagopal Komarath unless mentioned otherwise.
+</footer>
+
+<script>
+ 'use strict';
+
+ class DisclosureNav {
+   constructor(navNode) {
+     this.navNode = navNode;
+     var menus = navNode.querySelectorAll('a[role="button"]');
+     this.menus = [];
+     for (var i = 0; i < menus.length; ++i) {
+       this.menus.push(new DisclosureMenu(menus[i]));
+     }
+     this.navNode.addEventListener(
+       'focusout',
+       this.onFocusOut.bind(this)
+     );
+   }
+
+   onFocusOut(event) {
+     var containsFocus = this.navNode.contains(event.relatedTarget);
+     if (!containsFocus) {
+       this.menus.forEach((menu) => {
+         menu.close();
+       });
+     }
+   }
+ }
+
+ var nextID = 0;
+
+ function generateID() {
+   return ++nextID;
+ }
+
+ class DisclosureMenu {
+   constructor(menuNode) {
+     this.id = '_nav_menu_' + generateID();
+     this.menuNode = menuNode;
+     this.controlledMenu = menuNode.parentNode.querySelector('ul');
+     this.controlledMenuItems = this.controlledMenu.querySelectorAll('li');
+
+     console.log(this.id);
+
+      
+     this.menuNode.classList.add("disclosure-menu-closed");
+     this.menuNode.setAttribute("aria-expanded", "false");
+     this.menuNode.setAttribute("aria-haspopup", "true");
+     this.menuNode.setAttribute("aria-controls", this.id);
+
+      
+     this.controlledMenu.classList.add("disclosure-toggled-list-closed");
+     this.controlledMenu.setAttribute("id", this.id);
+
+     menuNode.addEventListener(
+       'click',
+       this.onClick.bind(this)
+     );
+     menuNode.addEventListener(
+       'keydown',
+       this.onMenuKeyDown.bind(this)
+     );
+     for (var i = 0; i < this.controlledMenuItems.length; ++i) {
+       var menuItem = this.controlledMenuItems[i];
+       menuItem.addEventListener(
+         'keydown',
+         this.onMenuItemKeyDown.bind(this)
+       );
+     }
+   }
+
+   isClosed() {
+     return this.menuNode.classList.contains("disclosure-menu-closed");
+   }
+
+   onClick(event) {
+     event.preventDefault();
+     this.toggleMenu(this.isClosed());
+   }
+
+   close() { this.toggleMenu(false); }
+
+   toggleMenu(should_open) {
+     var closed = this.isClosed();
+
+     if (should_open && !closed) return;
+     if (!should_open && closed) return;
+
+     if (should_open) {
+       this.menuNode.classList.replace(
+         "disclosure-menu-closed",
+         "disclosure-menu-opened"
+       );
+       this.menuNode.setAttribute("aria-expanded", "true");
+       this.controlledMenu.classList.replace("disclosure-toggled-list-closed", "disclosure-toggled-list-opened");
+     } else {
+       this.menuNode.classList.replace("disclosure-menu-opened", "disclosure-menu-closed");
+       this.menuNode.setAttribute("aria-expanded", "false");
+       this.controlledMenu.classList.replace("disclosure-toggled-list-opened", "disclosure-toggled-list-closed");
+     }
+   }
+
+   onMenuKeyDown(event) {
+     if (event.key === " ") {
+       event.preventDefault();
+       this.toggleMenu(this.isClosed());
+     } else if (event.key === 'Escape') {
+       this.close();
+     }
+   }
+
+   onMenuItemKeyDown(event) {
+     if (event.key === 'Escape') {
+       this.toggleMenu(false);
+       this.menuNode.focus();
+     }
+   }
+ }
+
+ function initNavigation(navs) {
+   for (let nav of navs) {
+     new DisclosureNav(nav);
+   }
+ }
+
+ window.addEventListener(
+   'load',
+   function () {
+     var navMenus = document.querySelectorAll('nav a[role="button"]');
+     var navs = [];
+     for (var i = 0; i < navMenus.length; ++i) {
+       var nav = navMenus[i].parentNode.parentNode;
+       if (!navs.find((otherNav) => otherNav === nav)) {
+         navs.push(nav);
+       }
+     }
+     initNavigation(navs);
+   },
+   false
+ );
+
+</script>
+
+</body>
+</html>

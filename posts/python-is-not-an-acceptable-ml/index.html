@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="author" content="Balagopal Komarath" />
+  <title> </title>
+  <link rel="stylesheet" type="text/css" href="/css/bk.css" />
+</head>
+<body>
+  <header>
+  <a class="skip-link" aria-label="Skip to main content" href="#main">Skip to main content</a>
+  <a class="logo" href="/index.html">bkomarath</a>
+  <nav aria-label="Primary navigation">
+    <ul>
+      <li>
+        <a
+          role="button"
+          href=""
+          tabindex="0"
+        >
+          Main
+        </a>
+        <ul>
+          <li><a href="/research">Research</a></li>
+          <li><a href="/teaching">Teaching</a></li>
+          <li><a href="/posts">Writing</a></li>
+          <li><a href="/cv">CV</a></li>
+        </ul>
+      </li>
+    </ul>
+  </nav>
+</header>
+
+  
+<main>
+  <h1>Python is Not an Acceptable ML</h1>
+  <p>The programming language Python is a popular fixture in introductory programming courses. The adoption of Python as a programming language for introductory courses is mainly driven by two reasons:</p>
+<ol>
+<li>Popularity in scientific computing and software industry.</li>
+<li><em>Readability</em>.</li>
+</ol>
+<p>While the first point is irrefutable, the readability enabled by Python&rsquo;s surface-level syntax does not compensate for its many violations of certain fundamental principles related to programming language and user interface design. In this article, we look at certain common problems with Python faced by beginning programmers and will see how a programming language with a better design, OCaml, prevents or even completely avoids these issues.</p>
+<p>When programming, there are multiples classes of errors that could occur. Some errors are detected by the text editor or IDE while typing, some errors are detected while compiling the program, some errors are always detected when the program is run, some errors remain hidden until some conditions are met during the runtime. A well-designed programming language ensures that most of the errors can be detected by the programmer as early as possible.</p>
+<p>Can&rsquo;t we create a perfect programming language by designing it so that all errors are compile-time errors? While such languages exist, they are usually hard to program without advanced knowledge. So all languages are designed with this trade-off between correctness and usability. However, this trade-off is not linear. Suppose we quantify usability and correctness on a scale of 1 to 100. Then, there will be languages that rate 80u in usability and 80c in correctness and those that rate 90u in usability and 50c in correctness. The main thesis I put forward is that OCaml is an (80u, 80c) language while Python is, at best, a (90u, 50c) language for introductory programming courses. I will try to convince you of this by listing a series of examples comparing Python and OCaml.</p>
+<h2 id="errors-of-commission-and-omission">Errors of commission and omission</h2>
+<p>The following code in Python has an error. Can you find it?</p>
+<p><a id="code-snippet--animal-py"></a></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">sound</span><span class="p">(</span><span class="n">animal</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">animal</span> <span class="o">==</span> <span class="s1">&#39;dog&#39;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="s1">&#39;bow&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">elif</span> <span class="n">animal</span> <span class="o">==</span> <span class="s1">&#39;cat&#39;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="s1">&#39;meow&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">elif</span> <span class="n">animal</span> <span class="o">==</span> <span class="s1">&#39;cow&#39;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="s1">&#39;moo&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">elif</span> <span class="n">anima1</span> <span class="o">==</span> <span class="s1">&#39;pig&#39;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="s1">&#39;oink&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">elif</span> <span class="n">animal</span> <span class="o">==</span> <span class="s1">&#39;human&#39;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="s1">&#39;huh&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">sound</span><span class="p">(</span><span class="s1">&#39;cat&#39;</span><span class="p">))</span>
+</span></span></code></pre></div><p>produces:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">meow
+</span></span></code></pre></div><p>As you can see, the program prints the expected output. If you did not manage to find the error, one of the <code>animal</code> is mis-spelled <code>anima1</code>. This is a conditional runtime error in Python that should have been a compilation error.</p>
+<p>Let us now write it in OCaml. If you fancy it, the above function can be written without even spelling out the parameter.</p>
+<p><a id="code-snippet--animal-ml"></a></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ocaml" data-lang="ocaml"><span class="line"><span class="cl"><span class="k">let</span> <span class="n">sound</span> <span class="o">=</span> <span class="k">function</span>
+</span></span><span class="line"><span class="cl">  <span class="o">|</span> <span class="s2">&#34;dog&#34;</span> <span class="o">-&gt;</span> <span class="s2">&#34;bow&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="o">|</span> <span class="s2">&#34;cat&#34;</span> <span class="o">-&gt;</span> <span class="s2">&#34;meow&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="o">|</span> <span class="s2">&#34;cow&#34;</span> <span class="o">-&gt;</span> <span class="s2">&#34;moo&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="o">|</span> <span class="s2">&#34;pig&#34;</span> <span class="o">-&gt;</span> <span class="s2">&#34;oink&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="o">|</span> <span class="s2">&#34;human&#34;</span> <span class="o">-&gt;</span> <span class="s2">&#34;huh&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="o">|</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="k">assert</span> <span class="bp">false</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">let</span> <span class="bp">()</span> <span class="o">=</span> <span class="n">print_endline</span> <span class="o">(</span><span class="n">sound</span> <span class="s2">&#34;cat&#34;</span><span class="o">)</span>
+</span></span></code></pre></div><p>produces:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">meow
+</span></span></code></pre></div><p>If you are spooked by the parameter not having a name, notice that the name of the parameter is irrelevant because it conveys no information to the reader. A good programming language lets you avoid unnecessary details. Of course, you could also write this in a more Pythonic style as follows so that you may misspell the parameter. The following code has a spelling error.</p>
+<p><a id="code-snippet--animal'-ml"></a></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ocaml" data-lang="ocaml"><span class="line"><span class="cl"><span class="k">let</span> <span class="n">sound</span> <span class="n">animal</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="n">animal</span> <span class="o">=</span> <span class="s2">&#34;dog&#34;</span> <span class="k">then</span> <span class="s2">&#34;bow&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">else</span> <span class="k">if</span> <span class="n">animal</span> <span class="o">=</span> <span class="s2">&#34;cat&#34;</span> <span class="k">then</span> <span class="s2">&#34;meow&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">else</span> <span class="k">if</span> <span class="n">animal</span> <span class="o">=</span> <span class="s2">&#34;cow&#34;</span> <span class="k">then</span> <span class="s2">&#34;moo&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">else</span> <span class="k">if</span> <span class="n">anima1</span> <span class="o">=</span> <span class="s2">&#34;pig&#34;</span> <span class="k">then</span> <span class="s2">&#34;oink&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">else</span> <span class="k">if</span> <span class="n">animal</span> <span class="o">=</span> <span class="s2">&#34;human&#34;</span> <span class="k">then</span> <span class="s2">&#34;huh&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">else</span> <span class="k">assert</span> <span class="nc">False</span>
+</span></span></code></pre></div><p>and OCaml will report it as follows:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">Line 5, characters 10-16:
+</span></span><span class="line"><span class="cl">5 |   else if anima1 = &#34;pig&#34; then &#34;oink&#34;
+</span></span><span class="line"><span class="cl">              ^^^^^^
+</span></span><span class="line"><span class="cl">Error: Unbound value anima1
+</span></span><span class="line"><span class="cl">Hint: Did you mean animal?
+</span></span></code></pre></div><p>Staying with the same example, let&rsquo;s say we want to write a <code>legs</code> function that returns the number of legs of an animal.</p>
+<p><a id="code-snippet--sum-types-py"></a></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">sound</span><span class="p">(</span><span class="n">animal</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">animal</span> <span class="o">==</span> <span class="s1">&#39;dog&#39;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="s1">&#39;bow&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">elif</span> <span class="n">animal</span> <span class="o">==</span> <span class="s1">&#39;cat&#39;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="s1">&#39;meow&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">elif</span> <span class="n">animal</span> <span class="o">==</span> <span class="s1">&#39;caterpillar&#39;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="s1">&#39;...&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">legs</span><span class="p">(</span><span class="n">animal</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">animal</span> <span class="o">==</span> <span class="s1">&#39;dog&#39;</span> <span class="ow">or</span> <span class="n">animal</span> <span class="o">==</span> <span class="s1">&#39;cat&#39;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="mi">4</span>
+</span></span><span class="line"><span class="cl">    <span class="k">elif</span> <span class="n">animal</span> <span class="o">==</span> <span class="s1">&#39;caterpillar&#39;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="mi">1000</span>
+</span></span></code></pre></div><p>In the future, you may want your program to handle <code>'human'</code> as an animal. So you change the definition of sound as follows:</p>
+<p><a id="code-snippet--sum-types-human-py"></a></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">sound</span><span class="p">(</span><span class="n">animal</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">animal</span> <span class="o">==</span> <span class="s1">&#39;dog&#39;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="s1">&#39;bow&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">elif</span> <span class="n">animal</span> <span class="o">==</span> <span class="s1">&#39;cat&#39;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="s1">&#39;meow&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">elif</span> <span class="n">animal</span> <span class="o">==</span> <span class="s1">&#39;caterpillar&#39;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="s1">&#39;...&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">elif</span> <span class="n">animal</span> <span class="o">==</span> <span class="s1">&#39;human&#39;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="s1">&#39;huh&#39;</span>
+</span></span></code></pre></div><p>but forget to update <code>legs</code>. Now <code>legs('human')</code> is <code>None</code> and Python doesn&rsquo;t warn you. This is a conditional runtime error because the function <code>legs('human')</code> may not be called in your program.</p>
+<p>The natural way to write OCaml easily avoids such bugs. We have the ability to easily define <em>sum</em> types in a light-weight manner:</p>
+<p><a id="code-snippet--sum-types-ml"></a></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ocaml" data-lang="ocaml"><span class="line"><span class="cl"><span class="k">type</span> <span class="n">animal</span> <span class="o">=</span> <span class="nc">Cat</span> <span class="o">|</span> <span class="nc">Dog</span> <span class="o">|</span> <span class="nc">Caterpillar</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">let</span> <span class="n">sound</span> <span class="o">=</span> <span class="k">function</span>
+</span></span><span class="line"><span class="cl">  <span class="o">|</span> <span class="nc">Cat</span> <span class="o">-&gt;</span> <span class="s2">&#34;meow&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="o">|</span> <span class="nc">Dog</span> <span class="o">-&gt;</span> <span class="s2">&#34;bow&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="o">|</span> <span class="nc">Caterpillar</span> <span class="o">-&gt;</span> <span class="s2">&#34;...&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">let</span> <span class="n">legs</span> <span class="o">=</span> <span class="k">function</span>
+</span></span><span class="line"><span class="cl">  <span class="o">|</span> <span class="nc">Cat</span> <span class="o">|</span> <span class="nc">Dog</span> <span class="o">-&gt;</span> <span class="n">4</span>
+</span></span><span class="line"><span class="cl">  <span class="o">|</span> <span class="nc">Caterpillar</span> <span class="o">-&gt;</span> <span class="n">1000</span>
+</span></span></code></pre></div><p>Now, if we change the type as follows:</p>
+<p><a id="code-snippet--sum-types-human-ml"></a></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ocaml" data-lang="ocaml"><span class="line"><span class="cl"><span class="k">type</span> <span class="n">animal</span> <span class="o">=</span> <span class="nc">Cat</span> <span class="o">|</span> <span class="nc">Dog</span> <span class="o">|</span> <span class="nc">Caterpillar</span> <span class="o">|</span> <span class="nc">Human</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">let</span> <span class="n">legs</span> <span class="o">=</span> <span class="k">function</span>
+</span></span><span class="line"><span class="cl">  <span class="o">|</span> <span class="nc">Cat</span> <span class="o">|</span> <span class="nc">Dog</span> <span class="o">-&gt;</span> <span class="n">4</span>
+</span></span><span class="line"><span class="cl">  <span class="o">|</span> <span class="nc">Caterpillar</span> <span class="o">-&gt;</span> <span class="n">1000</span>
+</span></span></code></pre></div><p>the OCaml compiler can point out the places where we forgot to handle humans.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">Lines 3-5, characters 11-23:
+</span></span><span class="line"><span class="cl">3 | ...........function
+</span></span><span class="line"><span class="cl">4 |   | Cat | Dog -&gt; 4
+</span></span><span class="line"><span class="cl">5 |   | Caterpillar -&gt; 1000..
+</span></span><span class="line"><span class="cl">Warning 8 [partial-match]: this pattern-matching is not exhaustive.
+</span></span><span class="line"><span class="cl">Here is an example of a case that is not matched:
+</span></span><span class="line"><span class="cl">Human
+</span></span><span class="line"><span class="cl">type animal = Cat | Dog | Caterpillar | Human
+</span></span></code></pre></div><h2 id="what-s-in-a-name">What&rsquo;s in a name?</h2>
+<p>The <em>scope</em> of a name defines the context in which it is valid. Python has unintuitive rules that define scope.</p>
+<p><a id="code-snippet--scope-py"></a></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">day</span> <span class="o">=</span> <span class="s1">&#39;Monday&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">setday</span><span class="p">(</span><span class="n">newday</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">day</span> <span class="o">=</span> <span class="n">newday</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">setday</span><span class="p">(</span><span class="s1">&#39;Tuesday&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">day</span><span class="p">)</span>
+</span></span></code></pre></div><p>produces:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">Monday
+</span></span></code></pre></div><p>In the above program, the <code>day</code> in <code>setday</code> refers to a newly created variable named <code>day</code> and not the global <code>day</code>. In other words, Python <em>implicitly</em> creates variables upon first assignment in functions so that an explicit keyword like <code>var</code> or <code>let</code> is not required. This is a violation of its own guiding principle &ldquo;Explicit is better than implicit.&rdquo; (<a href="https://peps.python.org/pep-0020/">The Zen of Python</a>).</p>
+<p>But, global variables are evil. So this is a non-problem, right? The problem also manifests for non-global variables.</p>
+<p><a id="code-snippet--fib-py"></a></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">end</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">last</span> <span class="o">=</span> <span class="s2">&#34;x&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">a</span><span class="p">():</span> <span class="n">last</span> <span class="o">=</span> <span class="s2">&#34;a&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">b</span><span class="p">():</span> <span class="n">last</span> <span class="o">=</span> <span class="s2">&#34;b&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">s</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">c</span> <span class="o">==</span> <span class="s2">&#34;a&#34;</span><span class="p">:</span> <span class="n">a</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="k">elif</span> <span class="n">c</span> <span class="o">==</span> <span class="s2">&#34;b&#34;</span><span class="p">:</span> <span class="n">b</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">last</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">end</span><span class="p">(</span><span class="s2">&#34;abracadabra&#34;</span><span class="p">))</span>
+</span></span></code></pre></div><p>produces:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">x
+</span></span></code></pre></div><p>The assignment to <code>last</code> in <code>a()</code> and <code>b()</code> has no effect on the <code>last</code> in the scope of <code>end()</code>. Python&rsquo;s <em>fix</em> for its self-created scoping problems is to use <code>global</code> and <code>nonlocal</code> declarations. However, it is quite easy for a beginner to simply forget to declare it and create these conditional runtime errors.</p>
+<h2 id="python-ui-lies">Python UI lies</h2>
+<p>A fundamental rule in user interface design (programming language or otherwise) is that things that look the same should behave the same. Now, consider the following code in Python:</p>
+<p><a id="code-snippet--list-aliasing-py"></a></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">x</span> <span class="o">=</span> <span class="mi">5</span>
+</span></span><span class="line"><span class="cl"><span class="n">y</span> <span class="o">=</span> <span class="n">x</span>
+</span></span><span class="line"><span class="cl"><span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">x</span> <span class="o">=</span> <span class="p">[]</span>
+</span></span><span class="line"><span class="cl"><span class="n">y</span> <span class="o">=</span> <span class="n">x</span>
+</span></span><span class="line"><span class="cl"><span class="n">x</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+</span></span></code></pre></div><p>which produces:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">6 5
+</span></span><span class="line"><span class="cl">[0] [0]
+</span></span></code></pre></div><p>So why did changing <code>x</code> also change <code>y</code> in the second case but not the first? Python provides a consistent interface to both value types and reference types, which are fundamentally different, and therefore <em>should not</em> be accessible through the same interface.</p>
+<p>A particularly problematic situation arises due to <code>*</code>, the list replication operator. The expression <code>xs * i</code> creates a list obtained by replicating <code>xs</code> , <code>i</code> times. So, one may try to create a 3x3 matrix and set it&rsquo;s top-left entry to <code>1</code> as follows:</p>
+<p><a id="code-snippet--list-aliasing-matrix"></a></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">xs</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="mi">3</span><span class="p">]</span> <span class="o">*</span> <span class="mi">3</span>
+</span></span><span class="line"><span class="cl"><span class="n">xs</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">xs</span><span class="p">)</span>
+</span></span></code></pre></div><p>and we get:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">[[1, 0, 0], [1, 0, 0], [1, 0, 0]]
+</span></span></code></pre></div><p>The solution in these cases is to ensure that lists (and other reference types, like dictionaries) are referred to uniquely or ensure that they are never modified (Enforcing this in the compiler gives you Rust, the programming language.). It is not necessary that you have multiple named references to a list such as <code>xs</code> and <code>ys</code> above for having non-unique references. You can also have implicit duplicate references in Python. The following <em>seems</em> to work fine.</p>
+<p><a id="code-snippet--for-mut-odd-py"></a></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">xs</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">xs</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">xs</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">xs</span><span class="p">)</span>
+</span></span></code></pre></div><p>to remove all odd numbers from the list.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">[2, 4]
+</span></span></code></pre></div><p>But, if we try to modify it slightly to remove all elements.</p>
+<p><a id="code-snippet--for-mut-py"></a></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">xs</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">xs</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">xs</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">xs</span><span class="p">)</span>
+</span></span></code></pre></div><p>we get:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">[2, 4]
+</span></span></code></pre></div><p>The problem here is that the iteration statement keeps an implicit reference to the list and it conflicts with the reference to <code>xs</code> in the body of the iteration.</p>
+<h2 id="python-non-functionality">Python non-functionality</h2>
+<p>Higher-order programming, the ability to manipulate functions as values, is a very important concept because it allows even more code reuse than first-order abstractions. Python&rsquo;s inability to distinguish between value and reference types impair higher-order programming even though Python has adopted many of these features from the ML-family of languages. This is particularly problematic because this can lead to situations where a sequence of good choices lead to a globally bad program. Consider the following definitions:</p>
+<p><a id="code-snippet--list-aliasing-higher-order-py"></a></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">dup</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">applyfst</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">pair</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="o">=</span> <span class="n">pair</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">y</span><span class="p">)</span>
+</span></span></code></pre></div><p>Applying these functions on value types such as integers work fine.</p>
+<p><a id="code-snippet--higher-int-py"></a></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">applyfst</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">dup</span><span class="p">(</span><span class="mi">0</span><span class="p">)))</span>
+</span></span></code></pre></div><p>produces:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">(1, 0)
+</span></span></code></pre></div><p>but on reference types such as lists, we get unintuitive behavior.</p>
+<p><a id="code-snippet--higher-list-py"></a></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">append0</span><span class="p">(</span><span class="n">xs</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">xs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">xs</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">applyfst</span><span class="p">(</span><span class="n">append0</span><span class="p">,</span> <span class="n">dup</span><span class="p">([])))</span>
+</span></span></code></pre></div><p>produces:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">([0], [0])
+</span></span></code></pre></div><p>Notice that the definition of <code>dup</code> and <code>applyfst</code> are perfectly logical. Yet, their use in different contexts lead to inconsistent behavior. This is again a conditional runtime error because everything works fine as long as you only use <code>dup</code> and <code>applyfst</code> on value types such as integers and strings. Notice that in a real-world situation, functions such as <code>dup</code> and <code>applyfst</code> may be written by a different person and packaged as a library. Now, a user of this library cannot use it properly without knowing how it is implemented, which defeats the fundamental purpose of having libraries in the first place.</p>
+<p>The equivalent in OCaml has no unexpected behavior.</p>
+<p><a id="code-snippet--list-aliasing-higher-order-ml"></a></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ocaml" data-lang="ocaml"><span class="line"><span class="cl"><span class="k">let</span> <span class="n">dup</span> <span class="n">x</span> <span class="o">=</span> <span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="n">x</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">let</span> <span class="n">applyfst</span> <span class="n">f</span> <span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">)</span> <span class="o">=</span> <span class="o">(</span><span class="n">f</span> <span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">let</span> <span class="n">inc</span> <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">1</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">let</span> <span class="bp">()</span> <span class="o">=</span> <span class="k">assert</span> <span class="o">(</span>
+</span></span><span class="line"><span class="cl">  <span class="n">applyfst</span> <span class="n">inc</span> <span class="o">(</span><span class="n">dup</span> <span class="n">0</span><span class="o">)</span> <span class="o">=</span> <span class="o">(</span><span class="n">1</span><span class="o">,</span> <span class="n">0</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="o">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">let</span> <span class="n">append0</span> <span class="n">xs</span> <span class="o">=</span> <span class="n">xs</span> <span class="o">@</span> <span class="o">[</span><span class="n">0</span><span class="o">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">let</span> <span class="bp">()</span> <span class="o">=</span> <span class="k">assert</span> <span class="o">(</span>
+</span></span><span class="line"><span class="cl">  <span class="n">applyfst</span> <span class="n">append0</span> <span class="o">(</span><span class="n">dup</span> <span class="bp">[]</span><span class="o">)</span> <span class="o">=</span> <span class="o">([</span><span class="n">0</span><span class="o">],</span> <span class="bp">[]</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="o">)</span>
+</span></span></code></pre></div><p>Newer versions of Python try to fix these problems to some extent by providing immutable types <code>frozenset</code>, <code>frozendict</code> etc. But, lists, sets, and dictionaries are used far more often than their immutable counterparts.</p>
+<p>Even the built-in higher-order functions such as <code>map</code> in Python has to be used while keeping this pitfall in mind. For example:</p>
+<p><a id="code-snippet--apply-fs-py"></a></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">listmap</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">xs</span><span class="p">):</span> <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">xs</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">print</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="n">listmap</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="k">lambda</span> <span class="n">f</span><span class="p">:</span> <span class="n">f</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">        <span class="p">[</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">+</span><span class="mi">2</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Let us avoid the repetition with a &#39;for&#39; loop.</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="n">listmap</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="k">lambda</span> <span class="n">f</span><span class="p">:</span> <span class="n">f</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">        <span class="p">[</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">+</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">)]</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span></code></pre></div><p>is an instance where a <code>for</code> loop cannot be used to eliminate repetition as demonstrated by the following result.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">[1, 2]
+</span></span><span class="line"><span class="cl">[9, 9, 9, 9, 9, 9, 9, 9, 9]
+</span></span></code></pre></div><p>It is possible to teach to avoid such errors by explaining how the Python abstract machine works. But, the sole point of a high-level programming language is to bring the level of conversation of the machine up to a human&rsquo;s; not to bring down a human&rsquo;s level of conversation to the machine&rsquo;s. Now, in OCaml, the following works as expected:</p>
+<p><a id="code-snippet--apply-fs-ml"></a></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ocaml" data-lang="ocaml"><span class="line"><span class="cl"><span class="k">let</span> <span class="n">apply</span> <span class="n">fs</span> <span class="n">x</span> <span class="o">=</span> <span class="nn">List</span><span class="p">.</span><span class="n">map</span> <span class="o">(</span><span class="k">fun</span> <span class="n">f</span> <span class="o">-&gt;</span> <span class="n">f</span> <span class="n">x</span><span class="o">)</span> <span class="n">fs</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">let</span> <span class="k">rec</span> <span class="n">range</span> <span class="n">n</span> <span class="n">m</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="n">n</span> <span class="o">=</span> <span class="n">m</span> <span class="k">then</span> <span class="o">[</span><span class="n">n</span><span class="o">]</span> <span class="k">else</span> <span class="n">n</span> <span class="o">::</span> <span class="n">range</span> <span class="o">(</span><span class="n">n</span><span class="o">+</span><span class="n">1</span><span class="o">)</span> <span class="n">m</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">let</span> <span class="n">fs</span> <span class="o">=</span> <span class="nn">List</span><span class="p">.</span><span class="n">map</span> <span class="o">(</span><span class="k">fun</span> <span class="n">i</span> <span class="o">-&gt;</span> <span class="o">(+)</span> <span class="n">i</span><span class="o">)</span> <span class="o">(</span><span class="n">range</span> <span class="n">1</span> <span class="n">9</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">let</span> <span class="bp">()</span> <span class="o">=</span> <span class="k">assert</span> <span class="o">(</span><span class="n">apply</span> <span class="n">fs</span> <span class="n">0</span> <span class="o">=</span> <span class="n">range</span> <span class="n">1</span> <span class="n">9</span><span class="o">)</span>
+</span></span></code></pre></div><h2 id="ocaml-imperativity">OCaml imperativity</h2>
+<p>I will also discuss a case where Python is considered more usable (I am not aware of a situation where Python is more correct.). The following computes the factorial of a number using iteration and a mutable variable <code>p</code>.</p>
+<p><a id="code-snippet--factorial-py"></a></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">factorial</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">p</span> <span class="o">=</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="n">p</span> <span class="o">=</span> <span class="n">p</span> <span class="o">*</span> <span class="n">i</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">p</span>
+</span></span></code></pre></div><p>The classic recursive definition in functional languages is not as performant although it perfectly mirrors the mathematical definition.</p>
+<p><a id="code-snippet--factorial-rec-ml"></a></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ocaml" data-lang="ocaml"><span class="line"><span class="cl"><span class="k">let</span> <span class="k">rec</span> <span class="n">factorial</span> <span class="n">n</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="n">n</span> <span class="o">=</span> <span class="n">0</span> <span class="k">then</span> <span class="n">1</span>
+</span></span><span class="line"><span class="cl">  <span class="k">else</span> <span class="n">n</span> <span class="o">*</span> <span class="n">factorial</span> <span class="o">(</span><span class="n">n</span><span class="o">-</span><span class="n">1</span><span class="o">)</span>
+</span></span></code></pre></div><p>Functional programming language experts favor a tail-recursive style to gain performance in such cases.</p>
+<p><a id="code-snippet--factorial-tailrec-ml"></a></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ocaml" data-lang="ocaml"><span class="line"><span class="cl"><span class="k">let</span> <span class="n">factorial</span> <span class="n">n</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">  <span class="k">let</span> <span class="k">rec</span> <span class="n">loop</span> <span class="n">acc</span> <span class="o">=</span> <span class="k">function</span>
+</span></span><span class="line"><span class="cl">    <span class="o">|</span> <span class="n">0</span> <span class="o">-&gt;</span> <span class="n">acc</span>
+</span></span><span class="line"><span class="cl">    <span class="o">|</span> <span class="n">n</span> <span class="o">-&gt;</span> <span class="n">loop</span> <span class="o">(</span><span class="n">acc</span><span class="o">*</span><span class="n">n</span><span class="o">)</span> <span class="o">(</span><span class="n">n</span><span class="o">-</span><span class="n">1</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">  <span class="k">in</span> <span class="n">loop</span> <span class="n">1</span> <span class="n">n</span>
+</span></span></code></pre></div><p>However, OCaml is not as strict about writing in a functional style as some other functional programming languages. We can perfectly mirror the Python implementation as follows:</p>
+<p><a id="code-snippet--factorial-mutation-ml"></a></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ocaml" data-lang="ocaml"><span class="line"><span class="cl"><span class="k">let</span> <span class="n">factorial</span> <span class="n">n</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">  <span class="k">let</span> <span class="n">p</span> <span class="o">=</span> <span class="n">ref</span> <span class="n">1</span> <span class="k">in</span>
+</span></span><span class="line"><span class="cl">  <span class="k">for</span> <span class="n">i</span> <span class="o">=</span> <span class="n">2</span> <span class="k">to</span> <span class="n">n</span> <span class="k">do</span>
+</span></span><span class="line"><span class="cl">    <span class="n">p</span> <span class="o">:=</span> <span class="o">!</span><span class="n">p</span> <span class="o">*</span> <span class="n">i</span>
+</span></span><span class="line"><span class="cl">  <span class="k">done</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">  <span class="o">!</span><span class="n">p</span>
+</span></span></code></pre></div><p>The only difference is that we have to state, explicitly, that <code>p</code> is mutable by making it a <code>ref</code>. The bang <code>!</code> operator then retrieves the current contents of that referred value explicitly. Subjectively, this may look uglier than the Python equivalent. But, it satisfies the &ldquo;Explicit is better than implicit.&rdquo; principle.</p>
+<h2 id="fixing-python">Fixing Python?</h2>
+<p>Realistically, it would be difficult to convince people to switch from Python to OCaml. So I suggest the following guidelines to help learners:</p>
+<ul>
+<li>(misspellings, type changes) Encourage learners to start writing automated tests as early as possible. The syntax for functions should be introduced before control structures. Use of linters (<a href="https://pypi.org/project/flake8/">flake8</a>), unit testing (<a href="https://pypi.org/project/pytest/">pytest</a>), and type hinting (<a href="https://peps.python.org/pep-0484/">typing</a>) should be mandated from the beginning.</li>
+<li>(scope) Avoid global variables and local variables accessed by nested functions as much as possible.</li>
+<li>(value vs reference types) Lists and dictionaries should either be immutable or there should be exactly one active reference (implicit or explicit) to it at all times.</li>
+<li>(higher-order functions) Despite the stated issues, higher-order programming should be introduced as it is an important concept. It seems best to let learners figure out the Python-specific issues and deal with it as and when it happens. Trying to teach these issues would only derail the introductory course into a course about Python arcana.</li>
+</ul>
+<h2 id="epilogue">Epilogue</h2>
+<p>There may be many scenarios where Python is a better choice than OCaml. This article only considers suitability of a programming language for introductory programming courses. I believe that just like the <a href="https://dl.acm.org/doi/abs/10.1145/3152894">switch from C to Python for introductory programming courses enabled larger number of students to get into programming</a>, a switch from Python to a better designed programming language will have a similar effect in the future.</p>
+
+</main>
+
+  <footer>
+  <p>
+    All content on this website is licensed under
+    <a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA
+      4.0</a> by Balagopal Komarath unless mentioned otherwise.
+</footer>
+
+<script>
+ 'use strict';
+
+ class DisclosureNav {
+   constructor(navNode) {
+     this.navNode = navNode;
+     var menus = navNode.querySelectorAll('a[role="button"]');
+     this.menus = [];
+     for (var i = 0; i < menus.length; ++i) {
+       this.menus.push(new DisclosureMenu(menus[i]));
+     }
+     this.navNode.addEventListener(
+       'focusout',
+       this.onFocusOut.bind(this)
+     );
+   }
+
+   onFocusOut(event) {
+     var containsFocus = this.navNode.contains(event.relatedTarget);
+     if (!containsFocus) {
+       this.menus.forEach((menu) => {
+         menu.close();
+       });
+     }
+   }
+ }
+
+ var nextID = 0;
+
+ function generateID() {
+   return ++nextID;
+ }
+
+ class DisclosureMenu {
+   constructor(menuNode) {
+     this.id = '_nav_menu_' + generateID();
+     this.menuNode = menuNode;
+     this.controlledMenu = menuNode.parentNode.querySelector('ul');
+     this.controlledMenuItems = this.controlledMenu.querySelectorAll('li');
+
+     console.log(this.id);
+
+      
+     this.menuNode.classList.add("disclosure-menu-closed");
+     this.menuNode.setAttribute("aria-expanded", "false");
+     this.menuNode.setAttribute("aria-haspopup", "true");
+     this.menuNode.setAttribute("aria-controls", this.id);
+
+      
+     this.controlledMenu.classList.add("disclosure-toggled-list-closed");
+     this.controlledMenu.setAttribute("id", this.id);
+
+     menuNode.addEventListener(
+       'click',
+       this.onClick.bind(this)
+     );
+     menuNode.addEventListener(
+       'keydown',
+       this.onMenuKeyDown.bind(this)
+     );
+     for (var i = 0; i < this.controlledMenuItems.length; ++i) {
+       var menuItem = this.controlledMenuItems[i];
+       menuItem.addEventListener(
+         'keydown',
+         this.onMenuItemKeyDown.bind(this)
+       );
+     }
+   }
+
+   isClosed() {
+     return this.menuNode.classList.contains("disclosure-menu-closed");
+   }
+
+   onClick(event) {
+     event.preventDefault();
+     this.toggleMenu(this.isClosed());
+   }
+
+   close() { this.toggleMenu(false); }
+
+   toggleMenu(should_open) {
+     var closed = this.isClosed();
+
+     if (should_open && !closed) return;
+     if (!should_open && closed) return;
+
+     if (should_open) {
+       this.menuNode.classList.replace(
+         "disclosure-menu-closed",
+         "disclosure-menu-opened"
+       );
+       this.menuNode.setAttribute("aria-expanded", "true");
+       this.controlledMenu.classList.replace("disclosure-toggled-list-closed", "disclosure-toggled-list-opened");
+     } else {
+       this.menuNode.classList.replace("disclosure-menu-opened", "disclosure-menu-closed");
+       this.menuNode.setAttribute("aria-expanded", "false");
+       this.controlledMenu.classList.replace("disclosure-toggled-list-opened", "disclosure-toggled-list-closed");
+     }
+   }
+
+   onMenuKeyDown(event) {
+     if (event.key === " ") {
+       event.preventDefault();
+       this.toggleMenu(this.isClosed());
+     } else if (event.key === 'Escape') {
+       this.close();
+     }
+   }
+
+   onMenuItemKeyDown(event) {
+     if (event.key === 'Escape') {
+       this.toggleMenu(false);
+       this.menuNode.focus();
+     }
+   }
+ }
+
+ function initNavigation(navs) {
+   for (let nav of navs) {
+     new DisclosureNav(nav);
+   }
+ }
+
+ window.addEventListener(
+   'load',
+   function () {
+     var navMenus = document.querySelectorAll('nav a[role="button"]');
+     var navs = [];
+     for (var i = 0; i < navMenus.length; ++i) {
+       var nav = navMenus[i].parentNode.parentNode;
+       if (!navs.find((otherNav) => otherNav === nav)) {
+         navs.push(nav);
+       }
+     }
+     initNavigation(navs);
+   },
+   false
+ );
+
+</script>
+
+</body>
+</html>

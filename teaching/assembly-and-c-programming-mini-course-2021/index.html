@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="author" content="Balagopal Komarath" />
+  <title> </title>
+  <link rel="stylesheet" type="text/css" href="/css/bk.css" />
+</head>
+<body>
+  <header>
+  <a class="skip-link" aria-label="Skip to main content" href="#main">Skip to main content</a>
+  <a class="logo" href="/index.html">bkomarath</a>
+  <nav aria-label="Primary navigation">
+    <ul>
+      <li>
+        <a
+          role="button"
+          href=""
+          tabindex="0"
+        >
+          Main
+        </a>
+        <ul>
+          <li><a href="/research">Research</a></li>
+          <li><a href="/teaching">Teaching</a></li>
+          <li><a href="/posts">Writing</a></li>
+          <li><a href="/cv">CV</a></li>
+        </ul>
+      </li>
+    </ul>
+  </nav>
+</header>
+
+  
+<main>
+  <h1>Assembly and C Programming Mini-Course (2021)</h1>
+  <h2 id="welcome">Welcome</h2>
+<p>&ldquo;High&rdquo;-level programming languages such as python provides many abstract types like lists and dictionaries and support complex operations such as taking a slice of the list as a basic operation. The underlying computer, of course, doesn&rsquo;t directly support such complex operations in hardware. The typical &ldquo;Data structures and algorithms&rdquo; course describes how one can structure data (Data structures) in memory so that complex operations can be implemented efficiently in terms of more primitive ones (Algorithms). A student who has only programmed in a language such as python may not have a sufficient understanding of the more primitive data structuring mechanisms and associated operations supported by the hardware. The goal of this course is to build this understanding.</p>
+<h2 id="contact">Contact</h2>
+<p>Please write to Balagopal Komarath &lt;<a href="mailto:bkomarath@iitgn.ac.in">bkomarath@iitgn.ac.in</a>&gt; for any course related queries.</p>
+<h2 id="lectures">Lectures</h2>
+<ol>
+<li><a href="https://drive.google.com/file/d/1ww0-wfEgE60ByEHX4vftLPE7PpfJvIMy/view?usp=sharing">Why assembly?</a></li>
+<li><a href="https://drive.google.com/file/d/1AVq1ebyAlwqfpqMhdoR45xiT-0pCnMia/view?usp=sharing">Assembly datatypes</a></li>
+<li><a href="https://drive.google.com/file/d/1oOUJB7BDiu6CZDDNEd5yY42kD9USGulz/view?usp=sharing">Assembly programming</a></li>
+<li><a href="https://drive.google.com/file/d/14EdYIoO_HqUHqtpSuzHCGoVRuC5f1aJw/view?usp=sharing">Discussion</a></li>
+<li><a href="https://drive.google.com/file/d/15H9bnrKvqX2heQ0dEyzdLYJDBsJTKFdD/view?usp=sharing">Branching</a></li>
+<li><a href="https://drive.google.com/file/d/1Fuqu15VgBEr_ZIO4LoobuFtUcGyiaNJ3/view?usp=sharing">Loops</a></li>
+<li><a href="https://drive.google.com/file/d/1tBrREaHbyzX2ML0w0vThLNURhCSGkl-X/view?usp=sharing">Types</a></li>
+<li><a href="https://drive.google.com/file/d/1ftaTirm9yVJ-J_y5RauxntDKpctHcwlP/view?usp=sharing">Discussion</a></li>
+<li><a href="https://drive.google.com/file/d/1G_ZdkQbaBjGXL6SUy9rEsl8Cp4nrfQZe/view?usp=sharing">Functions</a></li>
+<li><a href="https://drive.google.com/file/d/1Es63gn4aC9bpzA-VYQChZ6KRS6QdTjg1/view?usp=sharing">C pointers</a></li>
+<li><a href="https://drive.google.com/file/d/1d3Jkl2a0pnUwGU7FOHjAbiHKkWUvJyKz/view?usp=sharing">C compound types</a></li>
+</ol>
+<h2 id="tests">Tests</h2>
+<ol>
+<li><a href="https://docs.google.com/forms/d/e/1FAIpQLSeS_REhplsa162lrHAbuWiEkizQXXvWmbB2brdwZ6PKv9P7lA/viewform?usp=sf_link">Day 0</a></li>
+<li><a href="https://docs.google.com/forms/d/e/1FAIpQLSeZ1nYXz-PJmaU93c5Mwk-jW9R6Y-Aszo2sWq6CIlliPtm0XA/viewform?usp=sf_link">Day 1</a></li>
+<li><a href="https://docs.google.com/forms/d/e/1FAIpQLSdhAVVYYmOYgB09LNem_6nXZ06LV0UKo5ghd9yI1eKGBc3o3A/viewform?usp=sf_link">Day 2</a></li>
+<li><a href="https://docs.google.com/forms/d/e/1FAIpQLSe2CqmN8d8x-qa7dx88nA_tM9AdZZfcCWjFB43Gb9SdqxKVpw/viewform?usp=sf_link">Day 3</a></li>
+<li><a href="https://docs.google.com/forms/d/e/1FAIpQLSfy6B3a5V3CYwmhujdxNHz-3BnHpn_5FfLv8EkUwEI2byKWtQ/viewform?usp=sf_link">Day 4</a></li>
+</ol>
+<h2 id="references">References</h2>
+<ol>
+<li><a href="https://schweigi.github.io/assembler-simulator/">The simulator</a></li>
+<li><a href="https://schweigi.github.io/assembler-simulator/instruction-set.html">The instruction set</a></li>
+<li><a href="https://drive.google.com/file/d/1Pf9mjUAkG1CIrNsWXBOmapCMrxKNod-Z/view?usp=sharing">List vs Set program</a></li>
+<li><a href="https://drive.google.com/file/d/1Jq-E51t28xYklxpbfibBFnGivqYt2Osj/view?usp=sharing">List vs Set plot</a></li>
+<li><a href="https://drive.google.com/file/d/1LqEhXu1xrFMuYK0o0z_hq0gGREzRwSYn/view?usp=sharing">List insertion benchmark</a></li>
+<li><a href="https://drive.google.com/file/d/17NygZUpkQFhEMZAMvxspDK7Y1dqEiikr/view?usp=sharing">List insertion plot</a></li>
+<li><a href="https://drive.google.com/file/d/1dScm-BB8ooe3X73AjBsnQaxnkhk0mk1D/view?usp=sharing">Factorial program</a></li>
+<li><a href="https://drive.google.com/drive/folders/1L-k3sWFo1gxvl-tlQSdXNQK03lxQrrI6?usp=sharing">C programs</a></li>
+<li><a href="https://learnxinyminutes.com/docs/c/">C tutorial</a></li>
+<li><a href="https://drive.google.com/file/d/1XXH42ePJbQLQA9Hq6b2VC0dL0iAAQ0s1/view?usp=sharing">Board</a></li>
+</ol>
+
+</main>
+
+  <footer>
+  <p>
+    All content on this website is licensed under
+    <a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA
+      4.0</a> by Balagopal Komarath unless mentioned otherwise.
+</footer>
+
+<script>
+ 'use strict';
+
+ class DisclosureNav {
+   constructor(navNode) {
+     this.navNode = navNode;
+     var menus = navNode.querySelectorAll('a[role="button"]');
+     this.menus = [];
+     for (var i = 0; i < menus.length; ++i) {
+       this.menus.push(new DisclosureMenu(menus[i]));
+     }
+     this.navNode.addEventListener(
+       'focusout',
+       this.onFocusOut.bind(this)
+     );
+   }
+
+   onFocusOut(event) {
+     var containsFocus = this.navNode.contains(event.relatedTarget);
+     if (!containsFocus) {
+       this.menus.forEach((menu) => {
+         menu.close();
+       });
+     }
+   }
+ }
+
+ var nextID = 0;
+
+ function generateID() {
+   return ++nextID;
+ }
+
+ class DisclosureMenu {
+   constructor(menuNode) {
+     this.id = '_nav_menu_' + generateID();
+     this.menuNode = menuNode;
+     this.controlledMenu = menuNode.parentNode.querySelector('ul');
+     this.controlledMenuItems = this.controlledMenu.querySelectorAll('li');
+
+     console.log(this.id);
+
+      
+     this.menuNode.classList.add("disclosure-menu-closed");
+     this.menuNode.setAttribute("aria-expanded", "false");
+     this.menuNode.setAttribute("aria-haspopup", "true");
+     this.menuNode.setAttribute("aria-controls", this.id);
+
+      
+     this.controlledMenu.classList.add("disclosure-toggled-list-closed");
+     this.controlledMenu.setAttribute("id", this.id);
+
+     menuNode.addEventListener(
+       'click',
+       this.onClick.bind(this)
+     );
+     menuNode.addEventListener(
+       'keydown',
+       this.onMenuKeyDown.bind(this)
+     );
+     for (var i = 0; i < this.controlledMenuItems.length; ++i) {
+       var menuItem = this.controlledMenuItems[i];
+       menuItem.addEventListener(
+         'keydown',
+         this.onMenuItemKeyDown.bind(this)
+       );
+     }
+   }
+
+   isClosed() {
+     return this.menuNode.classList.contains("disclosure-menu-closed");
+   }
+
+   onClick(event) {
+     event.preventDefault();
+     this.toggleMenu(this.isClosed());
+   }
+
+   close() { this.toggleMenu(false); }
+
+   toggleMenu(should_open) {
+     var closed = this.isClosed();
+
+     if (should_open && !closed) return;
+     if (!should_open && closed) return;
+
+     if (should_open) {
+       this.menuNode.classList.replace(
+         "disclosure-menu-closed",
+         "disclosure-menu-opened"
+       );
+       this.menuNode.setAttribute("aria-expanded", "true");
+       this.controlledMenu.classList.replace("disclosure-toggled-list-closed", "disclosure-toggled-list-opened");
+     } else {
+       this.menuNode.classList.replace("disclosure-menu-opened", "disclosure-menu-closed");
+       this.menuNode.setAttribute("aria-expanded", "false");
+       this.controlledMenu.classList.replace("disclosure-toggled-list-opened", "disclosure-toggled-list-closed");
+     }
+   }
+
+   onMenuKeyDown(event) {
+     if (event.key === " ") {
+       event.preventDefault();
+       this.toggleMenu(this.isClosed());
+     } else if (event.key === 'Escape') {
+       this.close();
+     }
+   }
+
+   onMenuItemKeyDown(event) {
+     if (event.key === 'Escape') {
+       this.toggleMenu(false);
+       this.menuNode.focus();
+     }
+   }
+ }
+
+ function initNavigation(navs) {
+   for (let nav of navs) {
+     new DisclosureNav(nav);
+   }
+ }
+
+ window.addEventListener(
+   'load',
+   function () {
+     var navMenus = document.querySelectorAll('nav a[role="button"]');
+     var navs = [];
+     for (var i = 0; i < navMenus.length; ++i) {
+       var nav = navMenus[i].parentNode.parentNode;
+       if (!navs.find((otherNav) => otherNav === nav)) {
+         navs.push(nav);
+       }
+     }
+     initNavigation(navs);
+   },
+   false
+ );
+
+</script>
+
+</body>
+</html>
