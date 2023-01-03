@@ -14,7 +14,7 @@
       
       <guid>https://bkomarath.rbgo.in/posts/python-is-not-an-acceptable-ml/</guid>
       <description>The programming language Python is a popular fixture in introductory programming courses. The adoption of Python as a programming language for introductory courses is mainly driven by two reasons:
-Popularity in scientific computing and software industry. Readability. While the first point is irrefutable, the readability enabled by Python&amp;rsquo;s surface-level syntax does not compensate for its many violations of certain fundamental principles related to programming language and user interface design. In this article, we look at certain common problems with Python faced by beginning programmers and will see how a programming language with a better design, OCaml, prevents or even completely avoids these issues.</description>
+Popularity in scientific computing and software industry. Readability. While the first point is irrefutable, the readability enabled by Python&amp;rsquo;s surface-level syntax does not compensate for its many violations of certain fundamental principles related to programming language and user interface design. In this article, we look at certain common problems with Python faced by beginning programmers and will see how a programming language with a better design, OCaml, avoids or even completely prevents these issues.</description>
     </item>
     
   </channel>

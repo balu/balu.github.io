@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta name="generator" content="Hugo 0.104.3" />
+	<meta name="generator" content="Hugo 0.108.0">
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="author" content="Balagopal Komarath" />
@@ -75,7 +75,9 @@ Balagopal Komarath's Homepage
 
    onFocusOut(event) {
      var containsFocus = this.navNode.contains(event.relatedTarget);
-     if (!containsFocus) {
+     
+
+     if (event.relatedTarget && !containsFocus) {
        this.menus.forEach((menu) => {
          menu.close();
        });
@@ -95,8 +97,6 @@ Balagopal Komarath's Homepage
      this.menuNode = menuNode;
      this.controlledMenu = menuNode.parentNode.querySelector('ul');
      this.controlledMenuItems = this.controlledMenu.querySelectorAll('li');
-
-     console.log(this.id);
 
       
      this.menuNode.classList.add("disclosure-menu-closed");
@@ -135,6 +135,8 @@ Balagopal Komarath's Homepage
    }
 
    close() { this.toggleMenu(false); }
+
+   open() { this.toggleMenu(true); }
 
    toggleMenu(should_open) {
      var closed = this.isClosed();

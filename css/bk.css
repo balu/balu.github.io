@@ -1,11 +1,11 @@
 :root {
-    --main-text-color: black;
-    --main-background-color: white;
-    --surface-1-background-color: #ddd;
-    --active-text-color: var(--main-text-color);
-    --active-background-color: #FFEE00;
-    --link-color: #3344DD;
-    --link-visited-color: #884488;
+    --main-text-color: #4f5f5f;
+    --main-background-color: #fdf6e3;
+    --surface-1-background-color: #eee8d5;
+    --active-text-color: #fdf6e3;
+    --active-background-color: #8e6c06;
+    --link-color: #2976ae;
+    --link-visited-color: #6266cb;
 
     --border-main: 3px solid var(--main-text-color);
     --border-sub: 2px solid var(--main-text-color);
@@ -53,13 +53,13 @@
 
 @media (prefers-color-scheme: dark) {
     :root {
-        --main-text-color: #bdc1c6;
-        --main-background-color: #202124;
-        --surface-1-background-color: #303030;
+        --main-text-color: #919ea1;
+        --main-background-color: #002b36;
+        --surface-1-background-color: #003a44;
         --active-text-color: var(--main-background-color);
         --active-background-color: var(--main-text-color);
-        --link-color: #C6CBEB;
-        --link-visited-color: #A9B1E4;
+        --link-color: #2e93dc;
+        --link-visited-color: #8185df;
 
         --border-main: 3px solid var(--main-text-color);
         --border-sub: 2px solid var(--main-text-color);
@@ -343,7 +343,7 @@ p:last-child {
     margin-block-end: var(--element-spacing-1);
 }
 
-p {
+body p, body li {
     line-height: var(--line-height-main);
     font-size: var(--font-size-main);
     font-weight: var(--font-weight-main);

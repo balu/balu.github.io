@@ -65,7 +65,9 @@
 
    onFocusOut(event) {
      var containsFocus = this.navNode.contains(event.relatedTarget);
-     if (!containsFocus) {
+     
+
+     if (event.relatedTarget && !containsFocus) {
        this.menus.forEach((menu) => {
          menu.close();
        });
@@ -85,8 +87,6 @@
      this.menuNode = menuNode;
      this.controlledMenu = menuNode.parentNode.querySelector('ul');
      this.controlledMenuItems = this.controlledMenu.querySelectorAll('li');
-
-     console.log(this.id);
 
       
      this.menuNode.classList.add("disclosure-menu-closed");
@@ -125,6 +125,8 @@
    }
 
    close() { this.toggleMenu(false); }
+
+   open() { this.toggleMenu(true); }
 
    toggleMenu(should_open) {
      var closed = this.isClosed();

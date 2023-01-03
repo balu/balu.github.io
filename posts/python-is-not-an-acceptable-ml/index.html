@@ -4,7 +4,9 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="author" content="Balagopal Komarath" />
-  <title> </title>
+  <title>
+Python is Not an Acceptable ML
+</title>
   <link rel="stylesheet" type="text/css" href="/css/bk.css" />
 </head>
 <body>
@@ -40,7 +42,7 @@
 <li>Popularity in scientific computing and software industry.</li>
 <li><em>Readability</em>.</li>
 </ol>
-<p>While the first point is irrefutable, the readability enabled by Python&rsquo;s surface-level syntax does not compensate for its many violations of certain fundamental principles related to programming language and user interface design. In this article, we look at certain common problems with Python faced by beginning programmers and will see how a programming language with a better design, OCaml, prevents or even completely avoids these issues.</p>
+<p>While the first point is irrefutable, the readability enabled by Python&rsquo;s surface-level syntax does not compensate for its many violations of certain fundamental principles related to programming language and user interface design. In this article, we look at certain common problems with Python faced by beginning programmers and will see how a programming language with a better design, OCaml, avoids or even completely prevents these issues.</p>
 <p>When programming, there are multiples classes of errors that could occur. Some errors are detected by the text editor or IDE while typing, some errors are detected while compiling the program, some errors are always detected when the program is run, some errors remain hidden until some conditions are met during the runtime. A well-designed programming language ensures that most of the errors can be detected by the programmer as early as possible.</p>
 <p>Can&rsquo;t we create a perfect programming language by designing it so that all errors are compile-time errors? While such languages exist, they are usually hard to program without advanced knowledge. So all languages are designed with this trade-off between correctness and usability. However, this trade-off is not linear. Suppose we quantify usability and correctness on a scale of 1 to 100. Then, there will be languages that rate 80u in usability and 80c in correctness and those that rate 90u in usability and 50c in correctness. The main thesis I put forward is that OCaml is an (80u, 80c) language while Python is, at best, a (90u, 50c) language for introductory programming courses. I will try to convince you of this by listing a series of examples comparing Python and OCaml.</p>
 <h2 id="errors-of-commission-and-omission">Errors of commission and omission</h2>
@@ -127,15 +129,15 @@
 </span></span><span class="line"><span class="cl">  <span class="o">|</span> <span class="nc">Caterpillar</span> <span class="o">-&gt;</span> <span class="s2">&#34;...&#34;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="k">let</span> <span class="n">legs</span> <span class="o">=</span> <span class="k">function</span>
-</span></span><span class="line"><span class="cl">  <span class="o">|</span> <span class="nc">Cat</span> <span class="o">|</span> <span class="nc">Dog</span> <span class="o">-&gt;</span> <span class="n">4</span>
-</span></span><span class="line"><span class="cl">  <span class="o">|</span> <span class="nc">Caterpillar</span> <span class="o">-&gt;</span> <span class="n">1000</span>
+</span></span><span class="line"><span class="cl">  <span class="o">|</span> <span class="nc">Cat</span> <span class="o">|</span> <span class="nc">Dog</span> <span class="o">-&gt;</span> <span class="mi">4</span>
+</span></span><span class="line"><span class="cl">  <span class="o">|</span> <span class="nc">Caterpillar</span> <span class="o">-&gt;</span> <span class="mi">1000</span>
 </span></span></code></pre></div><p>Now, if we change the type as follows:</p>
 <p><a id="code-snippet--sum-types-human-ml"></a></p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ocaml" data-lang="ocaml"><span class="line"><span class="cl"><span class="k">type</span> <span class="n">animal</span> <span class="o">=</span> <span class="nc">Cat</span> <span class="o">|</span> <span class="nc">Dog</span> <span class="o">|</span> <span class="nc">Caterpillar</span> <span class="o">|</span> <span class="nc">Human</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="k">let</span> <span class="n">legs</span> <span class="o">=</span> <span class="k">function</span>
-</span></span><span class="line"><span class="cl">  <span class="o">|</span> <span class="nc">Cat</span> <span class="o">|</span> <span class="nc">Dog</span> <span class="o">-&gt;</span> <span class="n">4</span>
-</span></span><span class="line"><span class="cl">  <span class="o">|</span> <span class="nc">Caterpillar</span> <span class="o">-&gt;</span> <span class="n">1000</span>
+</span></span><span class="line"><span class="cl">  <span class="o">|</span> <span class="nc">Cat</span> <span class="o">|</span> <span class="nc">Dog</span> <span class="o">-&gt;</span> <span class="mi">4</span>
+</span></span><span class="line"><span class="cl">  <span class="o">|</span> <span class="nc">Caterpillar</span> <span class="o">-&gt;</span> <span class="mi">1000</span>
 </span></span></code></pre></div><p>the OCaml compiler can point out the places where we forgot to handle humans.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">Lines 3-5, characters 11-23:
 </span></span><span class="line"><span class="cl">3 | ...........function
@@ -243,16 +245,16 @@
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="k">let</span> <span class="n">applyfst</span> <span class="n">f</span> <span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">)</span> <span class="o">=</span> <span class="o">(</span><span class="n">f</span> <span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">)</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">let</span> <span class="n">inc</span> <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">1</span>
+</span></span><span class="line"><span class="cl"><span class="k">let</span> <span class="n">inc</span> <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="k">let</span> <span class="bp">()</span> <span class="o">=</span> <span class="k">assert</span> <span class="o">(</span>
-</span></span><span class="line"><span class="cl">  <span class="n">applyfst</span> <span class="n">inc</span> <span class="o">(</span><span class="n">dup</span> <span class="n">0</span><span class="o">)</span> <span class="o">=</span> <span class="o">(</span><span class="n">1</span><span class="o">,</span> <span class="n">0</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">  <span class="n">applyfst</span> <span class="n">inc</span> <span class="o">(</span><span class="n">dup</span> <span class="mi">0</span><span class="o">)</span> <span class="o">=</span> <span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">0</span><span class="o">)</span>
 </span></span><span class="line"><span class="cl"><span class="o">)</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">let</span> <span class="n">append0</span> <span class="n">xs</span> <span class="o">=</span> <span class="n">xs</span> <span class="o">@</span> <span class="o">[</span><span class="n">0</span><span class="o">]</span>
+</span></span><span class="line"><span class="cl"><span class="k">let</span> <span class="n">append0</span> <span class="n">xs</span> <span class="o">=</span> <span class="n">xs</span> <span class="o">@</span> <span class="o">[</span><span class="mi">0</span><span class="o">]</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="k">let</span> <span class="bp">()</span> <span class="o">=</span> <span class="k">assert</span> <span class="o">(</span>
-</span></span><span class="line"><span class="cl">  <span class="n">applyfst</span> <span class="n">append0</span> <span class="o">(</span><span class="n">dup</span> <span class="bp">[]</span><span class="o">)</span> <span class="o">=</span> <span class="o">([</span><span class="n">0</span><span class="o">],</span> <span class="bp">[]</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">  <span class="n">applyfst</span> <span class="n">append0</span> <span class="o">(</span><span class="n">dup</span> <span class="bp">[]</span><span class="o">)</span> <span class="o">=</span> <span class="o">([</span><span class="mi">0</span><span class="o">],</span> <span class="bp">[]</span><span class="o">)</span>
 </span></span><span class="line"><span class="cl"><span class="o">)</span>
 </span></span></code></pre></div><p>Newer versions of Python try to fix these problems to some extent by providing immutable types <code>frozenset</code>, <code>frozendict</code> etc. But, lists, sets, and dictionaries are used far more often than their immutable counterparts.</p>
 <p>Even the built-in higher-order functions such as <code>map</code> in Python has to be used while keeping this pitfall in mind. For example:</p>
@@ -281,11 +283,11 @@
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ocaml" data-lang="ocaml"><span class="line"><span class="cl"><span class="k">let</span> <span class="n">apply</span> <span class="n">fs</span> <span class="n">x</span> <span class="o">=</span> <span class="nn">List</span><span class="p">.</span><span class="n">map</span> <span class="o">(</span><span class="k">fun</span> <span class="n">f</span> <span class="o">-&gt;</span> <span class="n">f</span> <span class="n">x</span><span class="o">)</span> <span class="n">fs</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="k">let</span> <span class="k">rec</span> <span class="n">range</span> <span class="n">n</span> <span class="n">m</span> <span class="o">=</span>
-</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="n">n</span> <span class="o">=</span> <span class="n">m</span> <span class="k">then</span> <span class="o">[</span><span class="n">n</span><span class="o">]</span> <span class="k">else</span> <span class="n">n</span> <span class="o">::</span> <span class="n">range</span> <span class="o">(</span><span class="n">n</span><span class="o">+</span><span class="n">1</span><span class="o">)</span> <span class="n">m</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="n">n</span> <span class="o">=</span> <span class="n">m</span> <span class="k">then</span> <span class="o">[</span><span class="n">n</span><span class="o">]</span> <span class="k">else</span> <span class="n">n</span> <span class="o">::</span> <span class="n">range</span> <span class="o">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="o">)</span> <span class="n">m</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">let</span> <span class="n">fs</span> <span class="o">=</span> <span class="nn">List</span><span class="p">.</span><span class="n">map</span> <span class="o">(</span><span class="k">fun</span> <span class="n">i</span> <span class="o">-&gt;</span> <span class="o">(+)</span> <span class="n">i</span><span class="o">)</span> <span class="o">(</span><span class="n">range</span> <span class="n">1</span> <span class="n">9</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">let</span> <span class="n">fs</span> <span class="o">=</span> <span class="nn">List</span><span class="p">.</span><span class="n">map</span> <span class="o">(</span><span class="k">fun</span> <span class="n">i</span> <span class="o">-&gt;</span> <span class="o">(+)</span> <span class="n">i</span><span class="o">)</span> <span class="o">(</span><span class="n">range</span> <span class="mi">1</span> <span class="mi">9</span><span class="o">)</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">let</span> <span class="bp">()</span> <span class="o">=</span> <span class="k">assert</span> <span class="o">(</span><span class="n">apply</span> <span class="n">fs</span> <span class="n">0</span> <span class="o">=</span> <span class="n">range</span> <span class="n">1</span> <span class="n">9</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">let</span> <span class="bp">()</span> <span class="o">=</span> <span class="k">assert</span> <span class="o">(</span><span class="n">apply</span> <span class="n">fs</span> <span class="mi">0</span> <span class="o">=</span> <span class="n">range</span> <span class="mi">1</span> <span class="mi">9</span><span class="o">)</span>
 </span></span></code></pre></div><h2 id="ocaml-imperativity">OCaml imperativity</h2>
 <p>I will also discuss a case where Python is considered more usable (I am not aware of a situation where Python is more correct.). The following computes the factorial of a number using iteration and a mutable variable <code>p</code>.</p>
 <p><a id="code-snippet--factorial-py"></a></p>
@@ -297,20 +299,20 @@
 </span></span></code></pre></div><p>The classic recursive definition in functional languages is not as performant although it perfectly mirrors the mathematical definition.</p>
 <p><a id="code-snippet--factorial-rec-ml"></a></p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ocaml" data-lang="ocaml"><span class="line"><span class="cl"><span class="k">let</span> <span class="k">rec</span> <span class="n">factorial</span> <span class="n">n</span> <span class="o">=</span>
-</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="n">n</span> <span class="o">=</span> <span class="n">0</span> <span class="k">then</span> <span class="n">1</span>
-</span></span><span class="line"><span class="cl">  <span class="k">else</span> <span class="n">n</span> <span class="o">*</span> <span class="n">factorial</span> <span class="o">(</span><span class="n">n</span><span class="o">-</span><span class="n">1</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">0</span> <span class="k">then</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">  <span class="k">else</span> <span class="n">n</span> <span class="o">*</span> <span class="n">factorial</span> <span class="o">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="o">)</span>
 </span></span></code></pre></div><p>Functional programming language experts favor a tail-recursive style to gain performance in such cases.</p>
 <p><a id="code-snippet--factorial-tailrec-ml"></a></p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ocaml" data-lang="ocaml"><span class="line"><span class="cl"><span class="k">let</span> <span class="n">factorial</span> <span class="n">n</span> <span class="o">=</span>
 </span></span><span class="line"><span class="cl">  <span class="k">let</span> <span class="k">rec</span> <span class="n">loop</span> <span class="n">acc</span> <span class="o">=</span> <span class="k">function</span>
-</span></span><span class="line"><span class="cl">    <span class="o">|</span> <span class="n">0</span> <span class="o">-&gt;</span> <span class="n">acc</span>
-</span></span><span class="line"><span class="cl">    <span class="o">|</span> <span class="n">n</span> <span class="o">-&gt;</span> <span class="n">loop</span> <span class="o">(</span><span class="n">acc</span><span class="o">*</span><span class="n">n</span><span class="o">)</span> <span class="o">(</span><span class="n">n</span><span class="o">-</span><span class="n">1</span><span class="o">)</span>
-</span></span><span class="line"><span class="cl">  <span class="k">in</span> <span class="n">loop</span> <span class="n">1</span> <span class="n">n</span>
+</span></span><span class="line"><span class="cl">    <span class="o">|</span> <span class="mi">0</span> <span class="o">-&gt;</span> <span class="n">acc</span>
+</span></span><span class="line"><span class="cl">    <span class="o">|</span> <span class="n">n</span> <span class="o">-&gt;</span> <span class="n">loop</span> <span class="o">(</span><span class="n">acc</span><span class="o">*</span><span class="n">n</span><span class="o">)</span> <span class="o">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">  <span class="k">in</span> <span class="n">loop</span> <span class="mi">1</span> <span class="n">n</span>
 </span></span></code></pre></div><p>However, OCaml is not as strict about writing in a functional style as some other functional programming languages. We can perfectly mirror the Python implementation as follows:</p>
 <p><a id="code-snippet--factorial-mutation-ml"></a></p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ocaml" data-lang="ocaml"><span class="line"><span class="cl"><span class="k">let</span> <span class="n">factorial</span> <span class="n">n</span> <span class="o">=</span>
-</span></span><span class="line"><span class="cl">  <span class="k">let</span> <span class="n">p</span> <span class="o">=</span> <span class="n">ref</span> <span class="n">1</span> <span class="k">in</span>
-</span></span><span class="line"><span class="cl">  <span class="k">for</span> <span class="n">i</span> <span class="o">=</span> <span class="n">2</span> <span class="k">to</span> <span class="n">n</span> <span class="k">do</span>
+</span></span><span class="line"><span class="cl">  <span class="k">let</span> <span class="n">p</span> <span class="o">=</span> <span class="n">ref</span> <span class="mi">1</span> <span class="k">in</span>
+</span></span><span class="line"><span class="cl">  <span class="k">for</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">2</span> <span class="k">to</span> <span class="n">n</span> <span class="k">do</span>
 </span></span><span class="line"><span class="cl">    <span class="n">p</span> <span class="o">:=</span> <span class="o">!</span><span class="n">p</span> <span class="o">*</span> <span class="n">i</span>
 </span></span><span class="line"><span class="cl">  <span class="k">done</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl">  <span class="o">!</span><span class="n">p</span>
@@ -354,7 +356,9 @@
 
    onFocusOut(event) {
      var containsFocus = this.navNode.contains(event.relatedTarget);
-     if (!containsFocus) {
+     
+
+     if (event.relatedTarget && !containsFocus) {
        this.menus.forEach((menu) => {
          menu.close();
        });
@@ -374,8 +378,6 @@
      this.menuNode = menuNode;
      this.controlledMenu = menuNode.parentNode.querySelector('ul');
      this.controlledMenuItems = this.controlledMenu.querySelectorAll('li');
-
-     console.log(this.id);
 
       
      this.menuNode.classList.add("disclosure-menu-closed");
@@ -414,6 +416,8 @@
    }
 
    close() { this.toggleMenu(false); }
+
+   open() { this.toggleMenu(true); }
 
    toggleMenu(should_open) {
      var closed = this.isClosed();

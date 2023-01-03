@@ -4,7 +4,9 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="author" content="Balagopal Komarath" />
-  <title> </title>
+  <title>
+Data Structures and Algorithms II (2022)
+</title>
   <link rel="stylesheet" type="text/css" href="/css/bk.css" />
 </head>
 <body>
@@ -65,7 +67,9 @@
 
    onFocusOut(event) {
      var containsFocus = this.navNode.contains(event.relatedTarget);
-     if (!containsFocus) {
+     
+
+     if (event.relatedTarget && !containsFocus) {
        this.menus.forEach((menu) => {
          menu.close();
        });
@@ -85,8 +89,6 @@
      this.menuNode = menuNode;
      this.controlledMenu = menuNode.parentNode.querySelector('ul');
      this.controlledMenuItems = this.controlledMenu.querySelectorAll('li');
-
-     console.log(this.id);
 
       
      this.menuNode.classList.add("disclosure-menu-closed");
@@ -125,6 +127,8 @@
    }
 
    close() { this.toggleMenu(false); }
+
+   open() { this.toggleMenu(true); }
 
    toggleMenu(should_open) {
      var closed = this.isClosed();
