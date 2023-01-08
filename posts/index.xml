@@ -6,7 +6,16 @@
     <description>Recent content in Posts on Balagopal Komarath&#39;s Homepage</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 28 Nov 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://bkomarath.rbgo.in/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 05 Jan 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://bkomarath.rbgo.in/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Programming Projects for Beginners</title>
+      <link>https://bkomarath.rbgo.in/posts/programming-projects-for-beginners/</link>
+      <pubDate>Thu, 05 Jan 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://bkomarath.rbgo.in/posts/programming-projects-for-beginners/</guid>
+      <description>This pages contains a collection of small-size programming projects suitable for students who have just completed an introductory programming course. There is no specific programming language requirement. But, you should adopt the language that is the most comfortable for you. Each project is some simpler version of an existing application. Unlike typical programming assignments, you have to also come up with the exact specification for these programs. I list some issues that you have to handle in specification and functionality that you may need from libraries to implement the program.</description>
+    </item>
+    
     <item>
       <title>Python is Not an Acceptable ML</title>
       <link>https://bkomarath.rbgo.in/posts/python-is-not-an-acceptable-ml/</link>

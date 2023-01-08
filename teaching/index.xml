@@ -18,6 +18,17 @@ Basic Types: numbers, booleans, strings. Compound Types: products, sums, arrays.
     </item>
     
     <item>
+      <title>Special Topics Course: Complexity Theory (2023)</title>
+      <link>https://bkomarath.rbgo.in/teaching/special-topics-course-complexity-theory-2023/</link>
+      <pubDate>Mon, 02 Jan 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://bkomarath.rbgo.in/teaching/special-topics-course-complexity-theory-2023/</guid>
+      <description>This is a discussion based course where students are expected to learn by themselves and advance the course through discussions during the lecture hours.
+Meetings 02-01-2023 I presented an overview of various specialized topics in computational complexity theory.
+Reading Lecture notes on algebraic complexity. Ramprasad&amp;rsquo;s survey on arithmetic circuit lower bounds. Descriptive complexity by Immerman. Communication complexity by Rao and Yehudayoff. Boolean function complexity by Jukna. </description>
+    </item>
+    
+    <item>
       <title>Computing (2022)</title>
       <link>https://bkomarath.rbgo.in/teaching/computing-2022/</link>
       <pubDate>Thu, 24 Nov 2022 00:00:00 +0000</pubDate>

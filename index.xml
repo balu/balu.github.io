@@ -6,7 +6,16 @@
     <description>Recent content on Balagopal Komarath&#39;s Homepage</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 02 Jan 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://bkomarath.rbgo.in/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 05 Jan 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://bkomarath.rbgo.in/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Programming Projects for Beginners</title>
+      <link>https://bkomarath.rbgo.in/posts/programming-projects-for-beginners/</link>
+      <pubDate>Thu, 05 Jan 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://bkomarath.rbgo.in/posts/programming-projects-for-beginners/</guid>
+      <description>This pages contains a collection of small-size programming projects suitable for students who have just completed an introductory programming course. There is no specific programming language requirement. But, you should adopt the language that is the most comfortable for you. Each project is some simpler version of an existing application. Unlike typical programming assignments, you have to also come up with the exact specification for these programs. I list some issues that you have to handle in specification and functionality that you may need from libraries to implement the program.</description>
+    </item>
+    
     <item>
       <title>Compilers (2023)</title>
       <link>https://bkomarath.rbgo.in/teaching/compilers-2023/</link>
@@ -15,6 +24,17 @@
       <guid>https://bkomarath.rbgo.in/teaching/compilers-2023/</guid>
       <description>Welcome to CS327: Compilers. In this course, we will design and implement a compiler for a simple imperative language. We will aim for the following language features.
 Basic Types: numbers, booleans, strings. Compound Types: products, sums, arrays. Conditionals. Loops. Functions. Closures. Mutable variables. Exceptions. We will aim to implement a tree-walking interpreter followed by designing a bytecode along with a source to bytecode compiler that implements some optimizations such as function inlining, loop unrolling, constant folding, and dead code elimination.</description>
+    </item>
+    
+    <item>
+      <title>Special Topics Course: Complexity Theory (2023)</title>
+      <link>https://bkomarath.rbgo.in/teaching/special-topics-course-complexity-theory-2023/</link>
+      <pubDate>Mon, 02 Jan 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://bkomarath.rbgo.in/teaching/special-topics-course-complexity-theory-2023/</guid>
+      <description>This is a discussion based course where students are expected to learn by themselves and advance the course through discussions during the lecture hours.
+Meetings 02-01-2023 I presented an overview of various specialized topics in computational complexity theory.
+Reading Lecture notes on algebraic complexity. Ramprasad&amp;rsquo;s survey on arithmetic circuit lower bounds. Descriptive complexity by Immerman. Communication complexity by Rao and Yehudayoff. Boolean function complexity by Jukna. </description>
     </item>
     
     <item>
