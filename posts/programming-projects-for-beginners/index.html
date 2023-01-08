@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="author" content="Balagopal Komarath" />
+  <title>
+Programming Projects for Beginners
+</title>
+  <link rel="stylesheet" type="text/css" href="/css/bk.css" />
+</head>
+<body>
+  <header>
+  <a class="skip-link" aria-label="Skip to main content" href="#main">Skip to main content</a>
+  <a class="logo" href="/index.html">bkomarath</a>
+  <nav aria-label="Primary navigation">
+    <ul>
+      <li>
+        <a
+          role="button"
+          href=""
+          tabindex="0"
+        >
+          Main
+        </a>
+        <ul>
+          <li><a href="/research">Research</a></li>
+          <li><a href="/teaching">Teaching</a></li>
+          <li><a href="/posts">Writing</a></li>
+          <li><a href="/cv">CV</a></li>
+        </ul>
+      </li>
+    </ul>
+  </nav>
+</header>
+
+  
+<main>
+  <h1>Programming Projects for Beginners</h1>
+  <p>This pages contains a collection of small-size programming projects suitable for students who have just completed an introductory programming course. There is no specific programming language requirement. But, you should adopt the language that is the most comfortable for you. Each project is some simpler version of an existing application. Unlike typical programming assignments, you have to also come up with the exact specification for these programs. I list some issues that you have to handle in specification and functionality that you may need from libraries to implement the program.</p>
+<ol>
+<li>
+<p>Output the contents of the given file to screen. Allow an optional argument (default to 72) that limits the maximum length of lines. (See <a href="https://man7.org/linux/man-pages/man1/fmt.1.html">Linux command fmt</a>)</p>
+<p>How do you split lines? At spaces? Do you insert hyphens when you split mid-word? What about words with hyphens already in them? Are all your lines exactly 72 characters or do you split lines earlier?</p>
+<p>This program only requires some basic file handling and string manipulation.</p>
+</li>
+<li>
+<p>Search for files matching the specified criteria. Allow the user to specify size limits, modification date ranges, and patterns of names. (See <a href="https://man7.org/linux/man-pages/man1/find.1.html">Linux command find</a>)</p>
+<p>Do you allow regex as patterns? Do you allow users to depth-limit searches?</p>
+<p>This program should parse the command line conditions, traverse directories, and query file properties.</p>
+</li>
+<li>
+<p>A pager (See <a href="https://man7.org/linux/man-pages/man1/less.1.html">Linux command less</a>).</p>
+<p>This program has to manipulate the terminal. Learn about ANSI terminal codes to control the terminal.</p>
+</li>
+<li>
+<p>Personal finance tracking application (See <a href="https://www.gnucash.org">gnucash</a>).</p>
+<p>Since financial data is critical, use a database (learn about <a href="https://sqlite.org/index.html">sqlite</a>). Do you allow the user to encrypt it? What are the ways a user can summarize his/her financial data.</p>
+</li>
+<li>
+<p>TODO list management with deadlines (See the text-based manager <a href="http://todotxt.org/">todo.txt</a>).</p>
+<p>This program should be a daemon that notifies the user when a deadline is approaching.</p>
+</li>
+<li>
+<p>Display a running digital clock on the terminal. This can be a full-screen application or a live-updating, line-oriented one.</p>
+</li>
+<li>
+<p>Print today&rsquo;s weather status</p>
+<p>Use the website <a href="https://www.wttr.in/">wttr.in</a> for the data. This program has to request some data from the web. See <a href="https://pypi.org/project/requests/">Python requests library</a>.</p>
+</li>
+<li>
+<p>Print today&rsquo;s news headlines.</p>
+<p>Find a website that provides news of your interest. Does it provide a way to fetch the data?</p>
+</li>
+<li>
+<p>A line-oriented chat application over TCP (talk).</p>
+<p>Learn about sockets to communicate over the Internet.</p>
+</li>
+<li>
+<p>A GUI-based chat application.</p>
+<p>Use a GUI library like <a href="https://pygobject.readthedocs.io/en/latest/">GTK</a>, <a href="https://www.riverbankcomputing.com/software/pyqt/">QT</a>, or <a href="https://docs.python.org/3/library/tk.html">Tkinter</a>.</p>
+</li>
+<li>
+<p>A spell-checker.</p>
+<p>Spell check against a database of known words. Do you allow the user to add words? Is your program efficient on large text? See &ldquo;Edit distance&rdquo;.</p>
+</li>
+<li>
+<p>A spell-corrector.</p>
+<p>Allow the user to interactively correct spelling errors.</p>
+</li>
+</ol>
+
+</main>
+
+  <footer>
+  <p>
+    All content on this website is licensed under
+    <a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA
+      4.0</a> by Balagopal Komarath unless mentioned otherwise.
+</footer>
+
+<script>
+ 'use strict';
+
+ class DisclosureNav {
+   constructor(navNode) {
+     this.navNode = navNode;
+     var menus = navNode.querySelectorAll('a[role="button"]');
+     this.menus = [];
+     for (var i = 0; i < menus.length; ++i) {
+       this.menus.push(new DisclosureMenu(menus[i]));
+     }
+     this.navNode.addEventListener(
+       'focusout',
+       this.onFocusOut.bind(this)
+     );
+   }
+
+   onFocusOut(event) {
+     var containsFocus = this.navNode.contains(event.relatedTarget);
+     
+
+     if (event.relatedTarget && !containsFocus) {
+       this.menus.forEach((menu) => {
+         menu.close();
+       });
+     }
+   }
+ }
+
+ var nextID = 0;
+
+ function generateID() {
+   return ++nextID;
+ }
+
+ class DisclosureMenu {
+   constructor(menuNode) {
+     this.id = '_nav_menu_' + generateID();
+     this.menuNode = menuNode;
+     this.controlledMenu = menuNode.parentNode.querySelector('ul');
+     this.controlledMenuItems = this.controlledMenu.querySelectorAll('li');
+
+      
+     this.menuNode.classList.add("disclosure-menu-closed");
+     this.menuNode.setAttribute("aria-expanded", "false");
+     this.menuNode.setAttribute("aria-haspopup", "true");
+     this.menuNode.setAttribute("aria-controls", this.id);
+
+      
+     this.controlledMenu.classList.add("disclosure-toggled-list-closed");
+     this.controlledMenu.setAttribute("id", this.id);
+
+     menuNode.addEventListener(
+       'click',
+       this.onClick.bind(this)
+     );
+     menuNode.addEventListener(
+       'keydown',
+       this.onMenuKeyDown.bind(this)
+     );
+     for (var i = 0; i < this.controlledMenuItems.length; ++i) {
+       var menuItem = this.controlledMenuItems[i];
+       menuItem.addEventListener(
+         'keydown',
+         this.onMenuItemKeyDown.bind(this)
+       );
+     }
+   }
+
+   isClosed() {
+     return this.menuNode.classList.contains("disclosure-menu-closed");
+   }
+
+   onClick(event) {
+     event.preventDefault();
+     this.toggleMenu(this.isClosed());
+   }
+
+   close() { this.toggleMenu(false); }
+
+   open() { this.toggleMenu(true); }
+
+   toggleMenu(should_open) {
+     var closed = this.isClosed();
+
+     if (should_open && !closed) return;
+     if (!should_open && closed) return;
+
+     if (should_open) {
+       this.menuNode.classList.replace(
+         "disclosure-menu-closed",
+         "disclosure-menu-opened"
+       );
+       this.menuNode.setAttribute("aria-expanded", "true");
+       this.controlledMenu.classList.replace("disclosure-toggled-list-closed", "disclosure-toggled-list-opened");
+     } else {
+       this.menuNode.classList.replace("disclosure-menu-opened", "disclosure-menu-closed");
+       this.menuNode.setAttribute("aria-expanded", "false");
+       this.controlledMenu.classList.replace("disclosure-toggled-list-opened", "disclosure-toggled-list-closed");
+     }
+   }
+
+   onMenuKeyDown(event) {
+     if (event.key === " ") {
+       event.preventDefault();
+       this.toggleMenu(this.isClosed());
+     } else if (event.key === 'Escape') {
+       this.close();
+     }
+   }
+
+   onMenuItemKeyDown(event) {
+     if (event.key === 'Escape') {
+       this.toggleMenu(false);
+       this.menuNode.focus();
+     }
+   }
+ }
+
+ function initNavigation(navs) {
+   for (let nav of navs) {
+     new DisclosureNav(nav);
+   }
+ }
+
+ window.addEventListener(
+   'load',
+   function () {
+     var navMenus = document.querySelectorAll('nav a[role="button"]');
+     var navs = [];
+     for (var i = 0; i < navMenus.length; ++i) {
+       var nav = navMenus[i].parentNode.parentNode;
+       if (!navs.find((otherNav) => otherNav === nav)) {
+         navs.push(nav);
+       }
+     }
+     initNavigation(navs);
+   },
+   false
+ );
+
+</script>
+
+</body>
+</html>
