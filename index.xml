@@ -33,8 +33,10 @@ Basic Types: numbers, booleans, strings. Compound Types: products, sums, arrays.
       
       <guid>https://bkomarath.rbgo.in/teaching/special-topics-course-complexity-theory-2023/</guid>
       <description>This is a discussion based course where students are expected to learn by themselves and advance the course through discussions during the lecture hours.
-Meetings 12-01-2023 We discussed interactive proofs and saw one for the &amp;ldquo;Graph Non-Isomorphism&amp;rdquo; problem. We decided on the topics split for future discussions. Also, a 6-hour per-week work schedule is set for each student.
-09-01-2023 We discussed the implications of SAT is in P. A poly-time algorithm for SAT would imply poly-time algorithms for, given any fixed number of alternating quantifiers, checking whether a given quantified Boolean formula with that many alternating quantifiers is true or false.</description>
+The lectures hours are:
+Mon 10.00 to 11.30 Tue 11.30 to 01.00 The venue is 7/105.
+Meetings 16-01-2023 AC (RN): Definitions of determinant, permanent, circuits, formulas, ABPs and IMM. Poly-size circuits and ABPs (via IMM) for elementary symmetric polynomials (recurrence).
+DC (DD): Vocabulary, structures, first-order formulas. Example: Vocabulary for directed graphs with designated source and sink.</description>
     </item>
     
     <item>
