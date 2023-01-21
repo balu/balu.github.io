@@ -50,7 +50,35 @@ Compilers (2023)
 </ul>
 <p>We will aim to implement a tree-walking interpreter followed by designing a bytecode along with a source to bytecode compiler that implements some optimizations such as function inlining, loop unrolling, constant folding, and dead code elimination.</p>
 <p>My code for this course will be hosted at the <a href="https://github.com/balu/sim">github repository for CS327: Compilers (2023)</a>.</p>
+<h2 id="project">Project</h2>
+<p>This section lists the goals of the project. Everyone should try to complete the minimal (M) goals. The goals marked intermediate (I) and advanced (A) can be taken up once the minimal goals are achieved.</p>
+<ul>
+<li>M: A number type and arithmetic.</li>
+<li>I: Multiple number types such as fractions and integers. Quotient and division are different. Quotient has type (integer, integer) -&gt; integer and division has type (fraction, fraction) -&gt; fraction. An integer can be used wherever a fraction can be used.</li>
+<li>M: Let expressions.</li>
+<li>I: Parallel <code>let</code> (See <code>let..and</code> in Ocaml).</li>
+<li>M: A Boolean type, comparisons, and if-else.</li>
+<li>I: An explicit unary boolifying operator. In Perl <code>so x</code> where <code>x</code> has any type produces a Boolean value. For example, if <code>x</code> is a number, it is true when non-zero. If <code>x</code> is a string, it is true when non-empty.</li>
+<li>M: Mutable variables.</li>
+<li>I: Static type checking. The expression <code>(5&gt;3) + 2</code> should be an error without evaluating anything.</li>
+<li>A: Disallow mutable variables to change type. With the binding <code>let mut p = True in ...</code>, the variable <code>p</code> should only be assigned boolean values.</li>
+<li>M: Strings with concatenation and slicing.</li>
+<li>M: A <code>print</code> operation that prints values to screen.</li>
+<li>M: loops.</li>
+<li>M: Functions</li>
+<li>M: Lists with operations <code>cons</code>, <code>is-empty?</code>, <code>head</code>, <code>tail</code>.</li>
+<li>I: <code>for</code> loop to iterate over lists.</li>
+<li>I: Mutable arrays with indexing, appending, popping, concatenation, element assignment.</li>
+<li>I: Allow declaration of type of array. For example <code>let xs: Array[int] = [] in ...</code> should prevent <code>xs[0] ← 5/3</code>.</li>
+<li>A: Step-by-step debugger for your programming language.</li>
+<li>A: User-defined types &ndash; records.</li>
+<li>A: First-class functions.</li>
+</ul>
 <h2 id="meetings">Meetings</h2>
+<h3 id="19-01-2023">19-01-2023</h3>
+<p>We discussed lexing where we produce a stream of tokens from a stream of characters (also known as source code).</p>
+<h3 id="18-01-2023">18-01-2023</h3>
+<p>We discussed static analysis &ndash; analysis of programs without evaluating them. A part of it is semantic analysis which involves type checking. We discussed how to perform typechecking by tree-walking. We discussed language design choices such as expression+statements or expression-only languages and statically-typed vs dynamically-typed languages.</p>
 <h3 id="16-01-2023">16-01-2023</h3>
 <p>We discussed project submission workflow. All individual contributions SHOULD be associated with their github (or equivalent) id. As a rough guideline for project goals, try to implement solutions for the first five questions from <a href="https://projecteuler.net/">Project Euler</a> in the language you are implementing.</p>
 <h3 id="13-01-2023">13-01-2023</h3>
