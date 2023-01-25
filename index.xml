@@ -35,8 +35,8 @@ Basic Types: numbers, booleans, strings. Compound Types: products, sums, arrays.
       <description>This is a discussion based course where students are expected to learn by themselves and advance the course through discussions during the lecture hours.
 The lectures hours are:
 Mon 10.00 to 11.30 Tue 11.30 to 01.00 The venue is 7/105.
-Meetings 16-01-2023 AC (RN): Definitions of determinant, permanent, circuits, formulas, ABPs and IMM. Poly-size circuits and ABPs (via IMM) for elementary symmetric polynomials (recurrence).
-DC (DD): Vocabulary, structures, first-order formulas. Example: Vocabulary for directed graphs with designated source and sink.</description>
+Meetings 24-01-2023 CC (GV): Balancing protocol trees to log(number of leaves)-depth. Protocol from matrix decomposition that is not a protocol.
+23-01-2023 SC (BK): Non-uniform models, Boolean circuits, Does SAT have small circuits?</description>
     </item>
     
     <item>
