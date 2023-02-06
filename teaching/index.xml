@@ -26,8 +26,9 @@ Basic Types: numbers, booleans, strings. Compound Types: products, sums, arrays.
       <description>This is a discussion based course where students are expected to learn by themselves and advance the course through discussions during the lecture hours.
 The lectures hours are:
 Mon 10.00 to 11.30 Tue 11.30 to 01.00 The venue is 7/105.
-Meetings 24-01-2023 CC (GV): Balancing protocol trees to log(number of leaves)-depth. Protocol from matrix decomposition that is not a protocol.
-23-01-2023 SC (BK): Non-uniform models, Boolean circuits, Does SAT have small circuits?</description>
+Meetings 31-01-2023 AC (RN): Homogenization lemma, division elimination using truncated series.
+30-01-2023 DC (DD): Vocabulary for strings. FO formulas for addition.
+24-01-2023 CC (GV): Balancing protocol trees to log(number of leaves)-depth.</description>
     </item>
     
     <item>
