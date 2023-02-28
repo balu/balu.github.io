@@ -26,7 +26,8 @@ Basic Types: numbers, booleans, strings. Compound Types: products, sums, arrays.
       <description>This is a discussion based course where students are expected to learn by themselves and advance the course through discussions during the lecture hours.
 The lectures hours are:
 Mon 10.00 to 11.30 Tue 11.30 to 01.00 The venue is 7/105.
-Meetings 27-02-2023 AC (GS): Division elimination, computing partial derivatives.
+Meetings 28-02-2023 AC (GS): Baur-Strassen Theorem.
+27-02-2023 AC (GS): Division elimination, computing partial derivatives.
 21-02-2023 DC (SN): Interpretation, free variables, validity of formulas under interpretations.
 20-02-2023 CC (GV): Lower bound methods for deterministic cc: Fooling sets.</description>
     </item>
