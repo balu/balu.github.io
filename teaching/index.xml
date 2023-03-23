@@ -26,10 +26,9 @@ Basic Types: numbers, booleans, strings. Compound Types: products, sums, arrays.
       <description>This is a discussion based course where students are expected to learn by themselves and advance the course through discussions during the lecture hours.
 The lectures hours are:
 Mon 10.00 to 11.30 Tue 11.30 to 01.00 The venue is 7/105.
-Meetings 28-02-2023 AC (GS): Baur-Strassen Theorem.
-27-02-2023 AC (GS): Division elimination, computing partial derivatives.
-21-02-2023 DC (SN): Interpretation, free variables, validity of formulas under interpretations.
-20-02-2023 CC (GV): Lower bound methods for deterministic cc: Fooling sets.</description>
+Meetings 21-03-2023 DC (DD): FO queries, &amp;ldquo;reduction&amp;rdquo; from connected-ness to reachability using FO.
+20-03-2023 AC (RN): Computing numbers, complexity upper and lower bounds. Factorial.
+14-03-2023 CC (GV): Asymmetric communication complexity. k-subsets vs all subsets disjointedness.</description>
     </item>
     
     <item>
