@@ -28,6 +28,7 @@ Compilers (2023)
           <li><a href="/teaching">Teaching</a></li>
           <li><a href="/posts">Writing</a></li>
           <li><a href="/cv">CV</a></li>
+          <li><a href="/contact">Contact</a></li>
         </ul>
       </li>
     </ul>
@@ -51,8 +52,7 @@ Compilers (2023)
 <p>We will aim to implement a tree-walking interpreter followed by designing a bytecode along with a source to bytecode compiler that implements some optimizations such as function inlining, loop unrolling, constant folding, and dead code elimination.</p>
 <p>My code for this course will be hosted at the <a href="https://github.com/balu/sim">github repository for CS327: Compilers (2023)</a>.</p>
 <h2 id="current-status">Current status</h2>
-<p>I list here the chapters from the text book that covers the topics we have discussed.</p>
-<p>Chapters 4, 5, 6, 7, 8, 9, and some parts of 11.</p>
+<p>Complete implementation for a PL with conditionals, loops, nested functions, and typechecking with both tree-walking and bytecode generation.</p>
 <h2 id="project">Project</h2>
 <p>This section lists the goals of the project. Everyone should try to complete the minimal (M) goals. The goals marked intermediate (I) and advanced (A) can be taken up once the minimal goals are achieved.</p>
 <ul>
@@ -77,7 +77,14 @@ Compilers (2023)
 <li>A: User-defined types &ndash; records.</li>
 <li>A: First-class functions.</li>
 </ul>
+<p><a href="#studentproj">A showcase of various programming languages designed by students.</a></p>
 <h2 id="meetings">Meetings</h2>
+<h3 id="21-04-2023">21-04-2023</h3>
+<p>Resources for mathematical foundations. Feedback.</p>
+<h3 id="19-04-2023">19-04-2023</h3>
+<p>Static links for accessing variables in outer functions.</p>
+<h3 id="12-04-2023">12-04-2023</h3>
+<p>Functions with parameters. Calling convention. Function preamble.</p>
 <h3 id="05-04-2023">05-04-2023</h3>
 <p>Parameter-less functions. Call frame management. CALL and RETURN instructions.</p>
 <h3 id="31-03-2023">31-03-2023</h3>
@@ -141,7 +148,268 @@ Compilers (2023)
 <li><a href="https://www.cs.cmu.edu/~rdriley/487/papers/Thompson_1984_ReflectionsonTrustingTrust.pdf">Reflections on trusting trust</a></li>
 <li><a href="https://www.eecs.umich.edu/courses/eecs588/static/stack_smashing.pdf">Smashing the stack for fun and profit</a></li>
 </ul>
-
+<h2 id="studentproj">Showcase</h2>
+<p>This section showcases various programming languages designed by students. The programs are solutions to <a href="https://projecteuler.net/problem=14">Project Euler problem 14</a>.</p>
+<h3 id="dino">dino</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">assign start = 3;
+</span></span><span class="line"><span class="cl">assign count = 1;
+</span></span><span class="line"><span class="cl">assign ans = 1;
+</span></span><span class="line"><span class="cl">assign max_count = 1;
+</span></span><span class="line"><span class="cl">assign dp = {1:1};
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">func collatz(n)
+</span></span><span class="line"><span class="cl">    ?echo(n);
+</span></span><span class="line"><span class="cl">    if(dp.in_dict(n))
+</span></span><span class="line"><span class="cl">        return dp[n];
+</span></span><span class="line"><span class="cl">    end
+</span></span><span class="line"><span class="cl">    if(n%2 == 0)
+</span></span><span class="line"><span class="cl">        dp[n] = collatz(n//2) + 1;
+</span></span><span class="line"><span class="cl">    end
+</span></span><span class="line"><span class="cl">    else
+</span></span><span class="line"><span class="cl">        dp[n] = collatz(3*n + 1) + 1;
+</span></span><span class="line"><span class="cl">    end
+</span></span><span class="line"><span class="cl">    return dp[n];
+</span></span><span class="line"><span class="cl">end
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">loop(start &lt; 100)
+</span></span><span class="line"><span class="cl">    ? echo(start);
+</span></span><span class="line"><span class="cl">    count = collatz(start);
+</span></span><span class="line"><span class="cl">    if(count &gt; max_count)
+</span></span><span class="line"><span class="cl">        max_count = count;
+</span></span><span class="line"><span class="cl">        ans = start;
+</span></span><span class="line"><span class="cl">    end
+</span></span><span class="line"><span class="cl">    start = start + 2;
+</span></span><span class="line"><span class="cl">end
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">echo(max_count);
+</span></span><span class="line"><span class="cl">echo(ans);
+</span></span></code></pre></div><h3 id="gossip">gossip</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">declare n = 1;
+</span></span><span class="line"><span class="cl">declare k = 100000;
+</span></span><span class="line"><span class="cl">declare len = 1;
+</span></span><span class="line"><span class="cl">declare i = 1;
+</span></span><span class="line"><span class="cl">declare max = 0;
+</span></span><span class="line"><span class="cl">declare num = -1;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">declare d = dictn(0);
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">while i &lt;= k do {
+</span></span><span class="line"><span class="cl">    assign n = i;
+</span></span><span class="line"><span class="cl">    assign len = 1;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    while n &gt; 1 do {
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        if d[n]!=0 then {
+</span></span><span class="line"><span class="cl">            assign len = len + d[n] -1;
+</span></span><span class="line"><span class="cl">            assign n = 1;
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        else {
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            if n % 2 == 0 then {
+</span></span><span class="line"><span class="cl">                assign n = n / 2;
+</span></span><span class="line"><span class="cl">                assign len = len + 1;}
+</span></span><span class="line"><span class="cl">            else {
+</span></span><span class="line"><span class="cl">                assign n = 3 * n + 1;
+</span></span><span class="line"><span class="cl">                assign n = n/2;
+</span></span><span class="line"><span class="cl">                assign len = len + 2;
+</span></span><span class="line"><span class="cl">            };
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        };
+</span></span><span class="line"><span class="cl">    };
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    assign d[i] = len;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    if len &gt; max then {
+</span></span><span class="line"><span class="cl">        assign max = len;
+</span></span><span class="line"><span class="cl">        assign num = i;}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    assign i = i + 1;
+</span></span><span class="line"><span class="cl">};
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">print(k);
+</span></span><span class="line"><span class="cl">print(num);
+</span></span><span class="line"><span class="cl">print(max);
+</span></span></code></pre></div><h3 id="notpy">notpy</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">var i = 2;
+</span></span><span class="line"><span class="cl">var a = [1000000];
+</span></span><span class="line"><span class="cl">var max=0;
+</span></span><span class="line"><span class="cl">var maxnum=0;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">while (i&lt;1000000){
+</span></span><span class="line"><span class="cl">    var start = i;
+</span></span><span class="line"><span class="cl">    var cnt =1;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    while (start !=1){
+</span></span><span class="line"><span class="cl">        if (start &lt; 1000000){
+</span></span><span class="line"><span class="cl">            if (a[start] != 0){
+</span></span><span class="line"><span class="cl">                cnt = cnt + a[start]-1;
+</span></span><span class="line"><span class="cl">                start = 1;
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">            else{
+</span></span><span class="line"><span class="cl">                if (start %2 == 0){
+</span></span><span class="line"><span class="cl">                    start = start/2;
+</span></span><span class="line"><span class="cl">                }
+</span></span><span class="line"><span class="cl">                else{
+</span></span><span class="line"><span class="cl">                    start = 3*start + 1;
+</span></span><span class="line"><span class="cl">                }
+</span></span><span class="line"><span class="cl">                cnt = cnt+1;
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        else{
+</span></span><span class="line"><span class="cl">            if (start%2==0){
+</span></span><span class="line"><span class="cl">                start=start/2;
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">            else{
+</span></span><span class="line"><span class="cl">                start=3*start+1;
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">            cnt=cnt+1;
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    if(cnt&gt;max){max=cnt; maxnum=i;}
+</span></span><span class="line"><span class="cl">    a[i] = cnt;
+</span></span><span class="line"><span class="cl">    print i, cnt;
+</span></span><span class="line"><span class="cl">    i=i+1;
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">print &#34;ans&#34;, max, maxnum;
+</span></span></code></pre></div><h3 id="thorium">thorium</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">let ans=0 in
+</span></span><span class="line"><span class="cl">let start=0 in
+</span></span><span class="line"><span class="cl">let num = 1 in
+</span></span><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">    while num&lt;=100000 do
+</span></span><span class="line"><span class="cl">    {
+</span></span><span class="line"><span class="cl">            let l=1 in
+</span></span><span class="line"><span class="cl">            let n= num in
+</span></span><span class="line"><span class="cl">            {
+</span></span><span class="line"><span class="cl">                while n&gt;1 do
+</span></span><span class="line"><span class="cl">                    {
+</span></span><span class="line"><span class="cl">                        if n%2==0 then {
+</span></span><span class="line"><span class="cl">                            n=n//2;
+</span></span><span class="line"><span class="cl">                        };
+</span></span><span class="line"><span class="cl">                        else{
+</span></span><span class="line"><span class="cl">                            n=3*n+1;
+</span></span><span class="line"><span class="cl">                        }; end
+</span></span><span class="line"><span class="cl">                        l=l+1;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                    };
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                    if l&gt;ans then {
+</span></span><span class="line"><span class="cl">                        ans= l;
+</span></span><span class="line"><span class="cl">                        start=num;
+</span></span><span class="line"><span class="cl">                    };
+</span></span><span class="line"><span class="cl">                    else{
+</span></span><span class="line"><span class="cl">                       ans=ans;
+</span></span><span class="line"><span class="cl">                    }; end
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            };
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            num=num+ 1;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    };
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    print ans;
+</span></span><span class="line"><span class="cl">    print start;
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">end
+</span></span></code></pre></div><h3 id="zebra">Zebra</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">var int l = 1000000;
+</span></span><span class="line"><span class="cl">var array(int) a=array(int){};
+</span></span><span class="line"><span class="cl">var int mem = 1000000;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">for(var int i=0;i&lt;mem;i=i+1){
+</span></span><span class="line"><span class="cl">    append(0,a);
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">var int maxChainLength = 0;
+</span></span><span class="line"><span class="cl">var int result = 0;
+</span></span><span class="line"><span class="cl">var int n = nil;
+</span></span><span class="line"><span class="cl">var int chainLength = nil;
+</span></span><span class="line"><span class="cl">var int flag = 0;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">for (var int i = 1; i &lt; l; i=i+1) {
+</span></span><span class="line"><span class="cl">    n = i;
+</span></span><span class="line"><span class="cl">    chainLength = 1;
+</span></span><span class="line"><span class="cl">    flag = 0;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    while (n &gt; 1)
+</span></span><span class="line"><span class="cl">    {
+</span></span><span class="line"><span class="cl">        if (n&lt;mem){
+</span></span><span class="line"><span class="cl">            if (a[n]!=0){
+</span></span><span class="line"><span class="cl">                chainLength = chainLength + a[n] -1;
+</span></span><span class="line"><span class="cl">                flag = 1;
+</span></span><span class="line"><span class="cl">                n = 0;
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        if (flag ==0){
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            if (n % 2 == 0) {
+</span></span><span class="line"><span class="cl">                n = n//2;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">            else {
+</span></span><span class="line"><span class="cl">                n = 3 * n + 1;
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">            chainLength = chainLength + 1;
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    if (chainLength &gt; maxChainLength) {
+</span></span><span class="line"><span class="cl">        maxChainLength = chainLength;
+</span></span><span class="line"><span class="cl">        result = i;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    if (i&lt;mem) {a[i]=chainLength;}
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">zout(&#34;result&#34;, result);
+</span></span><span class="line"><span class="cl">zout(&#34;len&#34;, maxChainLength);
+</span></span></code></pre></div><h3 id="zoro">Zoro</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">var mil &lt;- 1000;
+</span></span><span class="line"><span class="cl">var lst &lt;- [1];
+</span></span><span class="line"><span class="cl">var i &lt;- 2;
+</span></span><span class="line"><span class="cl">var maxl &lt;- 1;
+</span></span><span class="line"><span class="cl">var maxi &lt;- 1;
+</span></span><span class="line"><span class="cl">var temp &lt;- 0;
+</span></span><span class="line"><span class="cl">var j &lt;- 0;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">while i &lt;= mil
+</span></span><span class="line"><span class="cl">do
+</span></span><span class="line"><span class="cl">    if i%2 == 0
+</span></span><span class="line"><span class="cl">    then
+</span></span><span class="line"><span class="cl">        temp &lt;- 1 + lst.at (i//2 - 1);
+</span></span><span class="line"><span class="cl">        lst.push temp;
+</span></span><span class="line"><span class="cl">    else
+</span></span><span class="line"><span class="cl">        j &lt;- 3*i + 1;
+</span></span><span class="line"><span class="cl">        temp &lt;- 1;
+</span></span><span class="line"><span class="cl">        while j &gt;= i
+</span></span><span class="line"><span class="cl">        do
+</span></span><span class="line"><span class="cl">            if j % 2 == 0
+</span></span><span class="line"><span class="cl">            then
+</span></span><span class="line"><span class="cl">                j &lt;- j // 2;
+</span></span><span class="line"><span class="cl">            else
+</span></span><span class="line"><span class="cl">                j &lt;- 3*j + 1;
+</span></span><span class="line"><span class="cl">            endif;
+</span></span><span class="line"><span class="cl">            temp &lt;- temp + 1;
+</span></span><span class="line"><span class="cl">        endwhile;
+</span></span><span class="line"><span class="cl">        temp &lt;- temp + lst.at (j - 1);
+</span></span><span class="line"><span class="cl">        lst.push temp;
+</span></span><span class="line"><span class="cl">    endif;
+</span></span><span class="line"><span class="cl">    if temp &gt; maxl
+</span></span><span class="line"><span class="cl">    then
+</span></span><span class="line"><span class="cl">        maxi &lt;- i;
+</span></span><span class="line"><span class="cl">        maxl &lt;- temp;
+</span></span><span class="line"><span class="cl">    endif;
+</span></span><span class="line"><span class="cl">    i &lt;- i+1;
+</span></span><span class="line"><span class="cl">endwhile;
+</span></span><span class="line"><span class="cl">print mil;
+</span></span><span class="line"><span class="cl">print maxi;
+</span></span><span class="line"><span class="cl">print maxl;
+</span></span></code></pre></div>
 </main>
 
   <footer>
