@@ -153,9 +153,12 @@ header {
     border-bottom: var(--border-main);
 }
 
-header a:link,
-header a:visited {
+header a:link {
     text-decoration: none;
+    color: var(--main-text-color);
+}
+
+header a:visited {
     color: var(--main-text-color);
 }
 
