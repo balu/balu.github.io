@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="author" content="Balagopal Komarath" />
+  <title> </title>
+  <link rel="stylesheet" type="text/css" href="/css/bk.css" />
+  
+  <script>
+   MathJax = {
+     tex: {
+       inlineMath: [['$', '$'], ['\\(', '\\)']]
+     },
+     svg: {
+       fontCache: 'global'
+     }
+   };
+  </script>
+  <script type="text/javascript" id="MathJax-script" async
+          src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+  </script>
+  
+</head>
+<body>
+  <header>
+  <a class="skip-link" aria-label="Skip to main content" href="#main">Skip to main content</a>
+  <a class="logo" href="/">bkomarath</a>
+  <a class="menu" href="/menu">Menu</a>
+</header>
+
+  
+  <main>
+    <h1>Execution</h1>
+    <p>An algorithm is a recipe or a template that tells us how to compute the answer on an arbitrary input. When an algorithm is <em>executed</em> on specific inputs, we obtain an <em>execution trace</em> that completely describes the events that occurred in the machine. An execution trace is a list of pairs \((I, M)\), where \(I\) is some instruction in the algorithm and \(M\) is the contents of the storage just before \(I\) is performed. We use U to denote the contents of a word when the contents of the word is undefined. For the absolute value program, given the inputs \(2\) and \(3\), here is the execution trace:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">jmpif [0] &lt; [1], 3  &lt;2, 3, U&gt;
+</span></span><span class="line"><span class="cl">sub   [2], [1], [0] &lt;2, 3, U&gt;
+</span></span><span class="line"><span class="cl">end                 &lt;2, 3, 1&gt;
+</span></span></code></pre></div><p>and here is the execution trace when the inputs are \(3\) and \(2\):</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">jmpif [0] &lt; [1], 3  &lt;3, 2, U&gt;
+</span></span><span class="line"><span class="cl">sub   [2], [0], [1] &lt;3, 2, U&gt;
+</span></span><span class="line"><span class="cl">end                 &lt;3, 2, 1&gt;
+</span></span></code></pre></div><p>Notice that in both cases, the actual instructions that were performed are different. An algorithm is correct when the execution trace yielded by the algorithm on <em>any input</em> leads to the correct output for that input.</p>
+<h2 id="exercise">Exercise</h2>
+<ol>
+<li>Write a RAM program that takes three numbers as input on words 0, 1, and 2 and produces the maximum of three numbers as output in word 3. How many execution traces with distinct instruction sequences exist for your program?</li>
+<li>Write a RAM program where the execution trace is an infinite sequence.</li>
+</ol>
+
+    
+    <nav class="chapter">
+      <ul>
+        
+        <li><a href="https://bkomarath.rbgo.in/dsa/machines-and-computation/time/">→ Time</a></li>
+        
+        
+        <li><a href="https://bkomarath.rbgo.in/dsa/machines-and-computation/algorithms/">← Algorithms</a></li>
+        
+        <li><a href="/dsa">↑ Data Structures and Algorithms</a></li>
+      </ul>
+    </nav>
+  </main>
+
+  <footer>
+  <p>
+    All content on this website is licensed under
+    <a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA
+      4.0</a> by Balagopal Komarath unless mentioned otherwise.
+</footer>
+
+</body>
+</html>

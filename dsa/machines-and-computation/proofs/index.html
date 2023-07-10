@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="author" content="Balagopal Komarath" />
+  <title> </title>
+  <link rel="stylesheet" type="text/css" href="/css/bk.css" />
+  
+  <script>
+   MathJax = {
+     tex: {
+       inlineMath: [['$', '$'], ['\\(', '\\)']]
+     },
+     svg: {
+       fontCache: 'global'
+     }
+   };
+  </script>
+  <script type="text/javascript" id="MathJax-script" async
+          src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+  </script>
+  
+</head>
+<body>
+  <header>
+  <a class="skip-link" aria-label="Skip to main content" href="#main">Skip to main content</a>
+  <a class="logo" href="/">bkomarath</a>
+  <a class="menu" href="/menu">Menu</a>
+</header>
+
+  
+  <main>
+    <h1>Proofs</h1>
+    <p>To prove that an algorithm is correct, we have to prove that its execution on <em>every input</em> is correct. Let \(f\) be the computational problem solved by \(A\). Then, we have to prove a statement such as:</p>
+<div class="stmt">
+<p>\(\forall x. f(x) = A(x)\)</p>
+</div>
+<p>where \(x\) is chosen from the domain of all valid inputs. Here, we denote by \(f(x)\) the required outputs and effects of the problem on \(x\), and by \(A(x)\) the outputs and effects produced by \(A\) on \(x\).</p>
+<h2 id="algorithms-without-loops">Algorithms without loops</h2>
+<p>If an algorithm doesn&rsquo;t have loops, then there are only finitely many distinct instruction sequences possible in its execution trace. For such algorithms, we can usually do a proof by cases to prove the correctness of the algorithm. For example, given the following algorithm for computing the maximum of three numbers:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">max3</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">,</span> <span class="kt">int</span> <span class="n">b</span><span class="p">,</span> <span class="kt">int</span> <span class="n">c</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">a</span> <span class="o">&gt;=</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">a</span> <span class="o">&gt;=</span> <span class="n">c</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="n">a</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">c</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">b</span> <span class="o">&gt;=</span> <span class="n">c</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="n">b</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">c</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>We can prove it&rsquo;s correctness as follows:</p>
+<div class="proof">
+<p>The following cases are exhaustive:</p>
+<ul>
+<li>\(a\) is maximum: \(a \geq b\) and \(a \geq c\). So we return \(a\).</li>
+<li>\(b\) is maximum: Suppose \(a=b\), then since \(b\) is maximum, \(a \geq c\) and we return \(a=b\). Otherwise \(a&lt;b\) and \(b\geq c\) and we return \(b\).</li>
+<li>\(c\) is maximum: Exercise.</li>
+</ul>
+</div>
+<p>The above proof is easily obtained by observing all possible execution traces.</p>
+<h2 id="algorithms-with-loops">Algorithms with loops</h2>
+<p>However, when an algorithm has loops, it most often has infinitely many distinct execution traces. A proof by cases cannot list them all. We introduce the following terminology to talk about loops. Every loop has a <em>condition</em> expression, a sequence of statements called the <em>body</em>, and a statement that immediately follows the loop. An <em>iteration</em> of the loop begins with the condition and then may optionally include the execution of the body. Specifically, the <em>last iteration</em> of any loop execution only executes the condition statement which will be false. A <em>loop invariant</em> is a statement that is true before every iteration of the loop. To prove that a statement is an invariant, we typically use a proof by induction. This has two parts.</p>
+<ul>
+<li>(Initialization) The invariant holds before the first iteration.</li>
+<li>(Preservation) If the invariant holds before an iteration, it holds after the iteration.</li>
+</ul>
+<p>We also have to prove that the loop achieves it&rsquo;s <em>goal</em>.</p>
+<ul>
+<li>(Termination) If the invariant holds before the last iteration, then we achieve the goal of the loop.</li>
+</ul>
+<p>Typically, the condition is an expression that doesn&rsquo;t have any effects on the storage. So we can also state the above as:</p>
+<ul>
+<li>(Termination) If the invariant holds after the last iteration, then we achieve the goal of the loop.</li>
+</ul>
+<h2 id="euclid-s-algorithm">Euclid&rsquo;s algorithm</h2>
+<p>Let us see a more advanced algorithm for computing the gcd. The algorithm is called Euclid&rsquo;s algorithm and relies on non-trivial properties of the gcd.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">euclid</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">,</span> <span class="kt">int</span> <span class="n">m</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">n</span> <span class="o">&lt;</span> <span class="n">m</span><span class="p">)</span> <span class="k">return</span> <span class="nf">euclid</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">a</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">while</span> <span class="p">(</span><span class="n">m</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">t</span> <span class="o">=</span> <span class="n">n</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">n</span> <span class="o">=</span> <span class="n">m</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">m</span> <span class="o">=</span> <span class="n">n</span> <span class="o">%</span> <span class="n">m</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">n</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>Before proving the correctness of Euclid&rsquo;s algorithm, we need a proof of the following theorem. We use \((n, m)\) to denote the gcd of \(n\) and \(m\).</p>
+<div class="theorem" id="thm-gcd">
+<p>(GCD Theorem) If \(m &gt; 0\), then \((n, m) = (m, n \text{ rem } m)\).</p>
+</div>
+<div class="proof">
+<p>We name \(r = n \text{ rem } m\) for convenience. Let \(g = (n, m)\) and \(g&rsquo; = (m, r)\). Our goal is to show that \(g = g&rsquo;\). By the definition of gcd, \(g\) divides \(n\) and \(m\). Now, \(r = n - qm\) for some natural number \(q\). Therefore, \(g\) divides \(r\) as well. Since \(g\) is a common divisor of \(m\) and \(r\), we must have \(g&rsquo; \geq g\). Again, by the definition of gcd, \(g&rsquo;\) divides \(m\) and \(r\). Therefore, \(g&rsquo;\) divides \(qm + r = n\) as well. Since \(g&rsquo;\) is a common divisor of \(n\) and \(m\), we have \(g \geq g&rsquo;\). So \(g = g&rsquo;\).</p>
+</div>
+<p>Now, we prove Euclid&rsquo;s algorithm correctly computes the gcd of any two numbers.</p>
+<div class="proof">
+<p>The loop invariant is:</p>
+<div class="stmt">
+<p>The gcd of the variables \(n\) and \(m\) remains the same in each iteration and is the same as the gcd of the inputs.</p>
+</div>
+<ul>
+<li>
+<p>(Initialization) The variables \(n\) and \(m\) are the values of the inputs. So the invariant holds trivially.</p>
+</li>
+<li>
+<p>(Preservation) By <a href="#thm-gcd">GCD Theorem</a>.</p>
+</li>
+</ul>
+<p>It is not obvious that this loop will always terminate. So we have to prove that the loop terminates and upon termination, the goal of the loop is achieved. The goal is:</p>
+<p>The variable \(n\) contains the gcd of the inputs.</p>
+<p>To see that the loop terminates eventually. Observe that \(r = n \text{ rem } m &lt; m\) for any \(n\). So \(m\) must eventually become \(0\).</p>
+<p>When the loop terminates \(m = 0\), we know that \((n, 0) = n\) for any \(n\). And, the loop invariant guarantees that the value in variable \(n\) is also the gcd of the inputs.</p>
+</div>
+<p>The most interesting fact about Euclid&rsquo;s algorithm is that not only does it correctly compute the gcd, it does it fast. Again, to establish this fact, we provide a proof that Euclid&rsquo;s algorithm. First, we prove that the naive algorithm is inefficient.</p>
+<div class="theorem">
+<p>The worst-case time complexity of <code>gcd(n,m)</code> is \(\Omega(n)\).</p>
+</div>
+<div class="proof">
+<p>Let \(m = n-1\) and n &gt; 3. The <code>for</code> loop in the naive algorithm executes at least \(n-2\) times.</p>
+</div>
+<p>Say, the inputs are \(n = 2^{100}\) and \(m = n-1\). Then, suppose in a second, we can execute \(2^{34}\) iterations (This is faster than a 16Ghz processor). Such a machine would need \(2^{66}\) seconds or more than 2000 billion years to compute the gcd using the naive algorithm!</p>
+<div class="theorem">
+<p>The worst-case time complexity of <code>euclid(n,m)</code> is \(O(\log(n+m))\).</p>
+</div>
+<div class="proof">
+<p>For values \(n\) and \(m\), we define the <em>weight</em> as \(n+m\). We define \(r = n \text{ rem } m\) and observe that \(m+r &lt; 2m\).</p>
+<ul>
+<li>\(q &gt; 1\): \(n+m \geq 3m\).</li>
+<li>\(q = 1\): We again split into two cases.
+<ul>
+<li>\(r \geq m/2\): \(n+m \geq \frac{5}{2} m\).</li>
+<li>\(r &lt; m/2\): \(n+m \geq 2m\) and \(m+r &lt; 3/2 m\)</li>
+</ul>
+</li>
+</ul>
+<p>Observe that in all cases \(m+r \leq \lceil \frac{4}{5}(n+m) \rceil\). Suppose \(w\) is the weight of the input. Then, the maximum time taken by Euclid&rsquo;s algorithm on inputs of weight \(w\) satisfies:</p>
+<ul>
+<li>\(t(w) \leq 100\) for \(w \leq 5\).</li>
+<li>\(t(w) \leq t(\lceil \frac{4}{5} w\rceil ) + 4\) for all \(w &gt; 5\).</li>
+</ul>
+<p>Solving the recurrence, we obtain \(t(w) = O(\log(w)) = O(\log(n+m))\).</p>
+</div>
+<h2 id="an-interesting-sorting-algorithm">An interesting sorting algorithm</h2>
+<p>We now turn our attention to an unusual sorting algorithm. Usually, comparison based sorting algorithms work by swapping elements to remove <em>inversions</em>. An inversion is a pair \((i, j)\) such that \(i &lt; j\) and \(a[i] &gt; a[j]\). The following algorithm could swap elements even when they are not inverted. But, it still correctly sorts the input.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">simple_sort</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">[],</span> <span class="kt">int</span> <span class="n">n</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="o">++</span><span class="n">j</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">a</span><span class="p">[</span><span class="n">j</span><span class="p">])</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="kt">int</span> <span class="n">t</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">                <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="n">j</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">                <span class="n">a</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">t</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>It is easy to see that the running time is \(O(n^2)\). The tricky part is to understand why this algorithm works correctly.</p>
+<div class="theorem">
+<p>Algorithm <code>simple_sort</code> sorts the input array in ascending order.</p>
+</div>
+<div class="proof">
+<p>The outer loop maintains the invariant:</p>
+<div class="stmt">
+<p>Just before any iteration, the subarray \(a[0\dotsc i-1]\) is in ascending order.</p>
+</div>
+<p>Here, since the outer loop is the last statement of the function, the goal is to ensure that the array is in ascending order.</p>
+<ul>
+<li>
+<p>(Initialization) Before the first iteration, the invariant holds vacuously since \(i = 0\) implies \(a[0\dotsc i-1]\) contains no elements.</p>
+</li>
+<li>
+<p>(Termination) Just before the last iteration, we have \(i = n\) and the invariant implies that \(a\) is in ascending order.</p>
+</li>
+<li>
+<p>(Preservation) Suppose the invariant holds before the iteration with \(i=p\). i.e., \(a[0\dotsc p-1]\) is in ascending order. We name the elements at the beginning of the iteration as \(c := a[p]\) and \(b[i] := a[i]\) for \(0 \leq i \leq p-1\). We have to prove after the iteration \(a[0\dotsc p]\) will be in ascending order. To prove this, we analyze the loop body with \(i = p\). Let \(k\) be the smallest value such that \(0 \leq k \leq p-1\) and \(a[p] &lt; b[k]\) initially. For \(j = 0 \text{ to } k-1\), the array is unmodified. For \(j = k \text{ to } p-1\), swap always occurs moving \(b[k\dotsc p-1]\) to \(a[k+1\dotsc p]\). The element \(c\) is now in \(a[k]\). At this point, the array \(a[0\dotsc p]\) is sorted as required by the invariant. However, we have to prove that subsequent iterations of the inner loop will not falsify the invariant. For \(j = p \text{ to } n-1\), the elements \(a[0\dotsc p-1]\) is unmodified and \(a[p]\) can only increase. Therefore the invariant is preserved for the next iteration. Suppose \(a[p]\) is greater than all elements in \(b[0\dotsc p-1]\) initially. Then, for \(j = 0 \text{ to } p\), no swaps occur and \(a[0\dotsc p-1]\) will remain in ascending order. For \(j = p+1 \text{ to } n-1\), the value in \(a[p]\) can only increase. Once again, the invariant is preserved for \(a[0\dotsc p]\) for the next iteration.</p>
+</li>
+</ul>
+</div>
+<h2 id="exercise">Exercise</h2>
+<ol>
+<li>Write an algorithm to compute the minimum element in an array. Prove that your algorithm is correct by stating the correct invariant.</li>
+</ol>
+
+    
+    <nav class="chapter">
+      <ul>
+        
+        <li><a href="https://bkomarath.rbgo.in/dsa/machines-and-computation/recursion/">→ Recursion</a></li>
+        
+        
+        <li><a href="https://bkomarath.rbgo.in/dsa/machines-and-computation/asymptotic-analysis/">← Asymptotic analysis</a></li>
+        
+        <li><a href="/dsa">↑ Data Structures and Algorithms</a></li>
+      </ul>
+    </nav>
+  </main>
+
+  <footer>
+  <p>
+    All content on this website is licensed under
+    <a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA
+      4.0</a> by Balagopal Komarath unless mentioned otherwise.
+</footer>
+
+</body>
+</html>

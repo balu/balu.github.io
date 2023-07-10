@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="author" content="Balagopal Komarath" />
+  <title> </title>
+  <link rel="stylesheet" type="text/css" href="/css/bk.css" />
+  
+  <script>
+   MathJax = {
+     tex: {
+       inlineMath: [['$', '$'], ['\\(', '\\)']]
+     },
+     svg: {
+       fontCache: 'global'
+     }
+   };
+  </script>
+  <script type="text/javascript" id="MathJax-script" async
+          src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+  </script>
+  
+</head>
+<body>
+  <header>
+  <a class="skip-link" aria-label="Skip to main content" href="#main">Skip to main content</a>
+  <a class="logo" href="/">bkomarath</a>
+  <a class="menu" href="/menu">Menu</a>
+</header>
+
+  
+  <main>
+    <h1>Time</h1>
+    <p>The <em>time</em> taken by an execution of the algorithm is the number of instructions in the execution trace. For an algorithm \(A\), and an input \(x\), we define \(t&rsquo;_A(x)\) to be the time taken by the algorithm \(A\) on input \(x\).</p>
+<p>The <em>worst case time complexity</em> of an algorithm \(A\) is defined as:</p>
+<p>\begin{equation}
+t_A(n) = \max_{x : |x| = n} t&rsquo;_A(x)
+\end{equation}</p>
+<p>where \(|x|\) denotes the size of the instance \(x\).</p>
+<p>Why this definition? We want to argue that our programs will take <em>at most</em> \(t\) time for <em>any</em> input of size at most \(n\). i.e., when analyzing performance, we are not interested in the time taken on easy inputs or even on time taken on specific input strings. We are only interested in the <em>growth</em> of time with the input size. From this perspective, worst case time complexity is the right measure of the performance of an algorithm.</p>
+<h2 id="exercise">Exercise</h2>
+<ol>
+<li>Find two inputs \(x\) and \(y\) such that \(|x| = |y|\) and \(t&rsquo;_{\texttt{gcd}}(x) \neq t&rsquo;_{\texttt{gcd}}(y)\).</li>
+<li>What is \(t_{\texttt{gcd}}(n)\)?</li>
+</ol>
+
+    
+    <nav class="chapter">
+      <ul>
+        
+        <li><a href="https://bkomarath.rbgo.in/dsa/machines-and-computation/asymptotic-analysis/">→ Asymptotic analysis</a></li>
+        
+        
+        <li><a href="https://bkomarath.rbgo.in/dsa/machines-and-computation/execution/">← Execution</a></li>
+        
+        <li><a href="/dsa">↑ Data Structures and Algorithms</a></li>
+      </ul>
+    </nav>
+  </main>
+
+  <footer>
+  <p>
+    All content on this website is licensed under
+    <a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA
+      4.0</a> by Balagopal Komarath unless mentioned otherwise.
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="author" content="Balagopal Komarath" />
+  <title> </title>
+  <link rel="stylesheet" type="text/css" href="/css/bk.css" />
+  
+  <script>
+   MathJax = {
+     tex: {
+       inlineMath: [['$', '$'], ['\\(', '\\)']]
+     },
+     svg: {
+       fontCache: 'global'
+     }
+   };
+  </script>
+  <script type="text/javascript" id="MathJax-script" async
+          src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+  </script>
+  
+</head>
+<body>
+  <header>
+  <a class="skip-link" aria-label="Skip to main content" href="#main">Skip to main content</a>
+  <a class="logo" href="/">bkomarath</a>
+  <a class="menu" href="/menu">Menu</a>
+</header>
+
+  
+  <main>
+    <h1>Asymptotic analysis</h1>
+    <p>We would like to classify functions based on the <em>order</em> of their growth. Function \(f(n) = 3n^2\) and \(g(n) = 2n^2 + n + \log(n)\) are different but in a sense the same when you consider the order of their growth. More concretely, they both satisfy the equation \(\lim_{n \to \infty} h(2n)/h(n) = 4\).</p>
+<p>\begin{equation}
+O(f) = \{ g \mid \exists n_0, c &gt; 0(\forall n \geq n_0(g(n) \leq cf(n)))\}
+\end{equation}</p>
+<p>\begin{equation}
+\Omega(f) = \{ g \mid \exists n_0, c &gt; 0(\forall n \geq n_0(g(n) \geq cf(n)))\}
+\end{equation}</p>
+<p>\begin{equation}
+\Theta(f) = O(f) \cap \Omega(f)
+\end{equation}</p>
+<h2 id="exercise">Exercise</h2>
+<ol>
+<li>The <em>Fibonacci sequence</em> is given by the recurrence: \(F_0=F_1=1\), \(F_n=F_{n-1} + F_{n-2}\) for \(n&gt;2\). What is the largest Fibonacci number that can fit into a word in a 64-bit machine? What about 128-bit machines?</li>
+</ol>
+
+    
+    <nav class="chapter">
+      <ul>
+        
+        <li><a href="https://bkomarath.rbgo.in/dsa/machines-and-computation/proofs/">→ Proofs</a></li>
+        
+        
+        <li><a href="https://bkomarath.rbgo.in/dsa/machines-and-computation/time/">← Time</a></li>
+        
+        <li><a href="/dsa">↑ Data Structures and Algorithms</a></li>
+      </ul>
+    </nav>
+  </main>
+
+  <footer>
+  <p>
+    All content on this website is licensed under
+    <a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA
+      4.0</a> by Balagopal Komarath unless mentioned otherwise.
+</footer>
+
+</body>
+</html>
