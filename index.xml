@@ -153,23 +153,74 @@ Are all problems computable? Does backtracking help? Is there a best algorithm f
     </item>
     
     <item>
+      <title>Algorithms</title>
+      <link>https://bkomarath.rbgo.in/dsa/machines-and-computation/algorithms/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://bkomarath.rbgo.in/dsa/machines-and-computation/algorithms/</guid>
+      <description>An algorithm describes to a computational device the steps needed to solve a computational problem. Whether or not a sequence of steps is an algorithm depends on the computational device. An algorithm for one type of device may not be an algorithm for another type of device. Therefore, in order to define algorithms, we have to fix a computational device first. Then, we can describe the set of instructions that the machine understands.</description>
+    </item>
+    
+    <item>
+      <title>Asymptotic analysis</title>
+      <link>https://bkomarath.rbgo.in/dsa/machines-and-computation/asymptotic-analysis/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://bkomarath.rbgo.in/dsa/machines-and-computation/asymptotic-analysis/</guid>
+      <description>We would like to classify functions based on the order of their growth. Function \(f(n) = 3n^2\) and \(g(n) = 2n^2 + n + \log(n)\) are different but in a sense the same when you consider the order of their growth. More concretely, they both satisfy the equation \(\lim_{n \to \infty} h(2n)/h(n) = 4\).
+\begin{equation} O(f) = \{ g \mid \exists n_0, c &amp;gt; 0(\forall n \geq n_0(g(n) \leq cf(n)))\} \end{equation}</description>
+    </item>
+    
+    <item>
+      <title>Computational problems</title>
+      <link>https://bkomarath.rbgo.in/dsa/machines-and-computation/computational-problems/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://bkomarath.rbgo.in/dsa/machines-and-computation/computational-problems/</guid>
+      <description>A computational problem is specified by:
+The name of the problem. The inputs and their representation. The outputs for a given input and their representation. The effects of the computation on the machine for a given input. The primary school computational problem of adding two numbers can be specified as follows:
+Name ADD Input Two numbers \(n\) and \(m\) in decimal. Output The sum \(n+m\) in decimal. Effect None. The numbers are presented to you in decimal representation.</description>
+    </item>
+    
+    <item>
       <title>Contact - Balagopal Komarath</title>
       <link>https://bkomarath.rbgo.in/contact/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://bkomarath.rbgo.in/contact/</guid>
       <description>Balagopal Komarath&#39;s contact details My email id is bkomarath at rbgo dot in. Please wait at least two days before sending a follow-up email.
-My current office is AB6/407B. If you want to schedule a meeting, please check my calendar and propose a free slot. Please try to leave a gap of at least fifteen minutes to my other meetings.</description>
+My current office is AB13/405B. If you want to schedule a meeting, please check my calendar and propose a free slot. Please try to leave a gap of at least fifteen minutes to my other meetings.</description>
     </item>
     
     <item>
-      <title>Learning Materials</title>
-      <link>https://bkomarath.rbgo.in/materials/</link>
+      <title>Execution</title>
+      <link>https://bkomarath.rbgo.in/dsa/machines-and-computation/execution/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://bkomarath.rbgo.in/materials/</guid>
-      <description> Learning Materials recommended by Balagopal Komarath All recommendations are for resources freely available online.
-Programming Python C++ Beej&#39;s guides for C and systems programming Mathematics for computer science Mathematics for computer science at MIT Data structures and algorithms Algorithms by Jeff Erickson </description>
+      <guid>https://bkomarath.rbgo.in/dsa/machines-and-computation/execution/</guid>
+      <description>An algorithm is a recipe or a template that tells us how to compute the answer on an arbitrary input. When an algorithm is executed on specific inputs, we obtain an execution trace that completely describes the events that occurred in the machine. An execution trace is a list of pairs \((I, M)\), where \(I\) is some instruction in the algorithm and \(M\) is the contents of the storage just before \(I\) is performed.</description>
+    </item>
+    
+    <item>
+      <title>Proofs</title>
+      <link>https://bkomarath.rbgo.in/dsa/machines-and-computation/proofs/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://bkomarath.rbgo.in/dsa/machines-and-computation/proofs/</guid>
+      <description>To prove that an algorithm is correct, we have to prove that its execution on every input is correct. Let \(f\) be the computational problem solved by \(A\). Then, we have to prove a statement such as:
+\(\forall x. f(x) = A(x)\)
+where \(x\) is chosen from the domain of all valid inputs. Here, we denote by \(f(x)\) the required outputs and effects of the problem on \(x\), and by \(A(x)\) the outputs and effects produced by \(A\) on \(x\).</description>
+    </item>
+    
+    <item>
+      <title>Recursion</title>
+      <link>https://bkomarath.rbgo.in/dsa/machines-and-computation/recursion/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://bkomarath.rbgo.in/dsa/machines-and-computation/recursion/</guid>
+      <description>Recursion is self-reference. An recursive algorithm may refer to itself directly or indirectly to solve a different instance of the same problem being solved by the algorithm. The following self-reference is trivial but not algorithmic:
+To sort an array a, sort the array a.
+It is recursive but doesn&amp;rsquo;t terminate and so cannot be an algorithm. So the self-reference has to be invoked on different instances so that it may terminate.</description>
     </item>
     
     <item>
@@ -181,6 +232,18 @@ Programming Python C++ Beej&#39;s guides for C and systems programming Mathemati
       <description>Balagopal Komarath&#39;s research publications The research articles that I have co-authored are given below in reverse chronological order.
 Finding and counting patterns in sparse graphs with Anant Kumar, Suchismita Mishra, and Aditi Sethia
 A pattern is a small graph that we want to find in a larger graph called the host graph. The state of the art algorithms for finding and counting patterns in graphs are oblivious to the number of edges in the host graph.</description>
+    </item>
+    
+    <item>
+      <title>Time</title>
+      <link>https://bkomarath.rbgo.in/dsa/machines-and-computation/time/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://bkomarath.rbgo.in/dsa/machines-and-computation/time/</guid>
+      <description>The time taken by an execution of the algorithm is the number of instructions in the execution trace. For an algorithm \(A\), and an input \(x\), we define \(t&amp;rsquo;_A(x)\) to be the time taken by the algorithm \(A\) on input \(x\).
+The worst case time complexity of an algorithm \(A\) is defined as:
+\begin{equation} t_A(n) = \max_{x : |x| = n} t&amp;rsquo;_A(x) \end{equation}
+where \(|x|\) denotes the size of the instance \(x\).</description>
     </item>
     
   </channel>
