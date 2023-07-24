@@ -12,7 +12,7 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://bkomarath.rbgo.in/dsa/machines-and-computation/algorithms/</guid>
-      <description>An algorithm describes to a computational device the steps needed to solve a computational problem. Whether or not a sequence of steps is an algorithm depends on the computational device. An algorithm for one type of device may not be an algorithm for another type of device. Therefore, in order to define algorithms, we have to fix a computational device first. Then, we can describe the set of instructions that the machine understands.</description>
+      <description>An algorithm describes to a computational device the steps needed to solve a computational problem. The set of instructions that a machine understands is called its instruction set. An algorithm for this machine is then a sequence of instructions where every instruction is from this set. Even in modern computers, the exact instruction set varies from one manufacturer to the other. In order to avoid tying algorithms to a specific type of device, high-level languages such as C or Python may be used to describe algorithms.</description>
     </item>
     
     <item>
@@ -21,8 +21,7 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://bkomarath.rbgo.in/dsa/machines-and-computation/asymptotic-analysis/</guid>
-      <description>We would like to classify functions based on the order of their growth. Function \(f(n) = 3n^2\) and \(g(n) = 2n^2 + n + \log(n)\) are different but in a sense the same when you consider the order of their growth. More concretely, they both satisfy the equation \(\lim_{n \to \infty} h(2n)/h(n) = 4\).
-\begin{equation} O(f) = \{ g \mid \exists n_0, c &amp;gt; 0(\forall n \geq n_0(g(n) \leq cf(n)))\} \end{equation}</description>
+      <description>We would like to classify functions based on the order of their growth. Function \(f(n) = 3n^2\) and \(g(n) = 2n^2 + n + \log(n)\) are different but in a sense the same when you consider the order of their growth. More concretely, they both satisfy the equation \(\lim_{n \to \infty} h(2n)/h(n) = 4\). We can think of \(f\) and \(g\) as time taken by some algorithms. Then, the limit communicates the information that if we double the size of the input, the running time increases by a factor of four.</description>
     </item>
     
     <item>
@@ -31,9 +30,8 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://bkomarath.rbgo.in/dsa/machines-and-computation/computational-problems/</guid>
-      <description>A computational problem is specified by:
-The name of the problem. The inputs and their representation. The outputs for a given input and their representation. The effects of the computation on the machine for a given input. The primary school computational problem of adding two numbers can be specified as follows:
-Name ADD Input Two numbers \(n\) and \(m\) in decimal. Output The sum \(n+m\) in decimal. Effect None. The numbers are presented to you in decimal representation.</description>
+      <description>We use computing to solve computational problems. A computational problem should be specified by a (1) name, (2) description of its inputs, and (3) description of its outputs including how the inputs and outputs are related. The problem of sorting a sequence of elements can be specified as:
+Name SORT Input A sequence of elements and an ordering relation among the elements. Output The same sequence of elements in ascending order.</description>
     </item>
     
     <item>

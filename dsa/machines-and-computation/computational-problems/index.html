@@ -6,25 +6,13 @@
   <meta name="author" content="Balagopal Komarath" />
   <title> </title>
   <link rel="stylesheet" type="text/css" href="/css/bk.css" />
+  <link rel="stylesheet" type="text/css" media="print" href="/css/bkprint.css" />
   
-  <script>
-   MathJax = {
-     tex: {
-       inlineMath: [['$', '$'], ['\\(', '\\)']]
-     },
-     svg: {
-       fontCache: 'global'
-     }
-   };
-  </script>
-  <script type="text/javascript" id="MathJax-script" async
-          src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
-  </script>
+  <script type="text/javascript" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
   
 </head>
 <body>
   <header>
-  <a class="skip-link" aria-label="Skip to main content" href="#main">Skip to main content</a>
   <a class="logo" href="/">bkomarath</a>
   <a class="menu" href="/menu">Menu</a>
 </header>
@@ -32,45 +20,40 @@
   
   <main>
     <h1>Computational problems</h1>
-    <p>A <em>computational problem</em> is specified by:</p>
-<ul>
-<li>The <em>name</em> of the problem.</li>
-<li>The <em>inputs</em> and their representation.</li>
-<li>The <em>outputs</em> for a given input and their representation.</li>
-<li>The <em>effects</em> of the computation on the machine for a given input.</li>
-</ul>
-<p>The primary school computational problem of adding two numbers can be specified as follows:</p>
-<dl>
-<dt>Name</dt>
-<dd>ADD</dd>
-<dt>Input</dt>
-<dd>Two numbers \(n\) and \(m\) in decimal.</dd>
-<dt>Output</dt>
-<dd>The sum \(n+m\) in decimal.</dd>
-<dt>Effect</dt>
-<dd>None.</dd>
-</dl>
-<p>The numbers are presented to you in decimal representation. The output of the problem is related to inputs via the equation \(x = n+m\) and \(x\) is expected to be in decimal representation. This problem statement is device independent. i.e., the problem may be reasonably expected to be solved by a human (which is typically the case in primary school) or a computer.</p>
-<p>When specifying problems in this text, we will assume that it is to be solved by a specific computational device, like a digital computer. Therefore, we may incorporate some details of the machine into the problem specification. For example, the sorting problem, which is solved by Python&rsquo;s <code>list.sort()</code> or C&rsquo;s <code>qsort()</code> functions can be specified as:</p>
+    <p>We use computing to solve <em>computational problems</em>. A computational problem should be specified by a (1) name, (2) description of its inputs, and (3) description of its outputs including how the inputs and outputs are related. The problem of sorting a sequence of elements can be specified as:</p>
 <dl>
 <dt>Name</dt>
 <dd>SORT</dd>
 <dt>Input</dt>
-<dd>An array <code>a</code> of <code>n</code> elements along with an ordering relation on the elements.</dd>
+<dd>A sequence of elements and an ordering relation among the elements.</dd>
 <dt>Output</dt>
-<dd>None.</dd>
-<dt>Effect</dt>
-<dd>The elements of the array are reordered into ascending order.</dd>
+<dd>The same sequence of elements in ascending order.</dd>
 </dl>
-<p>Notice that the resulting sequence is obtained as an effect of the computation. i.e., the storage holding the input array is modified so that it becomes the desired output array. The problem specification requires no output. So these functions return no values.</p>
-<p>A variant of SORT where there are no effects where the input sequence remains the same and the output is the sorted sequence may also be defined. The following Python function solves this variant of SORT.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">sort</span><span class="p">(</span><span class="n">xs</span><span class="p">):</span>
-</span></span><span class="line"><span class="cl">      <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">xs</span><span class="p">))</span>
-</span></span></code></pre></div><h2 id="exercise">Exercise</h2>
+<p>We can also make the specification more precise by using mathematical notation.</p>
+<dl>
+<dt>Name</dt>
+<dd>SORT</dd>
+<dt>Input</dt>
+<dd><ul>
+<li>A sequence \(S = (a_0, \dotsc, a_{n-1})\) where each \(a_i\in A\) for some set \(A\).</li>
+<li>A total order \(\leq\) on the set \(A\).</li>
+</ul>
+</dd>
+<dt>Output</dt>
+<dd>A sequence \(T = (b_0, \dotsc, b_{n-1})\) that satisfies:
+<ul>
+<li>The sequence \(T\) can be obtained from \(S\) by only rearranging the elements of \(S\).</li>
+<li>\(b_0 \leq b_1 \dotsc \leq b_{n-1}\).</li>
+</ul>
+</dd>
+</dl>
+<p>As with all writing, the specification you use should depend on the audience. The simplest specification that conveys the full information is the best one.</p>
+<h2 id="exercise">Exercise</h2>
 <ol>
 <li>Define the computational problem of subtracting two natural numbers.</li>
-<li>Define the computational problem of finding the largest element in a list of natural numbers.</li>
-<li>Define the computational problem of finding an element in a list.</li>
+<li>Define the computational problem of finding the largest element in a sequence of natural numbers.</li>
+<li>Define the computational problem of finding an element in a sequence.</li>
+<li>Show how to mathematically specify: &ldquo;The sequence \(T\) can be obtained from \(S\) by only rearranging the elements of \(S\)&rdquo;.</li>
 </ol>
 
     

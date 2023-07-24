@@ -6,7 +6,27 @@
     <description>Recent content on Balagopal Komarath&#39;s Homepage</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 05 Jan 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://bkomarath.rbgo.in/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 24 Jul 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://bkomarath.rbgo.in/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Data Structures and Algorithms I (2023)</title>
+      <link>https://bkomarath.rbgo.in/teaching/data-structures-and-algorithms-i-2023/</link>
+      <pubDate>Mon, 24 Jul 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://bkomarath.rbgo.in/teaching/data-structures-and-algorithms-i-2023/</guid>
+      <description>In this course, we will see how to structure data (data structures) so that complex operations (algorithms) can be efficiently executed. This course lies in the intersection of mathematics and computing. We will learn about the most basic and widely-used data structures and algorithms, prove their correctness and efficiency by writing mathematics, and implement them using C/C++ to understand how they work in practice.
+Grading Assessment Percentage Attendance 10 Lab Assignments 20 Exam I 20 Exam II 20 Exam III 30 Lecture Plan #Lectures Topic 1 Problems, Algorithms 1 Execution, Time 2 Asymptotic Analysis 2 Proofs 2 Recursion 2 Stacks 1 Queues 1 Priority queues 1 Heaps, heapsort 2 Sets, Dictionaries 1 Dynamic arrays 2 Hashing 2 Binary Search Trees 3 Graphs, Trees 2 Traversal 2 Graph algorithms 3 Reductions </description>
+    </item>
+    
+    <item>
+      <title>On Order</title>
+      <link>https://bkomarath.rbgo.in/posts/on-order/</link>
+      <pubDate>Sun, 23 Jul 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://bkomarath.rbgo.in/posts/on-order/</guid>
+      <description>A partial order is a binary relation on sets, usually denoted \(\leq\), defined as satisfying the following three properties for all \(a\), \(b\), and \(c\):
+(Reflexivity) \(a\leq a\). (Transitivity) \(a\leq b\) and \(b \leq c\) implies \(a\leq c\). (Antisymmetry) \(a \leq b\) and \(b \leq a\) implies \(a=b\). Examples of partial orders are the usual ordering on integers, the divisibility relation on natural numbers, and the subset relation on sets.</description>
+    </item>
+    
     <item>
       <title>Programming Projects for Beginners</title>
       <link>https://bkomarath.rbgo.in/posts/programming-projects-for-beginners/</link>
@@ -158,7 +178,7 @@ Are all problems computable? Does backtracking help? Is there a best algorithm f
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://bkomarath.rbgo.in/dsa/machines-and-computation/algorithms/</guid>
-      <description>An algorithm describes to a computational device the steps needed to solve a computational problem. Whether or not a sequence of steps is an algorithm depends on the computational device. An algorithm for one type of device may not be an algorithm for another type of device. Therefore, in order to define algorithms, we have to fix a computational device first. Then, we can describe the set of instructions that the machine understands.</description>
+      <description>An algorithm describes to a computational device the steps needed to solve a computational problem. The set of instructions that a machine understands is called its instruction set. An algorithm for this machine is then a sequence of instructions where every instruction is from this set. Even in modern computers, the exact instruction set varies from one manufacturer to the other. In order to avoid tying algorithms to a specific type of device, high-level languages such as C or Python may be used to describe algorithms.</description>
     </item>
     
     <item>
@@ -167,8 +187,7 @@ Are all problems computable? Does backtracking help? Is there a best algorithm f
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://bkomarath.rbgo.in/dsa/machines-and-computation/asymptotic-analysis/</guid>
-      <description>We would like to classify functions based on the order of their growth. Function \(f(n) = 3n^2\) and \(g(n) = 2n^2 + n + \log(n)\) are different but in a sense the same when you consider the order of their growth. More concretely, they both satisfy the equation \(\lim_{n \to \infty} h(2n)/h(n) = 4\).
-\begin{equation} O(f) = \{ g \mid \exists n_0, c &amp;gt; 0(\forall n \geq n_0(g(n) \leq cf(n)))\} \end{equation}</description>
+      <description>We would like to classify functions based on the order of their growth. Function \(f(n) = 3n^2\) and \(g(n) = 2n^2 + n + \log(n)\) are different but in a sense the same when you consider the order of their growth. More concretely, they both satisfy the equation \(\lim_{n \to \infty} h(2n)/h(n) = 4\). We can think of \(f\) and \(g\) as time taken by some algorithms. Then, the limit communicates the information that if we double the size of the input, the running time increases by a factor of four.</description>
     </item>
     
     <item>
@@ -177,9 +196,8 @@ Are all problems computable? Does backtracking help? Is there a best algorithm f
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://bkomarath.rbgo.in/dsa/machines-and-computation/computational-problems/</guid>
-      <description>A computational problem is specified by:
-The name of the problem. The inputs and their representation. The outputs for a given input and their representation. The effects of the computation on the machine for a given input. The primary school computational problem of adding two numbers can be specified as follows:
-Name ADD Input Two numbers \(n\) and \(m\) in decimal. Output The sum \(n+m\) in decimal. Effect None. The numbers are presented to you in decimal representation.</description>
+      <description>We use computing to solve computational problems. A computational problem should be specified by a (1) name, (2) description of its inputs, and (3) description of its outputs including how the inputs and outputs are related. The problem of sorting a sequence of elements can be specified as:
+Name SORT Input A sequence of elements and an ordering relation among the elements. Output The same sequence of elements in ascending order.</description>
     </item>
     
     <item>

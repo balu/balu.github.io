@@ -6,25 +6,13 @@
   <meta name="author" content="Balagopal Komarath" />
   <title> </title>
   <link rel="stylesheet" type="text/css" href="/css/bk.css" />
+  <link rel="stylesheet" type="text/css" media="print" href="/css/bkprint.css" />
   
-  <script>
-   MathJax = {
-     tex: {
-       inlineMath: [['$', '$'], ['\\(', '\\)']]
-     },
-     svg: {
-       fontCache: 'global'
-     }
-   };
-  </script>
-  <script type="text/javascript" id="MathJax-script" async
-          src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
-  </script>
+  <script type="text/javascript" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
   
 </head>
 <body>
   <header>
-  <a class="skip-link" aria-label="Skip to main content" href="#main">Skip to main content</a>
   <a class="logo" href="/">bkomarath</a>
   <a class="menu" href="/menu">Menu</a>
 </header>
@@ -32,16 +20,7 @@
   
   <main>
     <h1>Algorithms</h1>
-    <p>An <em>algorithm</em> describes to a computational device the steps needed to solve a computational problem. Whether or not a sequence of steps is an algorithm depends on the computational device. An algorithm for one type of device may not be an algorithm for another type of device. Therefore, in order to define algorithms, we have to fix a computational device first. Then, we can describe the set of instructions that the machine understands. This set is called the <em>instruction set</em>. An algorithm for this machine is then a sequence of instructions where every instruction is drawn from this set. The definition of an algorithm may also impose restrictions on the way in which instructions can be combined.</p>
-<p>In the early days of digital computers, the instruction set included a <code>load</code> instruction to load data into named memory locations for consumption by other operations and an <code>add</code> instruction to add numbers. So the following was (and <em>is</em>) a valid algorithm.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-asm" data-lang="asm"><span class="line"><span class="cl"><span class="nf">load</span> <span class="no">r1</span><span class="p">,</span> <span class="mi">2</span>
-</span></span><span class="line"><span class="cl"><span class="nf">load</span> <span class="no">r2</span><span class="p">,</span> <span class="mi">2</span>
-</span></span><span class="line"><span class="cl"><span class="nf">add</span>  <span class="no">r0</span><span class="p">,</span> <span class="no">r1</span><span class="p">,</span> <span class="no">r2</span>
-</span></span></code></pre></div><p>On the other hand, there was no <code>mul</code> instruction to multiply numbers. So the following algorithm that is valid on a modern digital computer was not valid.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-asm" data-lang="asm"><span class="line"><span class="cl"><span class="nf">load</span> <span class="no">r1</span><span class="p">,</span> <span class="mi">2</span>
-</span></span><span class="line"><span class="cl"><span class="nf">load</span> <span class="no">r2</span><span class="p">,</span> <span class="mi">3</span>
-</span></span><span class="line"><span class="cl"><span class="nf">mul</span>  <span class="no">r0</span><span class="p">,</span> <span class="no">r1</span><span class="p">,</span> <span class="no">r2</span>
-</span></span></code></pre></div><p>Even in modern computers, the exact instruction set varies from one manufacturer to the other. In order to avoid tying algorithms to a specific type of device, <em>high-level languages</em> such as C or Python may be used to describe algorithms. We will describe our algorithms in the C programming language to avoid any dependency on specific machines.</p>
+    <p>An <em>algorithm</em> describes to a computational device the steps needed to solve a computational problem. The set of instructions that a machine understands is called its <em>instruction set</em>. An algorithm for this machine is then a sequence of instructions where every instruction is from this set. Even in modern computers, the exact instruction set varies from one manufacturer to the other. In order to avoid tying algorithms to a specific type of device, <em>high-level languages</em> such as C or Python may be used to describe algorithms. We will describe our algorithms in the C programming language to avoid any dependency on specific machines.</p>
 <h2 id="the-first-algorithm">The first algorithm</h2>
 <p>Consider the problem of computing the <em>greatest common divisor</em> of two natural numbers.</p>
 <dl>
@@ -51,8 +30,6 @@
 <dd>Two numbers \(n\) and \(m\).</dd>
 <dt>Output</dt>
 <dd>The largest number \(d\) that divides both \(n\) and \(m\) evenly.</dd>
-<dt>Effect</dt>
-<dd>None.</dd>
 </dl>
 <p>The first algorithm for this problem, which we call the <em>naive gcd algorithm</em>, tests each possible divisor starting from the maximum.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">gcd</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">,</span> <span class="kt">int</span> <span class="n">m</span><span class="p">)</span>
@@ -65,19 +42,23 @@
 </span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">n</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></div><p>We can prove that the algorithm is correct by applying the definition of gcd. First, observe that gcd is symmetric. Using this, we can ensure that \(n\) is at least \(m\). If the smallest number is zero, then the other number is the gcd. In this case, the condition <code>d &gt; 0</code> is false initially and we simply return the other number. Otherwise, the gcd is in the range \([1, m]\). We search for this number starting from the greatest one so that the first common divisor we find is the gcd.</p>
-<p>The above analysis does not match reality. The C program above will have different behavior when executed on different machines. This is because the definition of an <code>int</code> in C depends on the machine. This issue can be avoided by writing our algorithms in a truly machine independent language such as Python. However, such languages hide too many details of the underlying machine. The primary purpose of learning algorithms is to understand algorithms that execute efficiently in practice. We will get out of this dilemma by writing programs in C and analyzing them as if they are executing on an idealized machine. This &ldquo;trick&rdquo; of analyzing an idealized version of reality is common in science. In classical physics, we analyze motion of bodies assuming they are <em>point particles</em>, objects with non-zero mass that takes up no space. Such objects cannot exist in reality. But, the analysis of motion of point particles is good enough for many applications. Similarly, the analysis of algorithms on our idealized machine will be good enough for many applications. We are now ready to introduce our idealized machine.</p>
+<p>The above analysis does not match reality. The C program above will have different behavior when executed on different machines. This is because the definition of an <code>int</code> in C depends on the machine. This issue can be avoided by writing our algorithms in a truly machine independent language such as Python. However, such languages hide too many details of the underlying machine. The primary purpose of learning algorithms is to understand algorithms that execute efficiently in practice. So we want to write our algorithms in an efficient, machine-dependent language and analyze them as if they were machine-independent.</p>
+<p>This &ldquo;trick&rdquo; of analyzing an idealized version of reality is common in science. In classical physics, we analyze motion of bodies assuming they are <em>point particles</em>, objects with non-zero mass that takes up no space. Such objects cannot exist in reality. But, the analysis of motion of point particles is good enough for many applications. Similarly, the analysis of algorithms on our idealized machine will be good enough for many applications. We are now ready to introduce our idealized machine.</p>
 <h2 id="unit-cost-ram-model">Unit-cost RAM model</h2>
-<p>The unit-cost random-access machine (RAM) model is an abstract computational device. The RAM executes a sequence of instructions that operate on storage. A unit of storage is called a <em>word</em>. The storage consists of a sequence of words numbered from 0. This number is called the <em>address</em> of the word. Each word may also store an integer, the magnitude of which is polynomial in the size of the input. i.e., there exists a constant \(k\) such that if the input size is \(n\), we assume that a word can hold integers in the range \([-n^k - k, n^k + k]\). The integer stored in a word may thus encode an address, or more generally, an element from any set the size of which is polynomial in the size of the input. The RAM executes instructions in the order specified by the sequence. i.e., if the instructions are \((i_0, i_1, \dotsc, i_k)\), then the RAM executes \(i_0\), followed by \(i_1\) and so on with a few exceptions. The instruction set includes instructions that perform arithmetic on values in words and store the result in (possibly) other words. There are also control-flow instructions that may compare values in words and transfer control to an arbitrary point in the instruction sequence depending on the result of the comparison. For example, here is a RAM program that computes the absolute value of the difference of words in \(0\) and \(1\) into word \(2\):</p>
+<p>The unit-cost random-access machine (RAM) model is an abstract computational device. The RAM executes a sequence of instructions that operate on storage. A unit of storage is called a <em>word</em>. The storage consists of a sequence of words numbered from 0. This number is called the <em>address</em> of the word. Each word may also store an integer, the magnitude of which is polynomial in the size of the input. i.e., there exists a constant \(k\) such that if the input size is \(n\), we assume that a word can hold integers in the range \([-n^k - k, n^k + k]\). The integer stored in a word may thus encode an address, or more generally, an element from any set the size of which is polynomial in the size of the input.</p>
+<p>An algorithm  for the RAM is a sequence of instructions such as \((i_0, i_1, \dotsc, i_k)\). The instructions are executed in order with only a few exceptions. The instruction set includes instructions that perform arithmetic on values in words and store the result in (possibly) other words. There are also control-flow instructions that may compare values in words and transfer control to an arbitrary point in the instruction sequence depending on the result of the comparison. For example, here is a RAM program that computes the absolute value of the difference of words in \([0]\) and \([1]\) into word \([2]\):</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-asm" data-lang="asm"><span class="line"><span class="cl"><span class="err">0:</span> <span class="nf">jmpif</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="err">&lt;</span> <span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">3</span>
 </span></span><span class="line"><span class="cl"><span class="err">1:</span> <span class="nf">sub</span>   <span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span>
 </span></span><span class="line"><span class="cl"><span class="err">2:</span> <span class="nf">jmp</span>   <span class="mi">4</span>
 </span></span><span class="line"><span class="cl"><span class="err">3:</span> <span class="nf">sub</span>   <span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 </span></span><span class="line"><span class="cl"><span class="err">4:</span> <span class="nf">end</span>
 </span></span></code></pre></div><p>So how is the RAM idealized? Real-world computers have fixed-size words. A 64-bit machine has 64-bit words. Any instruction can only operate on these fixed-size words. And, in C, integers are stored in these fixed-size words, not words that grow with the input size. Why is this idealization effective? The assumption behind the RAM model holds whenever \(k\) and \(n\) are small enough so that \(n^k + k &lt; 2^{64}\).</p>
+<h2 id="analysis-of-gcd-on-the-ram-model">Analysis of GCD on the RAM model</h2>
+<p>We can represent a natural number \(n\) using binary representation in \(\lceil \log_2(n) \rceil\) bits. Therefore, the assumption behind the <code>gcd</code> function is that \(\lceil \log_2(n) \rceil\) and \(\lceil \log_2(m) \rceil\) are both less than 64. If this assumption is true, observe that the variable \(d\) only holds numbers that can be represented using 64 bits. Observe that in this case, our mathematical proof of correctness of <code>gcd</code> is correct. Moreover, all arithmetic operations in our program correspond to arithmetic operations on 64-bit words. All these operations are unit-cost.</p>
 <h2 id="exercise">Exercise</h2>
 <ol>
-<li>Say an algorithm has \(k=2\), assume the computer can execute \(10\) billion instructions a second, how large an input can the algorithm handle before the heat death of the universe?</li>
-<li>What if \(k=100\)?</li>
+<li>Let \(k=2\). What is the largest \(n\) for which the assumption of the RAM model holds? Assume that the underlying machine has 64-bit words. What if it has 128-bit words?</li>
+<li>Do the same analysis for \(k=100\)?</li>
 </ol>
 
     

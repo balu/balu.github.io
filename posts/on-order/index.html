@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="author" content="Balagopal Komarath" />
+  <title>
+On Order
+</title>
+  <link rel="stylesheet" type="text/css" href="/css/bk.css" />
+  <link rel="stylesheet" type="text/css" media="print" href="/css/bkprint.css" />
+  
+  <script type="text/javascript" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  
+</head>
+<body>
+  <header>
+  <a class="logo" href="/">bkomarath</a>
+  <a class="menu" href="/menu">Menu</a>
+</header>
+
+  
+<main>
+  <h1>On Order</h1>
+  <p>A <em>partial order</em> is a binary relation on sets, usually denoted \(\leq\), defined as satisfying the following three properties for all \(a\), \(b\), and \(c\):</p>
+<ol>
+<li>(Reflexivity) \(a\leq a\).</li>
+<li>(Transitivity) \(a\leq b\) and \(b \leq c\) implies \(a\leq c\).</li>
+<li>(Antisymmetry) \(a \leq b\) and \(b \leq a\) implies \(a=b\).</li>
+</ol>
+<p>Examples of partial orders are the usual ordering on integers, the divisibility relation on natural numbers, and the subset relation on sets.</p>
+<p>In my opinion, any relation that allows us to <em>compare</em> elements should be a partial order. In this article, I propose to change the definition of partial order so that reflexivity and transitivity are the only two required properties. We will see that an antisymmetry follows naturally. First, we take a look at equality.</p>
+<p>Consider homogeneous linear polynomials on two variables. We say that \(x+2y\neq 2x+4y\). We <em>see</em> these polynomials as points on a two-dimensional Euclidean plane. With this context, the natural way to define equality is to say that two polynomials are equal if and only if they are the same point.</p>
+<p>Consider rational numbers. They can also be seen as points on a two-dimensional Euclidean place. But we do not say \(1/2 \neq 2/4\). This is because the most natural way to interpret rational numbers is by mapping them to the number line, a 1-dimensional Euclidean space. Under this mapping \(1/2\) and \(2/4\) are the same point. Some also use the terminology that \(1/2\) and \(2/4\) are distinct as fractions but same as rational numbers.</p>
+<p>Notice that mapping rational numbers to the number line induces a natural ordering on the rational numbers. We can now define equality of rational numbers using antisymmetry.</p>
+<blockquote>
+<p>\(a = b\) iff \(a\leq b\) and \(b\leq a\).</p>
+</blockquote>
+<p>Even though equality as fractions is a finer equivalence than the one based on order, the latter is more natural in the context of rational numbers.</p>
+<p>I argue that whenever we are studying partial orders, the most natural equivalence is almost always the equivalence defined as above. So there is no need to include antisymmetry in the definition, it is always true because we choose an equivalence to be so. Of course, this implies that all properties that we prove about the elements of the partial order will only be true up to this equivalence. But this is usually the case. Statements about rational numbers and statements about structural properties of graphs are only true up to their natural equivalence. With this change in definition, subgraph isomorphism on labeled graphs and reductions in computation become partial orders, which in my opinion they should be.</p>
+
+</main>
+
+  <footer>
+  <p>
+    All content on this website is licensed under
+    <a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA
+      4.0</a> by Balagopal Komarath unless mentioned otherwise.
+</footer>
+
+</body>
+</html>

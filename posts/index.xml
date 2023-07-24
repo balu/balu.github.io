@@ -6,7 +6,17 @@
     <description>Recent content in Posts on Balagopal Komarath&#39;s Homepage</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 05 Jan 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://bkomarath.rbgo.in/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 23 Jul 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://bkomarath.rbgo.in/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>On Order</title>
+      <link>https://bkomarath.rbgo.in/posts/on-order/</link>
+      <pubDate>Sun, 23 Jul 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://bkomarath.rbgo.in/posts/on-order/</guid>
+      <description>A partial order is a binary relation on sets, usually denoted \(\leq\), defined as satisfying the following three properties for all \(a\), \(b\), and \(c\):
+(Reflexivity) \(a\leq a\). (Transitivity) \(a\leq b\) and \(b \leq c\) implies \(a\leq c\). (Antisymmetry) \(a \leq b\) and \(b \leq a\) implies \(a=b\). Examples of partial orders are the usual ordering on integers, the divisibility relation on natural numbers, and the subset relation on sets.</description>
+    </item>
+    
     <item>
       <title>Programming Projects for Beginners</title>
       <link>https://bkomarath.rbgo.in/posts/programming-projects-for-beginners/</link>
