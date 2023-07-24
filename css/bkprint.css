@@ -1,0 +1,12 @@
+body {
+    color: #000;
+    background-color: #fff;
+    margin: 0;
+    font-family: liberation-serif, Times, "Times New Roman", serif;
+    font-size: 12pt;
+    line-height: 1.5;
+}
+
+header, footer, aside, nav {
+    display: none;
+}
