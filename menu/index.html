@@ -4,6 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="author" content="Balagopal Komarath" />
+  
   <title>
   Site Menu
 </title>
@@ -14,22 +15,44 @@
 <body>
   <header>
   <a class="logo" href="/">bkomarath</a>
-  <a class="menu" href="/menu">Menu</a>
+  
+    <a class="menu" onclick="history.back()" href="">Back</a>
+  
 </header>
 
   
   <main>
     <nav>
       <ul>
-          <li><a href="/">Home</a></li>
+          <li>
+            <a href="/">Home</a>
+          </li>
+
         
-          <li><a href="/research/">Research</a></li>
+          <li>
+            <a href="/research">Research</a>
+          </li>
+
         
-          <li><a href="/teaching/">Teaching</a></li>
+          <li>
+            <a href="/teaching">Teaching</a>
+            <nav>
+              <ul>
+                <li><a href="/teaching/data-structures-and-algorithms-i-2023">DSA I</a></li>
+              </ul>
+            </nav>
+          </li>
+
         
-          <li><a href="/posts/">Writing</a></li>
+          <li>
+            <a href="/posts">Writing</a>
+          </li>
+
         
-          <li><a href="/contact/">Contact</a></li>
+          <li>
+            <a href="/contact">Contact</a>
+          </li>
+
         
       </ul>
     </nav>

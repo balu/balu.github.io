@@ -4,17 +4,32 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="author" content="Balagopal Komarath" />
+  
   <title> </title>
   <link rel="stylesheet" type="text/css" href="/css/bk.css" />
   <link rel="stylesheet" type="text/css" media="print" href="/css/bkprint.css" />
   
-  <script type="text/javascript" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script>
+   MathJax = {
+     tex: {
+       inlineMath: [['$', '$'], ['\\(', '\\)']]
+     },
+     svg: {
+       fontCache: 'global'
+     }
+   };
+  </script>
+  <script type="text/javascript" id="MathJax-script" async
+          src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+  </script>
   
 </head>
 <body>
   <header>
   <a class="logo" href="/">bkomarath</a>
-  <a class="menu" href="/menu">Menu</a>
+  
+    <a class="menu" href="/menu">Menu</a>
+  
 </header>
 
   
@@ -51,6 +66,7 @@
 <h2 id="exercise">Exercise</h2>
 <ol>
 <li>Define the computational problem of subtracting two natural numbers.</li>
+<li>Define the computational problem of computing square roots.</li>
 <li>Define the computational problem of finding the largest element in a sequence of natural numbers.</li>
 <li>Define the computational problem of finding an element in a sequence.</li>
 <li>Show how to mathematically specify: &ldquo;The sequence \(T\) can be obtained from \(S\) by only rearranging the elements of \(S\)&rdquo;.</li>
