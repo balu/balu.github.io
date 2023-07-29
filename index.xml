@@ -201,16 +201,6 @@ Name SORT Input A sequence of elements and an ordering relation among the elemen
     </item>
     
     <item>
-      <title>Contact - Balagopal Komarath</title>
-      <link>https://bkomarath.rbgo.in/contact/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://bkomarath.rbgo.in/contact/</guid>
-      <description>Balagopal Komarath&#39;s contact details My email id is bkomarath at rbgo dot in. Please wait at least two days before sending a follow-up email.
-My current office is AB13/405B. If you want to schedule a meeting, please check my calendar and propose a free slot. Please try to leave a gap of at least fifteen minutes to my other meetings.</description>
-    </item>
-    
-    <item>
       <title>Execution</title>
       <link>https://bkomarath.rbgo.in/dsa/machines-and-computation/execution/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -239,17 +229,6 @@ where \(x\) is chosen from the domain of all valid inputs. Here, we denote by \(
       <description>Recursion is self-reference. An recursive algorithm may refer to itself directly or indirectly to solve a different instance of the same problem being solved by the algorithm. The following self-reference is trivial but not algorithmic:
 To sort an array a, sort the array a.
 It is recursive but doesn&amp;rsquo;t terminate and so cannot be an algorithm. So the self-reference has to be invoked on different instances so that it may terminate.</description>
-    </item>
-    
-    <item>
-      <title>Research - Balagopal Komarath</title>
-      <link>https://bkomarath.rbgo.in/research/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://bkomarath.rbgo.in/research/</guid>
-      <description>Balagopal Komarath&#39;s research publications The research articles that I have co-authored are given below in reverse chronological order.
-Finding and counting patterns in sparse graphs with Anant Kumar, Suchismita Mishra, and Aditi Sethia
-A pattern is a small graph that we want to find in a larger graph called the host graph. The state of the art algorithms for finding and counting patterns in graphs are oblivious to the number of edges in the host graph.</description>
     </item>
     
     <item>
