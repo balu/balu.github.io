@@ -121,9 +121,11 @@ img {
         grid-template-columns: 1fr;
         grid-template-areas:
             "header"
+            "header-sidebar"
             "main"
-            "sidebar"
-            "footer";
+            "main-sidebar"
+            "footer"
+            "footer-sidebar";
     }
 }
 
@@ -132,9 +134,9 @@ img {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         grid-template-areas:
-            "header header header"
-            "main main sidebar"
-            "footer footer footer";
+            "header header header-sidebar"
+            "main main main-sidebar"
+            "footer footer footer-sidebar";
     }
 }
 
