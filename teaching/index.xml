@@ -14,7 +14,7 @@
       
       <guid>https://bkomarath.rbgo.in/teaching/data-structures-and-algorithms-i-2023/</guid>
       <description>In this course, we will see how to structure data (data structures) so that complex operations (algorithms) can be efficiently executed. This course lies in the intersection of mathematics and computing. We will learn about the most basic and widely-used data structures and algorithms, prove their correctness and efficiency by writing mathematics, and implement them using C/C++ to understand how they work in practice.
-Grading Assessment Percentage Attendance 10 Lab Assignments 20 Exam I 20 Exam II 20 Exam III 30 Lecture Plan #Lectures Topic 1 Problems, Algorithms 1 Execution, Time 2 Asymptotic Analysis 2 Proofs 2 Recursion 2 Stacks 1 Queues 1 Priority queues 1 Heaps, heapsort 2 Sets, Dictionaries 1 Dynamic arrays 2 Hashing 2 Binary Search Trees 3 Graphs, Trees 2 Traversal 2 Graph algorithms 3 Reductions </description>
+Administrivia If you are absent from a lecture until Exam I for any reason, fill the form of absence for ES242.</description>
     </item>
     
     <item>
