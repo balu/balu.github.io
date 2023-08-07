@@ -121,27 +121,24 @@ img {
         grid-template-columns: 1fr;
         grid-template-areas:
             "header"
-            "header-sidebar"
             "main"
-            "main-sidebar"
             "footer"
-            "footer-sidebar";
     }
 }
 
 @media only screen and (min-width: 769px) {
     body {
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: 1fr;
         grid-template-areas:
-            "header header header-sidebar"
-            "main main main-sidebar"
-            "footer footer footer-sidebar";
+            "header"
+            "main"
+            "footer";
     }
 }
 
 body {
-    width: min(55rem, 100% - 2rem);
+    width: min(45rem, 100% - 2rem);
     margin: auto;
     background-color: var(--main-background-color);
     color: var(--main-text-color);
