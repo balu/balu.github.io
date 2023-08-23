@@ -44,6 +44,16 @@ Name SORT Input A sequence of elements and an ordering relation among the elemen
     </item>
     
     <item>
+      <title>Generating all permutations</title>
+      <link>https://bkomarath.rbgo.in/dsa/permutations/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://bkomarath.rbgo.in/dsa/permutations/</guid>
+      <description>We consider the following recursive algorithm to print all permutations of an array.
+void permutations(int a[], int n, int start) { if (start == n-1) { print_array(a, n); return; } // All permutations with a[start] at the beginning. permutations(a, n, start+1); for (int i = start+1; i &amp;lt; n; ++i) { // Now, bring the other elements to the front. swap(&amp;amp;a[start], &amp;amp;a[i]); permutations(a, n, start+1); swap(&amp;amp;a[start], &amp;amp;a[i]); } } We now prove that it correctly prints all permutations exactly once.</description>
+    </item>
+    
+    <item>
       <title>Proofs</title>
       <link>https://bkomarath.rbgo.in/dsa/machines-and-computation/proofs/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
