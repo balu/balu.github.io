@@ -6,7 +6,16 @@
     <description>Recent content in Posts on Balagopal Komarath&#39;s Homepage</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 23 Jul 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://bkomarath.rbgo.in/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 06 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://bkomarath.rbgo.in/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Tic-tac-toe</title>
+      <link>https://bkomarath.rbgo.in/posts/tic-tac-toe/</link>
+      <pubDate>Wed, 06 Sep 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://bkomarath.rbgo.in/posts/tic-tac-toe/</guid>
+      <description>Tic-tac-toe is a well-known two-player game played on a 3x3 board. It is easy to write a program that computes an optimal move at a given board position using plain recursion. However, this approach is too inefficient for a 4x4 board. For a 4x4 board, the simplest algorithm that will work well is to precompute a best move at each position. For this, we need to estimate the number of valid board positions during a game.</description>
+    </item>
+    
     <item>
       <title>On Order</title>
       <link>https://bkomarath.rbgo.in/posts/on-order/</link>

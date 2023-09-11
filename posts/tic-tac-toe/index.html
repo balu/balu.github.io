@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="author" content="Balagopal Komarath" />
+  
+  <title>
+Tic-tac-toe
+</title>
+  <link rel="stylesheet" type="text/css" href="/css/bk.css" />
+  <link rel="stylesheet" type="text/css" media="print" href="/css/bkprint.css" />
+  
+  <script>
+   MathJax = {
+     tex: {
+       inlineMath: [['$', '$'], ['\\(', '\\)']]
+     },
+     svg: {
+       fontCache: 'global'
+     }
+   };
+  </script>
+  <script type="text/javascript" id="MathJax-script" async
+          src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+  </script>
+  
+</head>
+<body>
+  <header>
+  <a class="logo" href="/">Balagopal Komarath</a>
+  
+    <a class="menu" href="/menu/">Menu</a>
+  
+</header>
+
+  
+<main>
+  <h1>Tic-tac-toe</h1>
+  <p><a href="https://en.wikipedia.org/wiki/Tic-tac-toe">Tic-tac-toe</a> is a well-known two-player game played on a 3x3 board. It is easy to write a program that computes an optimal move at a given board position using plain recursion. However, this approach is too inefficient for a 4x4 board. For a 4x4 board, the simplest algorithm that will work well is to precompute a best move at each position. For this, we need to estimate the number of valid board positions during a game. The valid board positions are determined from the following rules.</p>
+<ul>
+<li>&lsquo;X&rsquo; makes the first move.</li>
+<li>Game is finished when either player has won or the board is full.</li>
+</ul>
+<p>Given these rules, we have at most \(10^7\) valid board positions for the 4x4 game. Assuming we use a byte to store an optimal move from any position, this means we use at most 10MB of storage for the precomputed table.</p>
+<p>We also need a mechanism to compute an index into this precomputed table for fast lookup. The most straight-forward way to map a board position into an index is to encode the board using a ternary representation. We can encode a blank by 0, &lsquo;X&rsquo; by 1, and &lsquo;O&rsquo; by 2. If we use this index to encode into the array, we can limit the array size to 43046721 which is 44MB of storage.</p>
+<p>The above strategy wastes about eighty percent of storage allocated. A more complex indexing strategy is implied by the following upper-bound on the number of valid boards. Suppose \(x\) &lsquo;X&rsquo; marks have been placed. Then, the number of &lsquo;O&rsquo; marks is \(x\) or \(x-1\). This count is given by \(\binom{16}{x}(\binom{16-x}{x-1} + \binom{16-x}{x})\). Summing over all possibilities for \(x\) from 0 to 8 gives 10165779. With this indexing strategy, we use only 11MB of storage.</p>
+<p>In the table below, we compare these strategies for indexing for kxk boards, N is the number of valid positions, B is the size of the array when we encode boards as ternary numbers, C is the encoding using the sum and product rule in counting.</p>
+<table>
+<thead>
+<tr>
+<th>k</th>
+<th>N</th>
+<th>B</th>
+<th>C</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>2</td>
+<td>2</td>
+<td>2</td>
+</tr>
+<tr>
+<td>2</td>
+<td>29</td>
+<td>81</td>
+<td>35</td>
+</tr>
+<tr>
+<td>3</td>
+<td>5478</td>
+<td>19683</td>
+<td>6046</td>
+</tr>
+<tr>
+<td>4</td>
+<td>9722011</td>
+<td>43046721</td>
+<td>10165779</td>
+</tr>
+</tbody>
+</table>
+
+</main>
+
+  <footer>
+  <p>
+    All content on this website is licensed under
+    <a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA
+      4.0</a> by Balagopal Komarath unless mentioned otherwise.
+</footer>
+
+</body>
+</html>
