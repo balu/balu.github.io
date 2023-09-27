@@ -210,6 +210,15 @@ Name SORT Input A sequence of elements and an ordering relation among the elemen
     </item>
     
     <item>
+      <title>Depth-first search</title>
+      <link>https://bkomarath.rbgo.in/dsa/dfs/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://bkomarath.rbgo.in/dsa/dfs/</guid>
+      <description>dfs(G, s) for each v ∈ V(G) [n] visited[v] ← false [n] stack ← { s } [1] while stack not empty [m] v ← pop stack [m] - (a) if visited[v] = false [m] visited[v] ← true [m] for each (v → u) ∈ E(G) [m] - (b) if visited[u] = false [m] - (c) push u into stack [m] Let \(n\) and \(m\) be the number of vertices and edges in the graph respectively.</description>
+    </item>
+    
+    <item>
       <title>Execution</title>
       <link>https://bkomarath.rbgo.in/dsa/machines-and-computation/execution/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
