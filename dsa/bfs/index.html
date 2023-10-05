@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="author" content="Balagopal Komarath" />
+  
+  <title>
+  Breadth-first search
+</title>
+  <link rel="stylesheet" type="text/css" href="/css/bk.css" />
+  <link rel="stylesheet" type="text/css" media="print" href="/css/bkprint.css" />
+  
+  <script>
+   MathJax = {
+     tex: {
+       inlineMath: [['$', '$'], ['\\(', '\\)']]
+     },
+     svg: {
+       fontCache: 'global'
+     }
+   };
+  </script>
+  <script type="text/javascript" id="MathJax-script" async
+          src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+  </script>
+  
+</head>
+<body>
+  <header>
+  <a class="logo" href="/">Balagopal Komarath</a>
+  
+    <a class="menu" href="/menu/">Menu</a>
+  
+</header>
+
+  
+  <main>
+    <h1>Breadth-first search</h1>
+    <pre tabindex="0"><code class="language-nil" data-lang="nil">bfs(G, s)
+  for each v ∈ V(G)                 [n]
+    visited[v] ← false              [n]
+    parent[v] ← v                   [n]
+  queue ← { s }                     [1]
+  visited[s] ← true                 [1]
+  while queue not empty             [m]
+    v ← dequeue                     [m]
+    for each (v → u) ∈ E(G)         [m] - (a)
+      if visited[u] = false         [m]
+        enqueue u                   [m]
+        visited[u] ← true           [m]
+        parent[u] ← v               [m]
+</code></pre><p>This algorithm is very similar to DFS. We replace the stack with a queue so that vertices are traversed in breadth-first order. Also, we can set <code>parent[v]</code> to <code>u</code> as soon as we discover <code>v</code> through an edge <code>u → v</code> because this edge must be part of a shortest path to <code>v</code> from <code>s</code> and therefore also part of a BFS tree. This is not true for DFS.</p>
+<div class="theorem">
+<p>BFS takes \(O(n+m)\) time.</p>
+</div>
+<div class="proof">
+<p>The number of times each statement is executed is shown on the right-hand side. The argument is similar to that of DFS. The number of enqueue and dequeue operations is at most \(m\) because the loop in step (a) is run at most once for a `v`.</p>
+</div>
+<div class="theorem">
+<p>Let <code>G</code> be any vertex reachable from <code>s</code> in <code>G</code> and the shortest path be \(k\) steps. Then, the sequence <code>v, parent[v], parent[parent[v]], ...</code> leads to <code>s</code> in at most \(k\) steps and represents a shortest path from <code>s</code> to <code>v</code> in <code>G</code>.</p>
+</div>
+<div class="proof">
+<p>Use induction on \(k\).</p>
+</div>
+
+    
+    <nav class="chapter">
+      <ul>
+        
+        
+        <li><a href="https://bkomarath.rbgo.in/dsa/dfs/">← Depth-first search</a></li>
+        
+        <li><a href="/dsa">↑ Data Structures and Algorithms</a></li>
+      </ul>
+    </nav>
+  </main>
+
+  <footer>
+  <p>
+    All content on this website is licensed under
+    <a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA
+      4.0</a> by Balagopal Komarath unless mentioned otherwise.
+</footer>
+
+</body>
+</html>

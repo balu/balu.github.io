@@ -200,6 +200,15 @@ Are all problems computable? Does backtracking help? Is there a best algorithm f
     </item>
     
     <item>
+      <title>Breadth-first search</title>
+      <link>https://bkomarath.rbgo.in/dsa/bfs/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://bkomarath.rbgo.in/dsa/bfs/</guid>
+      <description>bfs(G, s) for each v ∈ V(G) [n] visited[v] ← false [n] parent[v] ← v [n] queue ← { s } [1] visited[s] ← true [1] while queue not empty [m] v ← dequeue [m] for each (v → u) ∈ E(G) [m] - (a) if visited[u] = false [m] enqueue u [m] visited[u] ← true [m] parent[u] ← v [m] This algorithm is very similar to DFS. We replace the stack with a queue so that vertices are traversed in breadth-first order.</description>
+    </item>
+    
+    <item>
       <title>Computational problems</title>
       <link>https://bkomarath.rbgo.in/dsa/machines-and-computation/computational-problems/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
