@@ -6,279 +6,217 @@
     <description>Recent content on Balagopal Komarath&#39;s Homepage</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 06 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://bkomarath.rbgo.in/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Tic-tac-toe</title>
-      <link>https://bkomarath.rbgo.in/posts/tic-tac-toe/</link>
-      <pubDate>Wed, 06 Sep 2023 00:00:00 +0000</pubDate>
-      
-      <guid>https://bkomarath.rbgo.in/posts/tic-tac-toe/</guid>
-      <description>Tic-tac-toe is a well-known two-player game played on a 3x3 board. It is easy to write a program that computes an optimal move at a given board position using plain recursion. However, this approach is too inefficient for a 4x4 board. For a 4x4 board, the simplest algorithm that will work well is to precompute a best move at each position. For this, we need to estimate the number of valid board positions during a game.</description>
-    </item>
-    
+    <lastBuildDate>Mon, 24 Jul 2023 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://bkomarath.rbgo.in/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Data Structures and Algorithms I (2023)</title>
       <link>https://bkomarath.rbgo.in/teaching/data-structures-and-algorithms-i-2023/</link>
       <pubDate>Mon, 24 Jul 2023 00:00:00 +0000</pubDate>
-      
       <guid>https://bkomarath.rbgo.in/teaching/data-structures-and-algorithms-i-2023/</guid>
-      <description>In this course, we will see how to structure data (data structures) so that complex operations (algorithms) can be efficiently executed. This course lies in the intersection of mathematics and computing. We will learn about the most basic and widely-used data structures and algorithms, prove their correctness and efficiency by writing mathematics, and implement them using C/C++ to understand how they work in practice.
-Administrivia If you are absent from a lecture until Exam I for any reason, fill the form of absence for ES242.</description>
+      <description>In this course, we will see how to structure data (data structures) so that complex operations (algorithms) can be efficiently executed. This course lies in the intersection of mathematics and computing. We will learn about the most basic and widely-used data structures and algorithms, prove their correctness and efficiency by writing mathematics, and implement them using C/C++ to understand how they work in practice.&#xA;Administrivia If you are absent from a lecture until Exam I for any reason, fill the form of absence for ES242.</description>
     </item>
-    
     <item>
       <title>On Order</title>
       <link>https://bkomarath.rbgo.in/posts/on-order/</link>
       <pubDate>Sun, 23 Jul 2023 00:00:00 +0000</pubDate>
-      
       <guid>https://bkomarath.rbgo.in/posts/on-order/</guid>
-      <description>A partial order is a binary relation on sets, usually denoted \(\leq\), defined as satisfying the following three properties for all \(a\), \(b\), and \(c\):
-(Reflexivity) \(a\leq a\). (Transitivity) \(a\leq b\) and \(b \leq c\) implies \(a\leq c\). (Antisymmetry) \(a \leq b\) and \(b \leq a\) implies \(a=b\). Examples of partial orders are the usual ordering on integers, the divisibility relation on natural numbers, and the subset relation on sets.</description>
+      <description>A partial order is a binary relation on sets, usually denoted \(\leq\), defined as satisfying the following three properties for all \(a\), \(b\), and \(c\):&#xA;(Reflexivity) \(a\leq a\). (Transitivity) \(a\leq b\) and \(b \leq c\) implies \(a\leq c\). (Antisymmetry) \(a \leq b\) and \(b \leq a\) implies \(a=b\). Examples of partial orders are the usual ordering on integers, the divisibility relation on natural numbers, and the subset relation on sets.</description>
     </item>
-    
     <item>
       <title>Programming Projects for Beginners</title>
       <link>https://bkomarath.rbgo.in/posts/programming-projects-for-beginners/</link>
       <pubDate>Thu, 05 Jan 2023 00:00:00 +0000</pubDate>
-      
       <guid>https://bkomarath.rbgo.in/posts/programming-projects-for-beginners/</guid>
       <description>This page contains a collection of small-size programming projects suitable for students who have just completed an introductory programming course. There is no specific programming language requirement. But, you should adopt the language that is the most comfortable for you. Each project is some simpler version of an existing application. Unlike typical programming assignments, you have to also come up with the exact specification for these programs. I list some issues that you have to handle in specification and functionality that you may need from libraries to implement the program.</description>
     </item>
-    
     <item>
       <title>Compilers (2023)</title>
       <link>https://bkomarath.rbgo.in/teaching/compilers-2023/</link>
       <pubDate>Mon, 02 Jan 2023 00:00:00 +0000</pubDate>
-      
       <guid>https://bkomarath.rbgo.in/teaching/compilers-2023/</guid>
-      <description>Welcome to CS327: Compilers. In this course, we will design and implement a compiler for a simple imperative language. We will aim for the following language features.
-Basic Types: numbers, booleans, strings. Compound Types: products, sums, arrays. Conditionals. Loops. Functions. Closures. Mutable variables. Exceptions. We will aim to implement a tree-walking interpreter followed by designing a bytecode along with a source to bytecode compiler that implements some optimizations such as function inlining, loop unrolling, constant folding, and dead code elimination.</description>
+      <description>Welcome to CS327: Compilers. In this course, we will design and implement a compiler for a simple imperative language. We will aim for the following language features.&#xA;Basic Types: numbers, booleans, strings. Compound Types: products, sums, arrays. Conditionals. Loops. Functions. Closures. Mutable variables. Exceptions. We will aim to implement a tree-walking interpreter followed by designing a bytecode along with a source to bytecode compiler that implements some optimizations such as function inlining, loop unrolling, constant folding, and dead code elimination.</description>
     </item>
-    
     <item>
       <title>Special Topics Course: Complexity Theory (2023)</title>
       <link>https://bkomarath.rbgo.in/teaching/special-topics-course-complexity-theory-2023/</link>
       <pubDate>Mon, 02 Jan 2023 00:00:00 +0000</pubDate>
-      
       <guid>https://bkomarath.rbgo.in/teaching/special-topics-course-complexity-theory-2023/</guid>
-      <description>This is a discussion based course where students are expected to learn by themselves and advance the course through discussions during the lecture hours.
-The lectures hours are:
-Mon 10.00 to 11.30 Tue 11.30 to 01.00 The venue is 7/105.
-Meetings 24-04-2023 BK: Conclusion and future directions.
-18-04-2023 DC (DD): Descriptive complexity conclusion.
-17-04-2023 CC (GV): Data structure lower bounds from communication complexity.
-11-04-2023 AC (BK): Brent&amp;rsquo;s formula depth reduction.</description>
+      <description>This is a discussion based course where students are expected to learn by themselves and advance the course through discussions during the lecture hours.&#xA;The lectures hours are:&#xA;Mon 10.00 to 11.30 Tue 11.30 to 01.00 The venue is 7/105.&#xA;Meetings 24-04-2023 BK: Conclusion and future directions.&#xA;18-04-2023 DC (DD): Descriptive complexity conclusion.&#xA;17-04-2023 CC (GV): Data structure lower bounds from communication complexity.&#xA;11-04-2023 AC (BK): Brent&amp;rsquo;s formula depth reduction.</description>
     </item>
-    
     <item>
       <title>Python is Not an Acceptable ML</title>
       <link>https://bkomarath.rbgo.in/posts/python-is-not-an-acceptable-ml/</link>
       <pubDate>Mon, 28 Nov 2022 00:00:00 +0000</pubDate>
-      
       <guid>https://bkomarath.rbgo.in/posts/python-is-not-an-acceptable-ml/</guid>
-      <description>The programming language Python is a popular fixture in introductory programming courses. The adoption of Python as a programming language for introductory courses is mainly driven by two reasons:
-Popularity in scientific computing and software industry. Readability. While the first point is irrefutable, the readability enabled by Python&amp;rsquo;s surface-level syntax does not compensate for its many violations of certain fundamental principles related to programming language and user interface design. In this article, we look at certain common problems with Python faced by beginning programmers and will see how a programming language with a better design, OCaml, avoids or even completely prevents these issues.</description>
+      <description>The programming language Python is a popular fixture in introductory programming courses. The adoption of Python as a programming language for introductory courses is mainly driven by two reasons:&#xA;Popularity in scientific computing and software industry. Readability. While the first point is irrefutable, the readability enabled by Python&amp;rsquo;s surface-level syntax does not compensate for its many violations of certain fundamental principles related to programming language and user interface design. In this article, we look at certain common problems with Python faced by beginning programmers and will see how a programming language with a better design, OCaml, avoids or even completely prevents these issues.</description>
     </item>
-    
     <item>
       <title>Computing (2022)</title>
       <link>https://bkomarath.rbgo.in/teaching/computing-2022/</link>
       <pubDate>Thu, 24 Nov 2022 00:00:00 +0000</pubDate>
-      
       <guid>https://bkomarath.rbgo.in/teaching/computing-2022/</guid>
       <description>Course website for computing in the winter of 2022.</description>
     </item>
-    
     <item>
       <title>Computational Complexity Theory (2022)</title>
       <link>https://bkomarath.rbgo.in/teaching/computational-complexity-theory-2022/</link>
       <pubDate>Sun, 07 Aug 2022 00:00:00 +0000</pubDate>
-      
       <guid>https://bkomarath.rbgo.in/teaching/computational-complexity-theory-2022/</guid>
       <description>First time computational complexity theory was offered as a regular course at IIT Gandhinagar since the CS discipline was formed. The course had code CS 617. I co-taught this course with Bireswar Das. See the Canvas page for computational complexity theory in 2022 (requires invitation).</description>
     </item>
-    
     <item>
       <title>Data Structures and Algorithms II (2022)</title>
       <link>https://bkomarath.rbgo.in/teaching/data-structures-and-algorithms-ii-2022/</link>
       <pubDate>Sat, 01 Jan 2022 00:00:00 +0000</pubDate>
-      
       <guid>https://bkomarath.rbgo.in/teaching/data-structures-and-algorithms-ii-2022/</guid>
       <description>This course covered algorithmic design paradigms such as divide and conquer, greedy, dynamic programming, and network flows. All course-related communication was managed on a locally hosted Zulip instance.</description>
     </item>
-    
     <item>
       <title>Introduction to Computing (Dec 2021)</title>
       <link>https://bkomarath.rbgo.in/teaching/introduction-to-computing-dec-2021/</link>
       <pubDate>Wed, 01 Dec 2021 00:00:00 +0000</pubDate>
-      
       <guid>https://bkomarath.rbgo.in/teaching/introduction-to-computing-dec-2021/</guid>
       <description>I was a tutor for this course. See course website for introduction to computing in the winter of 2021.</description>
     </item>
-    
     <item>
       <title>Special Topics Course: Algebraic Complexity Theory (2021)</title>
       <link>https://bkomarath.rbgo.in/teaching/special-topics-course-algebraic-complexity-theory-2021/</link>
       <pubDate>Sun, 01 Aug 2021 00:00:00 +0000</pubDate>
-      
       <guid>https://bkomarath.rbgo.in/teaching/special-topics-course-algebraic-complexity-theory-2021/</guid>
       <description>Welcome Algebraic complexity theory deals with the computation of polynomials using the basic operations addition and multiplication. For example, we can compute the polynomial \(xy + xz\) using two multiplications and one addition. By using distributivity, we can perform the same computation as \(x(y + z)\) which costs one addition and only one multiplication. The primary goal of algebraic complexity theory is to understand the minimum number of operations for computing interesting polynomials such as determinants and matrix multiplication polynomials (also called the complexity of these polynomials).</description>
     </item>
-    
     <item>
       <title>Assembly and C Programming Mini-Course (2021)</title>
       <link>https://bkomarath.rbgo.in/teaching/assembly-and-c-programming-mini-course-2021/</link>
       <pubDate>Thu, 01 Jul 2021 00:00:00 +0000</pubDate>
-      
       <guid>https://bkomarath.rbgo.in/teaching/assembly-and-c-programming-mini-course-2021/</guid>
       <description>Welcome &amp;ldquo;High&amp;rdquo;-level programming languages such as python provides many abstract types like lists and dictionaries and support complex operations such as taking a slice of the list as a basic operation. The underlying computer, of course, doesn&amp;rsquo;t directly support such complex operations in hardware. The typical &amp;ldquo;Data structures and algorithms&amp;rdquo; course describes how one can structure data (Data structures) in memory so that complex operations can be implemented efficiently in terms of more primitive ones (Algorithms).</description>
     </item>
-    
     <item>
       <title>Special Topics Course: Computational Complexity Theory (2021)</title>
       <link>https://bkomarath.rbgo.in/teaching/special-topics-course-computational-complexity-theory-2021/</link>
       <pubDate>Wed, 13 Jan 2021 00:00:00 +0000</pubDate>
-      
       <guid>https://bkomarath.rbgo.in/teaching/special-topics-course-computational-complexity-theory-2021/</guid>
-      <description>Welcome Welcome to computational complexity theory. In this course, we will look at various computational models (TM, circuits) and the power enabled by various resources (time, space, size, depth). We will see that using this framework, we can formulate many natural real-world questions in concrete terms. Questions such as:
-Is verifying solutions harder than finding them? Does interacting with the prover help someone verifying the proof? Can we verify a proof by reading only a part of it?</description>
+      <description>Welcome Welcome to computational complexity theory. In this course, we will look at various computational models (TM, circuits) and the power enabled by various resources (time, space, size, depth). We will see that using this framework, we can formulate many natural real-world questions in concrete terms. Questions such as:&#xA;Is verifying solutions harder than finding them? Does interacting with the prover help someone verifying the proof? Can we verify a proof by reading only a part of it?</description>
     </item>
-    
     <item>
       <title>Introduction to Computing (2021)</title>
       <link>https://bkomarath.rbgo.in/teaching/introduction-to-computing-2021/</link>
       <pubDate>Wed, 06 Jan 2021 00:00:00 +0000</pubDate>
-      
       <guid>https://bkomarath.rbgo.in/teaching/introduction-to-computing-2021/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>Theory of Computation (2020)</title>
       <link>https://bkomarath.rbgo.in/teaching/theory-of-computation-2020/</link>
       <pubDate>Wed, 05 Aug 2020 00:00:00 +0000</pubDate>
-      
       <guid>https://bkomarath.rbgo.in/teaching/theory-of-computation-2020/</guid>
-      <description>Welcome Welcome to &amp;ldquo;Theory of Computation&amp;rdquo;. In this course, we are going to try and answer fundamental questions about the nature of computation such as:
-Are all problems computable? Does backtracking help? Is there a best algorithm for all problems? Does more time help? Does more memory help? Is verifying solutions easier than finding them? Use this to add lectures to your Google calendar. The Google meet link for lectures is here.</description>
+      <description>Welcome Welcome to &amp;ldquo;Theory of Computation&amp;rdquo;. In this course, we are going to try and answer fundamental questions about the nature of computation such as:&#xA;Are all problems computable? Does backtracking help? Is there a best algorithm for all problems? Does more time help? Does more memory help? Is verifying solutions easier than finding them? Use this to add lectures to your Google calendar. The Google meet link for lectures is here.</description>
     </item>
-    
     <item>
       <title>Complexity Theory (2019-20)</title>
       <link>https://bkomarath.rbgo.in/teaching/complexity-theory-2019-20/</link>
       <pubDate>Tue, 15 Oct 2019 00:00:00 +0000</pubDate>
-      
       <guid>https://bkomarath.rbgo.in/teaching/complexity-theory-2019-20/</guid>
       <description>This course was co-taught with Markus Bläser. See the webpage for complexity theory course in 2019 at Saarland for details.</description>
     </item>
-    
     <item>
       <title>Complexity Theory (2018)</title>
       <link>https://bkomarath.rbgo.in/teaching/complexity-theory-2018/</link>
       <pubDate>Wed, 11 Apr 2018 00:00:00 +0000</pubDate>
-      
       <guid>https://bkomarath.rbgo.in/teaching/complexity-theory-2018/</guid>
       <description>This course was co-taught with Markus Bläser. See the webpage for complexity theory course in 2018 at Saarland for details.</description>
     </item>
-    
     <item>
       <title>Algorithms</title>
       <link>https://bkomarath.rbgo.in/dsa/machines-and-computation/algorithms/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>https://bkomarath.rbgo.in/dsa/machines-and-computation/algorithms/</guid>
       <description>An algorithm describes to a computational device the steps needed to solve a computational problem. The set of instructions that a machine understands is called its instruction set. An algorithm for this machine is then a sequence of instructions where every instruction is from this set. Even in modern computers, the exact instruction set varies from one manufacturer to the other. In order to avoid tying algorithms to a specific type of device, high-level languages such as C or Python may be used to describe algorithms.</description>
     </item>
-    
     <item>
       <title>Asymptotic analysis</title>
       <link>https://bkomarath.rbgo.in/dsa/machines-and-computation/asymptotic-analysis/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>https://bkomarath.rbgo.in/dsa/machines-and-computation/asymptotic-analysis/</guid>
       <description>We would like to classify functions based on the order of their growth. Function \(f(n) = 3n^2\) and \(g(n) = 2n^2 + n + \log(n)\) are different but in a sense the same when you consider the order of their growth. More concretely, they both satisfy the equation \(\lim_{n \to \infty} h(2n)/h(n) = 4\). We can think of \(f\) and \(g\) as time taken by some algorithms. Then, the limit communicates the information that if we double the size of the input, the running time increases by a factor of four.</description>
     </item>
-    
     <item>
       <title>Breadth-first search</title>
-      <link>https://bkomarath.rbgo.in/dsa/bfs/</link>
+      <link>https://bkomarath.rbgo.in/dsa/machines-and-computation/bfs/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://bkomarath.rbgo.in/dsa/bfs/</guid>
+      <guid>https://bkomarath.rbgo.in/dsa/machines-and-computation/bfs/</guid>
       <description>bfs(G, s) for each v ∈ V(G) [n] visited[v] ← false [n] parent[v] ← v [n] queue ← { s } [1] visited[s] ← true [1] while queue not empty [m] v ← dequeue [m] for each (v → u) ∈ E(G) [m] - (a) if visited[u] = false [m] enqueue u [m] visited[u] ← true [m] parent[u] ← v [m] This algorithm is very similar to DFS. We replace the stack with a queue so that vertices are traversed in breadth-first order.</description>
     </item>
-    
     <item>
       <title>Computational problems</title>
       <link>https://bkomarath.rbgo.in/dsa/machines-and-computation/computational-problems/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>https://bkomarath.rbgo.in/dsa/machines-and-computation/computational-problems/</guid>
-      <description>We use computing to solve computational problems. A computational problem should be specified by a (1) name, (2) description of its inputs, and (3) description of its outputs including how the inputs and outputs are related. The problem of sorting a sequence of elements can be specified as:
-Name SORT Input A sequence of elements and an ordering relation among the elements. Output The same sequence of elements in ascending order.</description>
+      <description>We use computing to solve computational problems. A computational problem should be specified by a (1) name, (2) description of its inputs, and (3) description of its outputs including how the inputs and outputs are related. The problem of sorting a sequence of elements can be specified as:&#xA;Name SORT Input A sequence of elements and an ordering relation among the elements. Output The same sequence of elements in ascending order.</description>
     </item>
-    
     <item>
       <title>Depth-first search</title>
-      <link>https://bkomarath.rbgo.in/dsa/dfs/</link>
+      <link>https://bkomarath.rbgo.in/dsa/machines-and-computation/dfs/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://bkomarath.rbgo.in/dsa/dfs/</guid>
+      <guid>https://bkomarath.rbgo.in/dsa/machines-and-computation/dfs/</guid>
       <description>dfs(G, s) for each v ∈ V(G) [n] visited[v] ← false [n] stack ← { s } [1] while stack not empty [m] v ← pop stack [m] - (a) if visited[v] = false [m] visited[v] ← true [m] for each (v → u) ∈ E(G) [m] - (b) if visited[u] = false [m] - (c) push u into stack [m] Let \(n\) and \(m\) be the number of vertices and edges in the graph respectively.</description>
     </item>
-    
     <item>
       <title>Execution</title>
       <link>https://bkomarath.rbgo.in/dsa/machines-and-computation/execution/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>https://bkomarath.rbgo.in/dsa/machines-and-computation/execution/</guid>
       <description>An algorithm is a recipe or a template that tells us how to compute the answer on an arbitrary input. When an algorithm is executed on specific inputs, we obtain an execution trace that completely describes the events that occurred in the machine. An execution trace is a list of pairs \((I, M)\), where \(I\) is some instruction in the algorithm and \(M\) is the contents of the storage just before \(I\) is performed.</description>
     </item>
-    
     <item>
       <title>Generating all permutations</title>
-      <link>https://bkomarath.rbgo.in/dsa/permutations/</link>
+      <link>https://bkomarath.rbgo.in/dsa/machines-and-computation/permutations/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://bkomarath.rbgo.in/dsa/permutations/</guid>
-      <description>We consider the following recursive algorithm to print all permutations of an array.
-void permutations(int a[], int n, int start) { if (start == n-1) { print_array(a, n); return; } // All permutations with a[start] at the beginning. permutations(a, n, start+1); for (int i = start+1; i &amp;lt; n; ++i) { // Now, bring the other elements to the front. swap(&amp;amp;a[start], &amp;amp;a[i]); permutations(a, n, start+1); swap(&amp;amp;a[start], &amp;amp;a[i]); } } We now prove that it correctly prints all permutations exactly once.</description>
+      <guid>https://bkomarath.rbgo.in/dsa/machines-and-computation/permutations/</guid>
+      <description>We consider the following recursive algorithm to print all permutations of an array.&#xA;void permutations(int a[], int n, int start) { if (start == n-1) { print_array(a, n); return; } // All permutations with a[start] at the beginning. permutations(a, n, start+1); for (int i = start+1; i &amp;lt; n; ++i) { // Now, bring the other elements to the front. swap(&amp;amp;a[start], &amp;amp;a[i]); permutations(a, n, start+1); swap(&amp;amp;a[start], &amp;amp;a[i]); } } We now prove that it correctly prints all permutations exactly once.</description>
     </item>
-    
+    <item>
+      <title>Linked lists</title>
+      <link>https://bkomarath.rbgo.in/dsa/machines-and-computation/linked-lists/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://bkomarath.rbgo.in/dsa/machines-and-computation/linked-lists/</guid>
+      <description>A linked-list is a data structure that is built by composing nodes. Each node contains a data part and one or two links that are pointers to adjacent nodes in the sequence. A singly linked list has one pointer that points to the next node in the sequence. A doubly linked list has an additional pointer that points to the previous node in the sequence. The new and delete operators are used to allocate and deallocate nodes as needed by the list.</description>
+    </item>
     <item>
       <title>Proofs</title>
       <link>https://bkomarath.rbgo.in/dsa/machines-and-computation/proofs/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>https://bkomarath.rbgo.in/dsa/machines-and-computation/proofs/</guid>
-      <description>To prove that an algorithm is correct, we have to prove that its execution on every input is correct. Let \(f\) be the computational problem solved by \(A\). Then, we have to prove a statement such as:
-\(\forall x. f(x) = A(x)\)
-where \(x\) is chosen from the domain of all valid inputs. Here, we denote by \(f(x)\) the required outputs and effects of the problem on \(x\), and by \(A(x)\) the outputs and effects produced by \(A\) on \(x\).</description>
+      <description>To prove that an algorithm is correct, we have to prove that its execution on every input is correct. Let \(f\) be the computational problem solved by \(A\). Then, we have to prove a statement such as:&#xA;\(\forall x. f(x) = A(x)\)&#xA;where \(x\) is chosen from the domain of all valid inputs. Here, we denote by \(f(x)\) the required outputs and effects of the problem on \(x\), and by \(A(x)\) the outputs and effects produced by \(A\) on \(x\).</description>
     </item>
-    
+    <item>
+      <title>Queues</title>
+      <link>https://bkomarath.rbgo.in/dsa/machines-and-computation/queues/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://bkomarath.rbgo.in/dsa/machines-and-computation/queues/</guid>
+      <description>Operation Time Space Description empty() O(1) O(1) Create an empty queue. enqueue(q, e) O(1) O(1) Append e into queue q. dequeue(q) O(1) O(1) Remove and return the earliest element from q. is_empty(q) O(1) O(1) Return whether or not q is an empty queue. Array-based queues We can maintain a queue using an array, two indices first and last into the array, and an integer len to store the number of elements in the queue.</description>
+    </item>
     <item>
       <title>Recursion</title>
       <link>https://bkomarath.rbgo.in/dsa/machines-and-computation/recursion/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>https://bkomarath.rbgo.in/dsa/machines-and-computation/recursion/</guid>
-      <description>Recursion is self-reference. An recursive algorithm may refer to itself directly or indirectly to solve a different instance of the same problem being solved by the algorithm. The following self-reference is trivial but not algorithmic:
-To sort an array a, sort the array a.
-It is recursive but doesn&amp;rsquo;t terminate and so cannot be an algorithm. So the self-reference has to be invoked on different instances so that it may terminate.</description>
+      <description>Recursion is self-reference. An recursive algorithm may refer to itself directly or indirectly to solve a different instance of the same problem being solved by the algorithm. The following self-reference is trivial but not algorithmic:&#xA;To sort an array a, sort the array a.&#xA;It is recursive but doesn&amp;rsquo;t terminate and so cannot be an algorithm. So the self-reference has to be invoked on different instances so that it may terminate.</description>
     </item>
-    
+    <item>
+      <title>Stacks</title>
+      <link>https://bkomarath.rbgo.in/dsa/machines-and-computation/stacks/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://bkomarath.rbgo.in/dsa/machines-and-computation/stacks/</guid>
+      <description>In this chapter, we will take a look at the various implementation choices for stacks and queues and their tradeoffs.&#xA;A stack should support the following operations with the following resource usage. The space complexity is the additional space needed to implement the operation and does not consider the space used by the stack itself.&#xA;Operation Time Space Description empty() O(1) O(1) Create an empty stack. push(s, e) O(1) O(1) Push e into stack s.</description>
+    </item>
     <item>
       <title>Time</title>
       <link>https://bkomarath.rbgo.in/dsa/machines-and-computation/time/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>https://bkomarath.rbgo.in/dsa/machines-and-computation/time/</guid>
-      <description>The time taken by an execution of the algorithm is the number of instructions in the execution trace. For an algorithm \(A\), and an input \(x\), we define \(t&amp;rsquo;_A(x)\) to be the time taken by the algorithm \(A\) on input \(x\).
-The worst case time complexity of an algorithm \(A\) is defined as:
-\begin{equation} t_A(n) = \max_{x : |x| = n} t&amp;rsquo;_A(x) \end{equation}
-where \(|x|\) denotes the size of the instance \(x\).</description>
+      <description>The time taken by an execution of the algorithm is the number of instructions in the execution trace. For an algorithm \(A\), and an input \(x\), we define \(t&amp;rsquo;_A(x)\) to be the time taken by the algorithm \(A\) on input \(x\).&#xA;The worst case time complexity of an algorithm \(A\) is defined as:&#xA;\begin{equation} t_A(n) = \max_{x : |x| = n} t&amp;rsquo;_A(x) \end{equation}&#xA;where \(|x|\) denotes the size of the instance \(x\).</description>
     </item>
-    
   </channel>
 </rss>

@@ -6,44 +6,28 @@
     <description>Recent content in Posts on Balagopal Komarath&#39;s Homepage</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 06 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://bkomarath.rbgo.in/posts/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Tic-tac-toe</title>
-      <link>https://bkomarath.rbgo.in/posts/tic-tac-toe/</link>
-      <pubDate>Wed, 06 Sep 2023 00:00:00 +0000</pubDate>
-      
-      <guid>https://bkomarath.rbgo.in/posts/tic-tac-toe/</guid>
-      <description>Tic-tac-toe is a well-known two-player game played on a 3x3 board. It is easy to write a program that computes an optimal move at a given board position using plain recursion. However, this approach is too inefficient for a 4x4 board. For a 4x4 board, the simplest algorithm that will work well is to precompute a best move at each position. For this, we need to estimate the number of valid board positions during a game.</description>
-    </item>
-    
+    <lastBuildDate>Sun, 23 Jul 2023 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://bkomarath.rbgo.in/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>On Order</title>
       <link>https://bkomarath.rbgo.in/posts/on-order/</link>
       <pubDate>Sun, 23 Jul 2023 00:00:00 +0000</pubDate>
-      
       <guid>https://bkomarath.rbgo.in/posts/on-order/</guid>
-      <description>A partial order is a binary relation on sets, usually denoted \(\leq\), defined as satisfying the following three properties for all \(a\), \(b\), and \(c\):
-(Reflexivity) \(a\leq a\). (Transitivity) \(a\leq b\) and \(b \leq c\) implies \(a\leq c\). (Antisymmetry) \(a \leq b\) and \(b \leq a\) implies \(a=b\). Examples of partial orders are the usual ordering on integers, the divisibility relation on natural numbers, and the subset relation on sets.</description>
+      <description>A partial order is a binary relation on sets, usually denoted \(\leq\), defined as satisfying the following three properties for all \(a\), \(b\), and \(c\):&#xA;(Reflexivity) \(a\leq a\). (Transitivity) \(a\leq b\) and \(b \leq c\) implies \(a\leq c\). (Antisymmetry) \(a \leq b\) and \(b \leq a\) implies \(a=b\). Examples of partial orders are the usual ordering on integers, the divisibility relation on natural numbers, and the subset relation on sets.</description>
     </item>
-    
     <item>
       <title>Programming Projects for Beginners</title>
       <link>https://bkomarath.rbgo.in/posts/programming-projects-for-beginners/</link>
       <pubDate>Thu, 05 Jan 2023 00:00:00 +0000</pubDate>
-      
       <guid>https://bkomarath.rbgo.in/posts/programming-projects-for-beginners/</guid>
       <description>This page contains a collection of small-size programming projects suitable for students who have just completed an introductory programming course. There is no specific programming language requirement. But, you should adopt the language that is the most comfortable for you. Each project is some simpler version of an existing application. Unlike typical programming assignments, you have to also come up with the exact specification for these programs. I list some issues that you have to handle in specification and functionality that you may need from libraries to implement the program.</description>
     </item>
-    
     <item>
       <title>Python is Not an Acceptable ML</title>
       <link>https://bkomarath.rbgo.in/posts/python-is-not-an-acceptable-ml/</link>
       <pubDate>Mon, 28 Nov 2022 00:00:00 +0000</pubDate>
-      
       <guid>https://bkomarath.rbgo.in/posts/python-is-not-an-acceptable-ml/</guid>
-      <description>The programming language Python is a popular fixture in introductory programming courses. The adoption of Python as a programming language for introductory courses is mainly driven by two reasons:
-Popularity in scientific computing and software industry. Readability. While the first point is irrefutable, the readability enabled by Python&amp;rsquo;s surface-level syntax does not compensate for its many violations of certain fundamental principles related to programming language and user interface design. In this article, we look at certain common problems with Python faced by beginning programmers and will see how a programming language with a better design, OCaml, avoids or even completely prevents these issues.</description>
+      <description>The programming language Python is a popular fixture in introductory programming courses. The adoption of Python as a programming language for introductory courses is mainly driven by two reasons:&#xA;Popularity in scientific computing and software industry. Readability. While the first point is irrefutable, the readability enabled by Python&amp;rsquo;s surface-level syntax does not compensate for its many violations of certain fundamental principles related to programming language and user interface design. In this article, we look at certain common problems with Python faced by beginning programmers and will see how a programming language with a better design, OCaml, avoids or even completely prevents these issues.</description>
     </item>
-    
   </channel>
 </rss>

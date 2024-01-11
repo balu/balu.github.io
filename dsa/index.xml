@@ -5,105 +5,98 @@
     <link>https://bkomarath.rbgo.in/dsa/</link>
     <description>Recent content in Dsas on Balagopal Komarath&#39;s Homepage</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language><atom:link href="https://bkomarath.rbgo.in/dsa/index.xml" rel="self" type="application/rss+xml" />
+    <language>en-us</language>
+    <atom:link href="https://bkomarath.rbgo.in/dsa/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Algorithms</title>
       <link>https://bkomarath.rbgo.in/dsa/machines-and-computation/algorithms/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>https://bkomarath.rbgo.in/dsa/machines-and-computation/algorithms/</guid>
       <description>An algorithm describes to a computational device the steps needed to solve a computational problem. The set of instructions that a machine understands is called its instruction set. An algorithm for this machine is then a sequence of instructions where every instruction is from this set. Even in modern computers, the exact instruction set varies from one manufacturer to the other. In order to avoid tying algorithms to a specific type of device, high-level languages such as C or Python may be used to describe algorithms.</description>
     </item>
-    
     <item>
       <title>Asymptotic analysis</title>
       <link>https://bkomarath.rbgo.in/dsa/machines-and-computation/asymptotic-analysis/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>https://bkomarath.rbgo.in/dsa/machines-and-computation/asymptotic-analysis/</guid>
       <description>We would like to classify functions based on the order of their growth. Function \(f(n) = 3n^2\) and \(g(n) = 2n^2 + n + \log(n)\) are different but in a sense the same when you consider the order of their growth. More concretely, they both satisfy the equation \(\lim_{n \to \infty} h(2n)/h(n) = 4\). We can think of \(f\) and \(g\) as time taken by some algorithms. Then, the limit communicates the information that if we double the size of the input, the running time increases by a factor of four.</description>
     </item>
-    
     <item>
       <title>Breadth-first search</title>
-      <link>https://bkomarath.rbgo.in/dsa/bfs/</link>
+      <link>https://bkomarath.rbgo.in/dsa/machines-and-computation/bfs/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://bkomarath.rbgo.in/dsa/bfs/</guid>
+      <guid>https://bkomarath.rbgo.in/dsa/machines-and-computation/bfs/</guid>
       <description>bfs(G, s) for each v ∈ V(G) [n] visited[v] ← false [n] parent[v] ← v [n] queue ← { s } [1] visited[s] ← true [1] while queue not empty [m] v ← dequeue [m] for each (v → u) ∈ E(G) [m] - (a) if visited[u] = false [m] enqueue u [m] visited[u] ← true [m] parent[u] ← v [m] This algorithm is very similar to DFS. We replace the stack with a queue so that vertices are traversed in breadth-first order.</description>
     </item>
-    
     <item>
       <title>Computational problems</title>
       <link>https://bkomarath.rbgo.in/dsa/machines-and-computation/computational-problems/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>https://bkomarath.rbgo.in/dsa/machines-and-computation/computational-problems/</guid>
-      <description>We use computing to solve computational problems. A computational problem should be specified by a (1) name, (2) description of its inputs, and (3) description of its outputs including how the inputs and outputs are related. The problem of sorting a sequence of elements can be specified as:
-Name SORT Input A sequence of elements and an ordering relation among the elements. Output The same sequence of elements in ascending order.</description>
+      <description>We use computing to solve computational problems. A computational problem should be specified by a (1) name, (2) description of its inputs, and (3) description of its outputs including how the inputs and outputs are related. The problem of sorting a sequence of elements can be specified as:&#xA;Name SORT Input A sequence of elements and an ordering relation among the elements. Output The same sequence of elements in ascending order.</description>
     </item>
-    
     <item>
       <title>Depth-first search</title>
-      <link>https://bkomarath.rbgo.in/dsa/dfs/</link>
+      <link>https://bkomarath.rbgo.in/dsa/machines-and-computation/dfs/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://bkomarath.rbgo.in/dsa/dfs/</guid>
+      <guid>https://bkomarath.rbgo.in/dsa/machines-and-computation/dfs/</guid>
       <description>dfs(G, s) for each v ∈ V(G) [n] visited[v] ← false [n] stack ← { s } [1] while stack not empty [m] v ← pop stack [m] - (a) if visited[v] = false [m] visited[v] ← true [m] for each (v → u) ∈ E(G) [m] - (b) if visited[u] = false [m] - (c) push u into stack [m] Let \(n\) and \(m\) be the number of vertices and edges in the graph respectively.</description>
     </item>
-    
     <item>
       <title>Execution</title>
       <link>https://bkomarath.rbgo.in/dsa/machines-and-computation/execution/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>https://bkomarath.rbgo.in/dsa/machines-and-computation/execution/</guid>
       <description>An algorithm is a recipe or a template that tells us how to compute the answer on an arbitrary input. When an algorithm is executed on specific inputs, we obtain an execution trace that completely describes the events that occurred in the machine. An execution trace is a list of pairs \((I, M)\), where \(I\) is some instruction in the algorithm and \(M\) is the contents of the storage just before \(I\) is performed.</description>
     </item>
-    
     <item>
       <title>Generating all permutations</title>
-      <link>https://bkomarath.rbgo.in/dsa/permutations/</link>
+      <link>https://bkomarath.rbgo.in/dsa/machines-and-computation/permutations/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://bkomarath.rbgo.in/dsa/permutations/</guid>
-      <description>We consider the following recursive algorithm to print all permutations of an array.
-void permutations(int a[], int n, int start) { if (start == n-1) { print_array(a, n); return; } // All permutations with a[start] at the beginning. permutations(a, n, start+1); for (int i = start+1; i &amp;lt; n; ++i) { // Now, bring the other elements to the front. swap(&amp;amp;a[start], &amp;amp;a[i]); permutations(a, n, start+1); swap(&amp;amp;a[start], &amp;amp;a[i]); } } We now prove that it correctly prints all permutations exactly once.</description>
+      <guid>https://bkomarath.rbgo.in/dsa/machines-and-computation/permutations/</guid>
+      <description>We consider the following recursive algorithm to print all permutations of an array.&#xA;void permutations(int a[], int n, int start) { if (start == n-1) { print_array(a, n); return; } // All permutations with a[start] at the beginning. permutations(a, n, start+1); for (int i = start+1; i &amp;lt; n; ++i) { // Now, bring the other elements to the front. swap(&amp;amp;a[start], &amp;amp;a[i]); permutations(a, n, start+1); swap(&amp;amp;a[start], &amp;amp;a[i]); } } We now prove that it correctly prints all permutations exactly once.</description>
     </item>
-    
+    <item>
+      <title>Linked lists</title>
+      <link>https://bkomarath.rbgo.in/dsa/machines-and-computation/linked-lists/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://bkomarath.rbgo.in/dsa/machines-and-computation/linked-lists/</guid>
+      <description>A linked-list is a data structure that is built by composing nodes. Each node contains a data part and one or two links that are pointers to adjacent nodes in the sequence. A singly linked list has one pointer that points to the next node in the sequence. A doubly linked list has an additional pointer that points to the previous node in the sequence. The new and delete operators are used to allocate and deallocate nodes as needed by the list.</description>
+    </item>
     <item>
       <title>Proofs</title>
       <link>https://bkomarath.rbgo.in/dsa/machines-and-computation/proofs/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>https://bkomarath.rbgo.in/dsa/machines-and-computation/proofs/</guid>
-      <description>To prove that an algorithm is correct, we have to prove that its execution on every input is correct. Let \(f\) be the computational problem solved by \(A\). Then, we have to prove a statement such as:
-\(\forall x. f(x) = A(x)\)
-where \(x\) is chosen from the domain of all valid inputs. Here, we denote by \(f(x)\) the required outputs and effects of the problem on \(x\), and by \(A(x)\) the outputs and effects produced by \(A\) on \(x\).</description>
+      <description>To prove that an algorithm is correct, we have to prove that its execution on every input is correct. Let \(f\) be the computational problem solved by \(A\). Then, we have to prove a statement such as:&#xA;\(\forall x. f(x) = A(x)\)&#xA;where \(x\) is chosen from the domain of all valid inputs. Here, we denote by \(f(x)\) the required outputs and effects of the problem on \(x\), and by \(A(x)\) the outputs and effects produced by \(A\) on \(x\).</description>
     </item>
-    
+    <item>
+      <title>Queues</title>
+      <link>https://bkomarath.rbgo.in/dsa/machines-and-computation/queues/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://bkomarath.rbgo.in/dsa/machines-and-computation/queues/</guid>
+      <description>Operation Time Space Description empty() O(1) O(1) Create an empty queue. enqueue(q, e) O(1) O(1) Append e into queue q. dequeue(q) O(1) O(1) Remove and return the earliest element from q. is_empty(q) O(1) O(1) Return whether or not q is an empty queue. Array-based queues We can maintain a queue using an array, two indices first and last into the array, and an integer len to store the number of elements in the queue.</description>
+    </item>
     <item>
       <title>Recursion</title>
       <link>https://bkomarath.rbgo.in/dsa/machines-and-computation/recursion/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>https://bkomarath.rbgo.in/dsa/machines-and-computation/recursion/</guid>
-      <description>Recursion is self-reference. An recursive algorithm may refer to itself directly or indirectly to solve a different instance of the same problem being solved by the algorithm. The following self-reference is trivial but not algorithmic:
-To sort an array a, sort the array a.
-It is recursive but doesn&amp;rsquo;t terminate and so cannot be an algorithm. So the self-reference has to be invoked on different instances so that it may terminate.</description>
+      <description>Recursion is self-reference. An recursive algorithm may refer to itself directly or indirectly to solve a different instance of the same problem being solved by the algorithm. The following self-reference is trivial but not algorithmic:&#xA;To sort an array a, sort the array a.&#xA;It is recursive but doesn&amp;rsquo;t terminate and so cannot be an algorithm. So the self-reference has to be invoked on different instances so that it may terminate.</description>
     </item>
-    
+    <item>
+      <title>Stacks</title>
+      <link>https://bkomarath.rbgo.in/dsa/machines-and-computation/stacks/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://bkomarath.rbgo.in/dsa/machines-and-computation/stacks/</guid>
+      <description>In this chapter, we will take a look at the various implementation choices for stacks and queues and their tradeoffs.&#xA;A stack should support the following operations with the following resource usage. The space complexity is the additional space needed to implement the operation and does not consider the space used by the stack itself.&#xA;Operation Time Space Description empty() O(1) O(1) Create an empty stack. push(s, e) O(1) O(1) Push e into stack s.</description>
+    </item>
     <item>
       <title>Time</title>
       <link>https://bkomarath.rbgo.in/dsa/machines-and-computation/time/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>https://bkomarath.rbgo.in/dsa/machines-and-computation/time/</guid>
-      <description>The time taken by an execution of the algorithm is the number of instructions in the execution trace. For an algorithm \(A\), and an input \(x\), we define \(t&amp;rsquo;_A(x)\) to be the time taken by the algorithm \(A\) on input \(x\).
-The worst case time complexity of an algorithm \(A\) is defined as:
-\begin{equation} t_A(n) = \max_{x : |x| = n} t&amp;rsquo;_A(x) \end{equation}
-where \(|x|\) denotes the size of the instance \(x\).</description>
+      <description>The time taken by an execution of the algorithm is the number of instructions in the execution trace. For an algorithm \(A\), and an input \(x\), we define \(t&amp;rsquo;_A(x)\) to be the time taken by the algorithm \(A\) on input \(x\).&#xA;The worst case time complexity of an algorithm \(A\) is defined as:&#xA;\begin{equation} t_A(n) = \max_{x : |x| = n} t&amp;rsquo;_A(x) \end{equation}&#xA;where \(|x|\) denotes the size of the instance \(x\).</description>
     </item>
-    
   </channel>
 </rss>
