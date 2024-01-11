@@ -6,14 +6,14 @@
     <description>Recent content in Teachings on Balagopal Komarath&#39;s Homepage</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 24 Jul 2023 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 03 Jan 2024 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://bkomarath.rbgo.in/teaching/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Data Structures and Algorithms I (2023)</title>
-      <link>https://bkomarath.rbgo.in/teaching/data-structures-and-algorithms-i-2023/</link>
-      <pubDate>Mon, 24 Jul 2023 00:00:00 +0000</pubDate>
-      <guid>https://bkomarath.rbgo.in/teaching/data-structures-and-algorithms-i-2023/</guid>
-      <description>In this course, we will see how to structure data (data structures) so that complex operations (algorithms) can be efficiently executed. This course lies in the intersection of mathematics and computing. We will learn about the most basic and widely-used data structures and algorithms, prove their correctness and efficiency by writing mathematics, and implement them using C/C++ to understand how they work in practice.&#xA;Administrivia If you are absent from a lecture until Exam I for any reason, fill the form of absence for ES242.</description>
+      <title>Theory of Computing (2024)</title>
+      <link>https://bkomarath.rbgo.in/teaching/theory-of-computing-2024/</link>
+      <pubDate>Wed, 03 Jan 2024 00:00:00 +0000</pubDate>
+      <guid>https://bkomarath.rbgo.in/teaching/theory-of-computing-2024/</guid>
+      <description>In this course we will take a look at various formal computing models. They enable us to classify languages based on their &amp;ldquo;difficulty&amp;rdquo;. We will also see how the theory is applied to various fields like compiler design.&#xA;Administrivia The lectures will be on J1 and J2 slots in hall 10/201. The tutorial will be on I2 in hall 1/102.&#xA;Lectures Jan 9 Closure of regular languages under union. Concatenation of languages.</description>
     </item>
     <item>
       <title>Compilers (2023)</title>
