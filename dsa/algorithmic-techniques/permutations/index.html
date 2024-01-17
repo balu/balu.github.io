@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="author" content="Balagopal Komarath" />
+  
+  <title>
+  Generating all permutations
+</title>
+  <link rel="stylesheet" type="text/css" href="/css/bk.css" />
+  <link rel="stylesheet" type="text/css" media="print" href="/css/bkprint.css" />
+  
+</head>
+<body>
+  <header>
+  <a class="logo" href="/">Balagopal Komarath</a>
+  
+    <a class="menu" href="/menu/">Menu</a>
+  
+</header>
+
+  
+  <main>
+    <h1>Generating all permutations</h1>
+    <p>We consider the following recursive algorithm to print all permutations of an array.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">permutations</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">[],</span> <span class="kt">int</span> <span class="n">n</span><span class="p">,</span> <span class="kt">int</span> <span class="n">start</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">start</span> <span class="o">==</span> <span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">print_array</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">n</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// All permutations with a[start] at the beginning.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nf">permutations</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">start</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">start</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// Now, bring the other elements to the front.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="nf">swap</span><span class="p">(</span><span class="o">&amp;</span><span class="n">a</span><span class="p">[</span><span class="n">start</span><span class="p">],</span> <span class="o">&amp;</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">permutations</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">start</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">swap</span><span class="p">(</span><span class="o">&amp;</span><span class="n">a</span><span class="p">[</span><span class="n">start</span><span class="p">],</span> <span class="o">&amp;</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>We now prove that it correctly prints all permutations exactly once.</p>
+<div class="theorem" id="thm-perm">
+<p>The function <code>permutations(a, n, start)</code> prints all permutations where <code>a[0..start-1]</code> is fixed and <code>a[start..n-1]</code> is permuted in all possible ways. Moreover, the array <code>a</code> has the same value at the beginning and the end of the function.</p>
+</div>
+<div class="proof">
+<p>We use a proof by induction on <code>n-start</code>.</p>
+<p>(Base case) When <code>start</code> is <code>n-1</code>, the only permutation satisfying the condition in the statement is the array <code>a</code> itself. Since, we just print the array and return in this case, the array remains unmodified. So both conditions of the statement are satisfied.</p>
+<p>Note: In the subsequent proof, the expression <code>b[i]</code> refers to the value in <code>a[i]</code> at the beginning of the function. In the intermediate stages of this function, we may have <code>a[i] ≠ b[i]</code> even though they will be eventually equal.</p>
+<p>(Inductive case) Let <code>start</code> be <code>k</code> that is less than <code>n-1</code>. So <code>k+1</code> is at most <code>n-1</code> and the inductive hypothesis applies. The set of all permutations of <code>a[start..n-1]</code> is the disjoint union of those that begin with <code>b[start]</code>, those that begin with <code>b[start+1]</code>, and so on until <code>b[n-1]</code>. The first call to permutations correctly prints all (and exactly) those that has <code>b[start]</code> at position <code>start</code> by the inductive hypothesis. Also, the array is unmodified at the end of this call by the inductive hypothesis.</p>
+<p>Now, we have to prove that the <code>for</code> loop correctly prints the rest of the permutations. We use a loop invariant to prove this:</p>
+<p>Loop invariant: In the beginning of iteration where <code>i</code> is <code>j</code>, where <code>start &lt; j &lt; n</code>, all permutations that begin with <code>b[start]</code> until <code>b[j-1]</code> has already been printed. Moreover, we have the equality <code>a[start..n-1] = b[start..n-1]</code>.</p>
+<p>(Base case for the loop invariant, initialization) <code>j = start+1</code>. The first call to <code>permutations</code> in the function has already printed all permutations that begin with <code>b[start]</code>. The array is unchanged too as argued previously.</p>
+<p>(Inductive case for the loop invariant, preservation) When <code>start + 1 &lt; j &lt; n</code>, we just have to argue that this iteration of the loop prints all permutations that start with <code>b[j]</code>. Indeed, the first statement, brings <code>b[j]</code> to position <code>start</code> (At this point, the value of <code>a</code> is different, it will be restored later). The inductive hypothesis ensures that all permutations with <code>b[j]</code> at position <code>start</code> are printed. At the end of the recursive call in this iteration, by the second condition of the main theorem, we see that all elements are in the same positions at the beginning of the recursive call. In particular, the element at position <code>j</code> is the same as <code>b[start]</code>. The element at position <code>start</code> is <code>b[j]</code>. These are the only two elements in <code>a</code> that are at different places from <code>b</code> (which is <code>a</code>&rsquo;s initial value). The last swap fixes this satisfying the equality condition of the loop invariant.</p>
+<p>(Termination) At termination, we have <code>start = n</code> (This is when the condition of the <code>for</code> is falsified). By the loop invariant, we have printed all permutations that begin with <code>b[start]</code> until <code>b[n-1]</code>, which is all permutations required by the main theorem. The second condition of the loop invariant is the same as the second condition of the main theorem. So both conditions are satisfied closing the induction (for the main theorem).</p>
+</div>
+
+    
+    <nav class="chapter">
+      <ul>
+        
+        <li><a href="https://bkomarath.rbgo.in/dsa/algorithmic-techniques/dfs/">→ Depth-first search</a></li>
+        
+        
+        <li><a href="https://bkomarath.rbgo.in/dsa/algorithmic-techniques/recursion/">← Recursion</a></li>
+        
+        <li><a href="/dsa">↑ Data Structures and Algorithms</a></li>
+      </ul>
+    </nav>
+  </main>
+
+  <footer>
+  <p>
+    All content on this website is licensed under
+    <a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA
+      4.0</a> by Balagopal Komarath unless mentioned otherwise.
+</footer>
+
+</body>
+</html>

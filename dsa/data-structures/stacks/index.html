@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="author" content="Balagopal Komarath" />
+  
+  <title>
+  Stacks
+</title>
+  <link rel="stylesheet" type="text/css" href="/css/bk.css" />
+  <link rel="stylesheet" type="text/css" media="print" href="/css/bkprint.css" />
+  
+  <script>
+   MathJax = {
+     tex: {
+       inlineMath: [['$', '$'], ['\\(', '\\)']]
+     },
+     svg: {
+       fontCache: 'global'
+     }
+   };
+  </script>
+  <script type="text/javascript" id="MathJax-script" async
+          src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+  </script>
+  
+</head>
+<body>
+  <header>
+  <a class="logo" href="/">Balagopal Komarath</a>
+  
+    <a class="menu" href="/menu/">Menu</a>
+  
+</header>
+
+  
+  <main>
+    <h1>Stacks</h1>
+    <p>In this chapter, we will take a look at the various implementation choices for stacks and queues and their tradeoffs.</p>
+<p>A stack should support the following operations with the following resource usage. The space complexity is the additional space needed to implement the operation and does not consider the space used by the stack itself.</p>
+<table>
+<thead>
+<tr>
+<th>Operation</th>
+<th>Time</th>
+<th>Space</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>empty()</td>
+<td>O(1)</td>
+<td>O(1)</td>
+<td>Create an empty stack.</td>
+</tr>
+<tr>
+<td>push(s, e)</td>
+<td>O(1)</td>
+<td>O(1)</td>
+<td>Push e into stack s.</td>
+</tr>
+<tr>
+<td>pop(s)</td>
+<td>O(1)</td>
+<td>O(1)</td>
+<td>Pop and return the top element from s.</td>
+</tr>
+<tr>
+<td>is_empty(s)</td>
+<td>O(1)</td>
+<td>O(1)</td>
+<td>Return whether or not s is an empty stack.</td>
+</tr>
+</tbody>
+</table>
+<p>For any stack <code>s</code>, we have <code>pop(push(s, e)) == e</code>. An alternate choice of stack operations is to implement a <code>top(s)</code> operation that returns the top element in the stack and a <code>popv(s)</code> operation that removes the top element in the stack without returning anything. This implementation is more fine-grained than the one above. i.e., you can implement the above <code>pop(s)</code> operation using <code>top(s)</code> and <code>popv(s)</code>. Indeed, it is also possible to implement <code>popv(s)</code> and <code>top(s)</code> using <code>push()</code> and <code>pop()</code>. So both choices are equivalent.</p>
+<h2 id="array-based-stacks">Array-based stacks</h2>
+<p>An array-based implementation uses an array to store the elements of the stack and an index to store the index of the top element of the stack.</p>
+<h2 id="linked-list-based-stacks">Linked-list based stacks</h2>
+<p>We use a singly-linked list where the elements of the stack are stored from top to bottom from the head of the list. This implementation can also support <code>copy(s)</code>, which creates an independent copy of the stack <code>s</code> in O(1) time.</p>
+
+    
+    <nav class="chapter">
+      <ul>
+        
+        <li><a href="https://bkomarath.rbgo.in/dsa/data-structures/queues/">→ Queues</a></li>
+        
+        
+        <li><a href="https://bkomarath.rbgo.in/dsa/data-structures/linked-lists/">← Linked lists</a></li>
+        
+        <li><a href="/dsa">↑ Data Structures and Algorithms</a></li>
+      </ul>
+    </nav>
+  </main>
+
+  <footer>
+  <p>
+    All content on this website is licensed under
+    <a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA
+      4.0</a> by Balagopal Komarath unless mentioned otherwise.
+</footer>
+
+</body>
+</html>

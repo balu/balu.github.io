@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="author" content="Balagopal Komarath" />
+  
+  <title>
+  Depth-first search
+</title>
+  <link rel="stylesheet" type="text/css" href="/css/bk.css" />
+  <link rel="stylesheet" type="text/css" media="print" href="/css/bkprint.css" />
+  
+  <script>
+   MathJax = {
+     tex: {
+       inlineMath: [['$', '$'], ['\\(', '\\)']]
+     },
+     svg: {
+       fontCache: 'global'
+     }
+   };
+  </script>
+  <script type="text/javascript" id="MathJax-script" async
+          src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+  </script>
+  
+</head>
+<body>
+  <header>
+  <a class="logo" href="/">Balagopal Komarath</a>
+  
+    <a class="menu" href="/menu/">Menu</a>
+  
+</header>
+
+  
+  <main>
+    <h1>Depth-first search</h1>
+    <pre tabindex="0"><code class="language-nil" data-lang="nil">dfs(G, s)
+  for each v ∈ V(G)                   [n]
+    visited[v] ← false                [n]
+  stack ← { s }                       [1]
+  while stack not empty               [m]
+    v ← pop stack                     [m] - (a)
+    if visited[v] = false             [m]
+      visited[v] ← true               [m]
+      for each (v → u) ∈ E(G)         [m] - (b)
+        if visited[u] = false         [m] - (c)
+          push u into stack           [m]
+</code></pre><p>Let \(n\) and \(m\) be the number of vertices and edges in the graph respectively. The size of a graph is defined as \(n+m\). In the algorithm, the quantity in square brackets on the right-hand side is the maximum number of times that step is executed. The crucial steps for time complexity analysis are marked.</p>
+<div class="theorem">
+<p>The DFS algorithm runs in time \(O(n+m)\).</p>
+</div>
+<div class="proof">
+<p>The loop (b) is executed at most once for each vertex <code>v</code>. This is because just before that loop is executed <code>visited[v]</code> is marked <code>true</code> and this loop can only be executed if <code>visited[v]</code> is <code>false</code>. Also, note that we never set <code>visited[v]</code> to <code>false</code> after the initialization. Let the number of outgoing edges for each \(v\) be \(o_v\). For any <code>v</code>, the statement (c) is executed exactly \(o_v\) times. We also have \(\sum_v o_v = m\). So (c) is executed at most \(m\) times in total.</p>
+<p>Now, we establish that (a) is executed at most \(m\) times. Let the number of incoming edges for each \(u\) be \(i_u\). Observe that any vertex \(u\) is pushed into the stack at most \(i_u\) times because an edge <code>v → u</code> is considered at most once in the loop (b). So the total number of <code>pop</code> operations can only be at most \(\sum_u i_u = m\) which establishes the claim.</p>
+</div>
+<p>The following claim is why DFS works for path finding in graphs.</p>
+<div class="theorem">
+<p>If there is a path from \(s\) to \(t\) in \(G\), then <code>dfs(G, s)</code> will visit \(t\).</p>
+</div>
+<div class="proof">
+<p>We will use induction on the distance from \(s\). Distance is defined as the minimum number of edges in a path from \(s\). The only vertex at distance zero from \(s\) is \(s\) and it will be visited in the first iteration of the loop (a). For the induction step, suppose that all vertices at distance \(d\) will be visited by the algorithm. Let \(v\) be any vertex at distance \(d+1\) from \(s\). Then, there is a vertex \(u\) at distance \(d\) from \(s\) such that \(u→v\) is an edge in \(G\). By the induction hypothesis, \(u\) will be visited. The loop (b) will consider the edge \(u→v\). If \(v\) is already visited, we are done. Otherwise, \(v\) will be pushed into the stack. Since we know the stack eventually becomes empty by our time complexity analysis, we conclude that the vertex \(v\) will be popped from the stack and visited (if not already visited).</p>
+</div>
+
+    
+    <nav class="chapter">
+      <ul>
+        
+        <li><a href="https://bkomarath.rbgo.in/dsa/algorithmic-techniques/bfs/">→ Breadth-first search</a></li>
+        
+        
+        <li><a href="https://bkomarath.rbgo.in/dsa/algorithmic-techniques/permutations/">← Generating all permutations</a></li>
+        
+        <li><a href="/dsa">↑ Data Structures and Algorithms</a></li>
+      </ul>
+    </nav>
+  </main>
+
+  <footer>
+  <p>
+    All content on this website is licensed under
+    <a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA
+      4.0</a> by Balagopal Komarath unless mentioned otherwise.
+</footer>
+
+</body>
+</html>

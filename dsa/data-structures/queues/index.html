@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="author" content="Balagopal Komarath" />
+  
+  <title>
+  Queues
+</title>
+  <link rel="stylesheet" type="text/css" href="/css/bk.css" />
+  <link rel="stylesheet" type="text/css" media="print" href="/css/bkprint.css" />
+  
+  <script>
+   MathJax = {
+     tex: {
+       inlineMath: [['$', '$'], ['\\(', '\\)']]
+     },
+     svg: {
+       fontCache: 'global'
+     }
+   };
+  </script>
+  <script type="text/javascript" id="MathJax-script" async
+          src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+  </script>
+  
+</head>
+<body>
+  <header>
+  <a class="logo" href="/">Balagopal Komarath</a>
+  
+    <a class="menu" href="/menu/">Menu</a>
+  
+</header>
+
+  
+  <main>
+    <h1>Queues</h1>
+    <table>
+<thead>
+<tr>
+<th>Operation</th>
+<th>Time</th>
+<th>Space</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>empty()</td>
+<td>O(1)</td>
+<td>O(1)</td>
+<td>Create an empty queue.</td>
+</tr>
+<tr>
+<td>enqueue(q, e)</td>
+<td>O(1)</td>
+<td>O(1)</td>
+<td>Append e into queue q.</td>
+</tr>
+<tr>
+<td>dequeue(q)</td>
+<td>O(1)</td>
+<td>O(1)</td>
+<td>Remove and return the earliest element from q.</td>
+</tr>
+<tr>
+<td>is_empty(q)</td>
+<td>O(1)</td>
+<td>O(1)</td>
+<td>Return whether or not q is an empty queue.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="array-based-queues">Array-based queues</h2>
+<p>We can maintain a queue using an array, two indices <code>first</code> and <code>last</code> into the array, and an integer <code>len</code> to store the number of elements in the queue. When the queue is non-empty, <code>first</code> and <code>last</code> are indices of the first and last elements in the queue. When the queue is empty, <code>len</code> will be 0 and the values of <code>first</code> and <code>last</code> should be the same.</p>
+<h2 id="linked-list-based-queues">Linked-list based queues</h2>
+
+    
+    <nav class="chapter">
+      <ul>
+        
+        
+        <li><a href="https://bkomarath.rbgo.in/dsa/data-structures/stacks/">← Stacks</a></li>
+        
+        <li><a href="/dsa">↑ Data Structures and Algorithms</a></li>
+      </ul>
+    </nav>
+  </main>
+
+  <footer>
+  <p>
+    All content on this website is licensed under
+    <a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA
+      4.0</a> by Balagopal Komarath unless mentioned otherwise.
+</footer>
+
+</body>
+</html>
